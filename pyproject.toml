@@ -1,6 +1,6 @@
 [project]
 name = "dataherald"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Dataherald", email="support@dataherald.com" },
 ]
@@ -27,7 +27,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/openai"]
+packages = ["src/dataherald"]
 
 [tool.black]
 line-length = 120
