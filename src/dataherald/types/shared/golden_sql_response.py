@@ -1,0 +1,38 @@
+# File generated from our OpenAPI spec by Stainless.
+
+from typing import Optional
+from datetime import datetime
+from typing_extensions import Literal
+
+from ..._models import BaseModel
+
+__all__ = ["GoldenSqlResponse", "Metadata", "MetadataDataheraldInternal"]
+
+
+class MetadataDataheraldInternal(BaseModel):
+    display_id: Optional[str] = None
+
+    organization_id: Optional[str] = None
+
+    prompt_id: Optional[str] = None
+
+    source: Optional[Literal["USER_UPLOAD", "VERIFIED_QUERY"]] = None
+    """An enumeration."""
+
+
+class Metadata(BaseModel):
+    dataherald_internal: Optional[MetadataDataheraldInternal] = None
+
+
+class GoldenSqlResponse(BaseModel):
+    id: str
+
+    db_connection_id: str
+
+    prompt_text: str
+
+    sql: str
+
+    created_at: Optional[datetime] = None
+
+    metadata: Optional[Metadata] = None
