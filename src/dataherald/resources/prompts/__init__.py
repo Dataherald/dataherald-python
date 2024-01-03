@@ -1,11 +1,6 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from .prompts import (
-    Prompts,
-    AsyncPrompts,
-    PromptsWithRawResponse,
-    AsyncPromptsWithRawResponse,
-)
+from .prompts import Prompts, AsyncPrompts, PromptsWithRawResponse, AsyncPromptsWithRawResponse
 from .sql_generations import (
     SqlGenerations,
     AsyncSqlGenerations,
