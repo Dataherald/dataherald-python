@@ -6,11 +6,20 @@ from typing import TYPE_CHECKING
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, UnknownResponse
+from ..._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+    UnknownResponse,
+)
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from ..._base_client import make_request_options
+from ..._base_client import (
+    make_request_options,
+)
 from ...types.shared import NlGenerationResponse, SqlGenerationResponse
 from ...types.prompts import (
     sql_generation_create_params,

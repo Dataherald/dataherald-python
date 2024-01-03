@@ -19,11 +19,7 @@ from pydantic import ValidationError
 from dataherald import Dataherald, AsyncDataherald, APIResponseValidationError
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald._models import BaseModel, FinalRequestOptions
-from dataherald._exceptions import (
-    APIStatusError,
-    APITimeoutError,
-    APIResponseValidationError,
-)
+from dataherald._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from dataherald._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,

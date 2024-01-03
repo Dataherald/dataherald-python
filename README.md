@@ -1,6 +1,6 @@
 # Dataherald Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/Dataherald.svg)](https://pypi.org/project/Dataherald/)
+[![PyPI version](https://img.shields.io/pypi/v/dataherald.svg)](https://pypi.org/project/dataherald/)
 
 The Dataherald Python library provides convenient access to the Dataherald REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -13,7 +13,7 @@ The API documentation can be found [here](https://dataherald.readthedocs.io/en/l
 ## Installation
 
 ```sh
-pip install Dataherald
+pip install dataherald
 ```
 
 ## Usage

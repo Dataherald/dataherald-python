@@ -8,7 +8,9 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald.types import InstructionListResponse
+from dataherald.types import (
+    InstructionListResponse,
+)
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald.types.shared import InstructionResponse
 

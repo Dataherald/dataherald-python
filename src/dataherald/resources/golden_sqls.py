@@ -12,11 +12,20 @@ from ..types import (
     golden_sql_list_params,
     golden_sql_user_upload_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, UnknownResponse
+from .._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+    UnknownResponse,
+)
 from .._utils import maybe_transform
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from .._base_client import make_request_options
+from .._base_client import (
+    make_request_options,
+)
 from ..types.shared import GoldenSqlResponse
 
 if TYPE_CHECKING:
