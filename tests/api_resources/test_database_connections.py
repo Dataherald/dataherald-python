@@ -8,7 +8,10 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald.types import DBConnectionResponse, DatabaseConnectionListResponse
+from dataherald.types import (
+    DBConnectionResponse,
+    DatabaseConnectionListResponse,
+)
 from dataherald._client import Dataherald, AsyncDataherald
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")

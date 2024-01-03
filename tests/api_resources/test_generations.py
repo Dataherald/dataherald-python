@@ -8,7 +8,10 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald.types import GenerationResponse, GenerationListResponse
+from dataherald.types import (
+    GenerationResponse,
+    GenerationListResponse,
+)
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald.types.shared import NlGenerationResponse
 

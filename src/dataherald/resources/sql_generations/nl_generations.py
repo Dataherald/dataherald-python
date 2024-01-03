@@ -6,16 +6,22 @@ from typing import TYPE_CHECKING
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, UnknownResponse
+from ..._types import (
+    NOT_GIVEN,
+    Body,
+    Query,
+    Headers,
+    NotGiven,
+    UnknownResponse,
+)
 from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from ..._base_client import make_request_options
-from ...types.shared import NlGenerationResponse
-from ...types.sql_generations import (
-    nl_generation_create_params,
-    nl_generation_retrieve_params,
+from ..._base_client import (
+    make_request_options,
 )
+from ...types.shared import NlGenerationResponse
+from ...types.sql_generations import nl_generation_create_params, nl_generation_retrieve_params
 
 if TYPE_CHECKING:
     from ..._client import Dataherald, AsyncDataherald
