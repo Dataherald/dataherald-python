@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2024-01-04)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/Dataherald/dataherald-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** OpenAPI spec update ([#10](https://github.com/Dataherald/dataherald-python/issues/10)) ([179ba32](https://github.com/Dataherald/dataherald-python/commit/179ba3233c8b16d0747dc806c5b2c36a67f88119))
+
 ## 0.4.0 (2024-01-04)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/Dataherald/dataherald-python/compare/v0.3.0...v0.4.0)
