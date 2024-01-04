@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+from typing import Union
 
 import httpx
 
@@ -21,26 +21,24 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["DatabaseConnections", "AsyncDatabaseConnections"]
 
 
 class DatabaseConnections(SyncAPIResource):
-    drivers: Drivers
-    with_raw_response: DatabaseConnectionsWithRawResponse
+    @cached_property
+    def drivers(self) -> Drivers:
+        return Drivers(self._client)
 
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.drivers = Drivers(client)
-        self.with_raw_response = DatabaseConnectionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> DatabaseConnectionsWithRawResponse:
+        return DatabaseConnectionsWithRawResponse(self)
 
     def create(
         self,
@@ -193,13 +191,13 @@ class DatabaseConnections(SyncAPIResource):
 
 
 class AsyncDatabaseConnections(AsyncAPIResource):
-    drivers: AsyncDrivers
-    with_raw_response: AsyncDatabaseConnectionsWithRawResponse
+    @cached_property
+    def drivers(self) -> AsyncDrivers:
+        return AsyncDrivers(self._client)
 
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.drivers = AsyncDrivers(client)
-        self.with_raw_response = AsyncDatabaseConnectionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncDatabaseConnectionsWithRawResponse:
+        return AsyncDatabaseConnectionsWithRawResponse(self)
 
     async def create(
         self,

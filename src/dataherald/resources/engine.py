@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from .._types import (
@@ -14,24 +12,20 @@ from .._types import (
     NotGiven,
     UnknownResponse,
 )
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Dataherald, AsyncDataherald
-
 __all__ = ["Engine", "AsyncEngine"]
 
 
 class Engine(SyncAPIResource):
-    with_raw_response: EngineWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = EngineWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> EngineWithRawResponse:
+        return EngineWithRawResponse(self)
 
     def heartbeat(
         self,
@@ -54,11 +48,9 @@ class Engine(SyncAPIResource):
 
 
 class AsyncEngine(AsyncAPIResource):
-    with_raw_response: AsyncEngineWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncEngineWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncEngineWithRawResponse:
+        return AsyncEngineWithRawResponse(self)
 
     async def heartbeat(
         self,

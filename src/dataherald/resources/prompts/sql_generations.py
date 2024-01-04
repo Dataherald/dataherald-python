@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..._types import (
@@ -15,6 +13,7 @@ from ..._types import (
     UnknownResponse,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -27,18 +26,13 @@ from ...types.prompts import (
     sql_generation_nl_generations_params,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["SqlGenerations", "AsyncSqlGenerations"]
 
 
 class SqlGenerations(SyncAPIResource):
-    with_raw_response: SqlGenerationsWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = SqlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> SqlGenerationsWithRawResponse:
+        return SqlGenerationsWithRawResponse(self)
 
     def create(
         self,
@@ -175,11 +169,9 @@ class SqlGenerations(SyncAPIResource):
 
 
 class AsyncSqlGenerations(AsyncAPIResource):
-    with_raw_response: AsyncSqlGenerationsWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncSqlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncSqlGenerationsWithRawResponse:
+        return AsyncSqlGenerationsWithRawResponse(self)
 
     async def create(
         self,

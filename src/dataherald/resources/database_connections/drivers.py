@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..._types import (
@@ -13,6 +11,7 @@ from ..._types import (
     Headers,
     NotGiven,
 )
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -20,18 +19,13 @@ from ..._base_client import (
 )
 from ...types.database_connections import DriverListResponse
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["Drivers", "AsyncDrivers"]
 
 
 class Drivers(SyncAPIResource):
-    with_raw_response: DriversWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = DriversWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> DriversWithRawResponse:
+        return DriversWithRawResponse(self)
 
     def list(
         self,
@@ -54,11 +48,9 @@ class Drivers(SyncAPIResource):
 
 
 class AsyncDrivers(AsyncAPIResource):
-    with_raw_response: AsyncDriversWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncDriversWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncDriversWithRawResponse:
+        return AsyncDriversWithRawResponse(self)
 
     async def list(
         self,

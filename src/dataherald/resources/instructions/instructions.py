@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from .first import First, AsyncFirst, FirstWithRawResponse, AsyncFirstWithRawResponse
@@ -22,6 +20,7 @@ from ..._types import (
     UnknownResponse,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -29,20 +28,17 @@ from ..._base_client import (
 )
 from ...types.shared import InstructionResponse
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["Instructions", "AsyncInstructions"]
 
 
 class Instructions(SyncAPIResource):
-    first: First
-    with_raw_response: InstructionsWithRawResponse
+    @cached_property
+    def first(self) -> First:
+        return First(self._client)
 
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.first = First(client)
-        self.with_raw_response = InstructionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> InstructionsWithRawResponse:
+        return InstructionsWithRawResponse(self)
 
     def create(
         self,
@@ -197,13 +193,13 @@ class Instructions(SyncAPIResource):
 
 
 class AsyncInstructions(AsyncAPIResource):
-    first: AsyncFirst
-    with_raw_response: AsyncInstructionsWithRawResponse
+    @cached_property
+    def first(self) -> AsyncFirst:
+        return AsyncFirst(self._client)
 
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.first = AsyncFirst(client)
-        self.with_raw_response = AsyncInstructionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncInstructionsWithRawResponse:
+        return AsyncInstructionsWithRawResponse(self)
 
     async def create(
         self,

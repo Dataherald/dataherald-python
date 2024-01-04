@@ -2,16 +2,9 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
-from ...types import (
-    PromptResponse,
-    PromptListResponse,
-    prompt_list_params,
-    prompt_create_params,
-)
+from ...types import PromptResponse, PromptListResponse, prompt_list_params, prompt_create_params
 from ..._types import (
     NOT_GIVEN,
     Body,
@@ -20,6 +13,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -32,20 +26,17 @@ from .sql_generations import (
     AsyncSqlGenerationsWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["Prompts", "AsyncPrompts"]
 
 
 class Prompts(SyncAPIResource):
-    sql_generations: SqlGenerations
-    with_raw_response: PromptsWithRawResponse
+    @cached_property
+    def sql_generations(self) -> SqlGenerations:
+        return SqlGenerations(self._client)
 
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.sql_generations = SqlGenerations(client)
-        self.with_raw_response = PromptsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> PromptsWithRawResponse:
+        return PromptsWithRawResponse(self)
 
     def create(
         self,
@@ -167,13 +158,13 @@ class Prompts(SyncAPIResource):
 
 
 class AsyncPrompts(AsyncAPIResource):
-    sql_generations: AsyncSqlGenerations
-    with_raw_response: AsyncPromptsWithRawResponse
+    @cached_property
+    def sql_generations(self) -> AsyncSqlGenerations:
+        return AsyncSqlGenerations(self._client)
 
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.sql_generations = AsyncSqlGenerations(client)
-        self.with_raw_response = AsyncPromptsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncPromptsWithRawResponse:
+        return AsyncPromptsWithRawResponse(self)
 
     async def create(
         self,
