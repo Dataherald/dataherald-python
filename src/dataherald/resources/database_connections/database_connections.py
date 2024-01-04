@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Mapping, cast
+from typing import TYPE_CHECKING, Union
 
 import httpx
 
@@ -19,9 +19,8 @@ from ..._types import (
     Query,
     Headers,
     NotGiven,
-    FileTypes,
 )
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal
+from ..._utils import maybe_transform
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -46,8 +45,13 @@ class DatabaseConnections(SyncAPIResource):
     def create(
         self,
         *,
-        db_connection_request_json: str,
-        file: FileTypes | NotGiven = NOT_GIVEN,
+        alias: str | NotGiven = NOT_GIVEN,
+        connection_uri: str | NotGiven = NOT_GIVEN,
+        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        llm_api_key: str | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_create_params.SshSettings | NotGiven = NOT_GIVEN,
+        use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,7 +60,7 @@ class DatabaseConnections(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DBConnectionResponse:
         """
-        Api Add Db Connection
+        Add Db Connection
 
         Args:
           extra_headers: Send extra headers
@@ -67,23 +71,20 @@ class DatabaseConnections(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
-            {
-                "db_connection_request_json": db_connection_request_json,
-                "file": file,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-
         return self._post(
             "/api/database-connections",
-            body=maybe_transform(body, database_connection_create_params.DatabaseConnectionCreateParams),
-            files=files,
+            body=maybe_transform(
+                {
+                    "alias": alias,
+                    "connection_uri": connection_uri,
+                    "credential_file_content": credential_file_content,
+                    "llm_api_key": llm_api_key,
+                    "metadata": metadata,
+                    "ssh_settings": ssh_settings,
+                    "use_ssh": use_ssh,
+                },
+                database_connection_create_params.DatabaseConnectionCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -125,8 +126,13 @@ class DatabaseConnections(SyncAPIResource):
         self,
         id: str,
         *,
-        db_connection_request_json: str,
-        file: FileTypes | NotGiven = NOT_GIVEN,
+        alias: str | NotGiven = NOT_GIVEN,
+        connection_uri: str | NotGiven = NOT_GIVEN,
+        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        llm_api_key: str | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_update_params.SshSettings | NotGiven = NOT_GIVEN,
+        use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,7 +141,7 @@ class DatabaseConnections(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DBConnectionResponse:
         """
-        Api Update Db Connection
+        Update Db Connection
 
         Args:
           extra_headers: Send extra headers
@@ -146,23 +152,20 @@ class DatabaseConnections(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
-            {
-                "db_connection_request_json": db_connection_request_json,
-                "file": file,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-
         return self._put(
             f"/api/database-connections/{id}",
-            body=maybe_transform(body, database_connection_update_params.DatabaseConnectionUpdateParams),
-            files=files,
+            body=maybe_transform(
+                {
+                    "alias": alias,
+                    "connection_uri": connection_uri,
+                    "credential_file_content": credential_file_content,
+                    "llm_api_key": llm_api_key,
+                    "metadata": metadata,
+                    "ssh_settings": ssh_settings,
+                    "use_ssh": use_ssh,
+                },
+                database_connection_update_params.DatabaseConnectionUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -201,8 +204,13 @@ class AsyncDatabaseConnections(AsyncAPIResource):
     async def create(
         self,
         *,
-        db_connection_request_json: str,
-        file: FileTypes | NotGiven = NOT_GIVEN,
+        alias: str | NotGiven = NOT_GIVEN,
+        connection_uri: str | NotGiven = NOT_GIVEN,
+        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        llm_api_key: str | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_create_params.SshSettings | NotGiven = NOT_GIVEN,
+        use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -211,7 +219,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DBConnectionResponse:
         """
-        Api Add Db Connection
+        Add Db Connection
 
         Args:
           extra_headers: Send extra headers
@@ -222,23 +230,20 @@ class AsyncDatabaseConnections(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
-            {
-                "db_connection_request_json": db_connection_request_json,
-                "file": file,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-
         return await self._post(
             "/api/database-connections",
-            body=maybe_transform(body, database_connection_create_params.DatabaseConnectionCreateParams),
-            files=files,
+            body=maybe_transform(
+                {
+                    "alias": alias,
+                    "connection_uri": connection_uri,
+                    "credential_file_content": credential_file_content,
+                    "llm_api_key": llm_api_key,
+                    "metadata": metadata,
+                    "ssh_settings": ssh_settings,
+                    "use_ssh": use_ssh,
+                },
+                database_connection_create_params.DatabaseConnectionCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -280,8 +285,13 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         self,
         id: str,
         *,
-        db_connection_request_json: str,
-        file: FileTypes | NotGiven = NOT_GIVEN,
+        alias: str | NotGiven = NOT_GIVEN,
+        connection_uri: str | NotGiven = NOT_GIVEN,
+        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        llm_api_key: str | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_update_params.SshSettings | NotGiven = NOT_GIVEN,
+        use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,7 +300,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DBConnectionResponse:
         """
-        Api Update Db Connection
+        Update Db Connection
 
         Args:
           extra_headers: Send extra headers
@@ -301,23 +311,20 @@ class AsyncDatabaseConnections(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
-            {
-                "db_connection_request_json": db_connection_request_json,
-                "file": file,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-
         return await self._put(
             f"/api/database-connections/{id}",
-            body=maybe_transform(body, database_connection_update_params.DatabaseConnectionUpdateParams),
-            files=files,
+            body=maybe_transform(
+                {
+                    "alias": alias,
+                    "connection_uri": connection_uri,
+                    "credential_file_content": credential_file_content,
+                    "llm_api_key": llm_api_key,
+                    "metadata": metadata,
+                    "ssh_settings": ssh_settings,
+                    "use_ssh": use_ssh,
+                },
+                database_connection_update_params.DatabaseConnectionUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

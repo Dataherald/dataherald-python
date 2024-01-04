@@ -672,7 +672,7 @@ class TestDataherald:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/api/database-connections",
-                body=dict(db_connection_request_json="string"),
+                body=dict(),
                 cast_to=httpx.Response,
                 options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
             )
@@ -687,7 +687,7 @@ class TestDataherald:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/api/database-connections",
-                body=dict(db_connection_request_json="string"),
+                body=dict(),
                 cast_to=httpx.Response,
                 options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
             )
@@ -1324,7 +1324,7 @@ class TestAsyncDataherald:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/api/database-connections",
-                body=dict(db_connection_request_json="string"),
+                body=dict(),
                 cast_to=httpx.Response,
                 options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
             )
@@ -1339,7 +1339,7 @@ class TestAsyncDataherald:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/api/database-connections",
-                body=dict(db_connection_request_json="string"),
+                body=dict(),
                 cast_to=httpx.Response,
                 options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
             )
