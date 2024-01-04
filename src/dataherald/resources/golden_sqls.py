@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
 import httpx
 
-from ..types import GoldenSqlListResponse, golden_sql_list_params
+from ..types import (
+    GoldenSqlListResponse,
+    GoldenSqlUploadResponse,
+    golden_sql_list_params,
+    golden_sql_upload_params,
+)
 from .._types import (
     NOT_GIVEN,
     Body,
@@ -144,6 +149,38 @@ class GoldenSqls(SyncAPIResource):
             cast_to=UnknownResponse,
         )
 
+    def upload(
+        self,
+        *,
+        body: List[golden_sql_upload_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GoldenSqlUploadResponse:
+        """
+        Api Add User Upload Golden Sql
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/api/golden-sqls",
+            body=maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GoldenSqlUploadResponse,
+        )
+
 
 class AsyncGoldenSqls(AsyncAPIResource):
     with_raw_response: AsyncGoldenSqlsWithRawResponse
@@ -260,6 +297,38 @@ class AsyncGoldenSqls(AsyncAPIResource):
             cast_to=UnknownResponse,
         )
 
+    async def upload(
+        self,
+        *,
+        body: List[golden_sql_upload_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> GoldenSqlUploadResponse:
+        """
+        Api Add User Upload Golden Sql
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/api/golden-sqls",
+            body=maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=GoldenSqlUploadResponse,
+        )
+
 
 class GoldenSqlsWithRawResponse:
     def __init__(self, golden_sqls: GoldenSqls) -> None:
@@ -271,6 +340,9 @@ class GoldenSqlsWithRawResponse:
         )
         self.delete = to_raw_response_wrapper(
             golden_sqls.delete,
+        )
+        self.upload = to_raw_response_wrapper(
+            golden_sqls.upload,
         )
 
 
@@ -284,4 +356,7 @@ class AsyncGoldenSqlsWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             golden_sqls.delete,
+        )
+        self.upload = async_to_raw_response_wrapper(
+            golden_sqls.upload,
         )
