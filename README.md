@@ -31,9 +31,7 @@ client = Dataherald(
     environment="staging",
 )
 
-db_connection_response = client.database_connections.create(
-    db_connection_request_json="string",
-)
+db_connection_response = client.database_connections.create()
 print(db_connection_response.id)
 ```
 
@@ -60,9 +58,7 @@ client = AsyncDataherald(
 
 
 async def main() -> None:
-    db_connection_response = await client.database_connections.create(
-        db_connection_request_json="string",
-    )
+    db_connection_response = await client.database_connections.create()
     print(db_connection_response.id)
 
 
@@ -96,9 +92,7 @@ from dataherald import Dataherald
 client = Dataherald()
 
 try:
-    client.database_connections.create(
-        db_connection_request_json="string",
-    )
+    client.database_connections.create()
 except dataherald.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -141,9 +135,7 @@ client = Dataherald(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).database_connections.create(
-    db_connection_request_json="string",
-)
+client.with_options(max_retries=5).database_connections.create()
 ```
 
 ### Timeouts
@@ -166,9 +158,7 @@ client = Dataherald(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).database_connections.create(
-    db_connection_request_json="string",
-)
+client.with_options(timeout=5 * 1000).database_connections.create()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -207,9 +197,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from dataherald import Dataherald
 
 client = Dataherald()
-response = client.database_connections.with_raw_response.create(
-    db_connection_request_json="string",
-)
+response = client.database_connections.with_raw_response.create()
 print(response.headers.get('X-My-Header'))
 
 database_connection = response.parse()  # get the object that `database_connections.create()` would have returned
