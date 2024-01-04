@@ -8,10 +8,7 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald.types import (
-    GoldenSqlListResponse,
-    GoldenSqlUserUploadResponse,
-)
+from dataherald.types import GoldenSqlListResponse
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald.types.shared import GoldenSqlResponse
 
@@ -78,54 +75,6 @@ class TestGoldenSqls:
         golden_sql = response.parse()
         assert_matches_type(object, golden_sql, path=["response"])
 
-    @parametrize
-    def test_method_user_upload(self, client: Dataherald) -> None:
-        golden_sql = client.golden_sqls.user_upload(
-            body=[
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-            ],
-        )
-        assert_matches_type(GoldenSqlUserUploadResponse, golden_sql, path=["response"])
-
-    @parametrize
-    def test_raw_response_user_upload(self, client: Dataherald) -> None:
-        response = client.golden_sqls.with_raw_response.user_upload(
-            body=[
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-            ],
-        )
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
-        assert_matches_type(GoldenSqlUserUploadResponse, golden_sql, path=["response"])
-
 
 class TestAsyncGoldenSqls:
     strict_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -185,51 +134,3 @@ class TestAsyncGoldenSqls:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         golden_sql = response.parse()
         assert_matches_type(object, golden_sql, path=["response"])
-
-    @parametrize
-    async def test_method_user_upload(self, client: AsyncDataherald) -> None:
-        golden_sql = await client.golden_sqls.user_upload(
-            body=[
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-            ],
-        )
-        assert_matches_type(GoldenSqlUserUploadResponse, golden_sql, path=["response"])
-
-    @parametrize
-    async def test_raw_response_user_upload(self, client: AsyncDataherald) -> None:
-        response = await client.golden_sqls.with_raw_response.user_upload(
-            body=[
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-                {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
-                },
-            ],
-        )
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
-        assert_matches_type(GoldenSqlUserUploadResponse, golden_sql, path=["response"])
