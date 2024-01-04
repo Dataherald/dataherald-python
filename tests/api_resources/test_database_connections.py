@@ -25,24 +25,35 @@ class TestDatabaseConnections:
 
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
-        database_connection = client.database_connections.create(
-            db_connection_request_json="string",
-        )
+        database_connection = client.database_connections.create()
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         database_connection = client.database_connections.create(
-            db_connection_request_json="string",
-            file=b"raw file contents",
+            alias="string",
+            connection_uri="string",
+            credential_file_content={},
+            llm_api_key="string",
+            metadata={},
+            ssh_settings={
+                "db_name": "string",
+                "host": "string",
+                "username": "string",
+                "password": "string",
+                "remote_host": "string",
+                "remote_db_name": "string",
+                "remote_db_password": "string",
+                "private_key_password": "string",
+                "db_driver": "string",
+            },
+            use_ssh=True,
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
-        response = client.database_connections.with_raw_response.create(
-            db_connection_request_json="string",
-        )
+        response = client.database_connections.with_raw_response.create()
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         database_connection = response.parse()
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
@@ -67,7 +78,6 @@ class TestDatabaseConnections:
     def test_method_update(self, client: Dataherald) -> None:
         database_connection = client.database_connections.update(
             "string",
-            db_connection_request_json="string",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
@@ -75,8 +85,23 @@ class TestDatabaseConnections:
     def test_method_update_with_all_params(self, client: Dataherald) -> None:
         database_connection = client.database_connections.update(
             "string",
-            db_connection_request_json="string",
-            file=b"raw file contents",
+            alias="string",
+            connection_uri="string",
+            credential_file_content={},
+            llm_api_key="string",
+            metadata={},
+            ssh_settings={
+                "db_name": "string",
+                "host": "string",
+                "username": "string",
+                "password": "string",
+                "remote_host": "string",
+                "remote_db_name": "string",
+                "remote_db_password": "string",
+                "private_key_password": "string",
+                "db_driver": "string",
+            },
+            use_ssh=True,
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
@@ -84,7 +109,6 @@ class TestDatabaseConnections:
     def test_raw_response_update(self, client: Dataherald) -> None:
         response = client.database_connections.with_raw_response.update(
             "string",
-            db_connection_request_json="string",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         database_connection = response.parse()
@@ -110,24 +134,35 @@ class TestAsyncDatabaseConnections:
 
     @parametrize
     async def test_method_create(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.create(
-            db_connection_request_json="string",
-        )
+        database_connection = await client.database_connections.create()
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncDataherald) -> None:
         database_connection = await client.database_connections.create(
-            db_connection_request_json="string",
-            file=b"raw file contents",
+            alias="string",
+            connection_uri="string",
+            credential_file_content={},
+            llm_api_key="string",
+            metadata={},
+            ssh_settings={
+                "db_name": "string",
+                "host": "string",
+                "username": "string",
+                "password": "string",
+                "remote_host": "string",
+                "remote_db_name": "string",
+                "remote_db_password": "string",
+                "private_key_password": "string",
+                "db_driver": "string",
+            },
+            use_ssh=True,
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, client: AsyncDataherald) -> None:
-        response = await client.database_connections.with_raw_response.create(
-            db_connection_request_json="string",
-        )
+        response = await client.database_connections.with_raw_response.create()
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         database_connection = response.parse()
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
@@ -152,7 +187,6 @@ class TestAsyncDatabaseConnections:
     async def test_method_update(self, client: AsyncDataherald) -> None:
         database_connection = await client.database_connections.update(
             "string",
-            db_connection_request_json="string",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
@@ -160,8 +194,23 @@ class TestAsyncDatabaseConnections:
     async def test_method_update_with_all_params(self, client: AsyncDataherald) -> None:
         database_connection = await client.database_connections.update(
             "string",
-            db_connection_request_json="string",
-            file=b"raw file contents",
+            alias="string",
+            connection_uri="string",
+            credential_file_content={},
+            llm_api_key="string",
+            metadata={},
+            ssh_settings={
+                "db_name": "string",
+                "host": "string",
+                "username": "string",
+                "password": "string",
+                "remote_host": "string",
+                "remote_db_name": "string",
+                "remote_db_password": "string",
+                "private_key_password": "string",
+                "db_driver": "string",
+            },
+            use_ssh=True,
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
@@ -169,7 +218,6 @@ class TestAsyncDatabaseConnections:
     async def test_raw_response_update(self, client: AsyncDataherald) -> None:
         response = await client.database_connections.with_raw_response.update(
             "string",
-            db_connection_request_json="string",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         database_connection = response.parse()
