@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import List
 
 import httpx
 
@@ -20,24 +20,20 @@ from .._types import (
     NotGiven,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Dataherald, AsyncDataherald
-
 __all__ = ["Finetunings", "AsyncFinetunings"]
 
 
 class Finetunings(SyncAPIResource):
-    with_raw_response: FinetuningsWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = FinetuningsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> FinetuningsWithRawResponse:
+        return FinetuningsWithRawResponse(self)
 
     def create(
         self,
@@ -152,11 +148,9 @@ class Finetunings(SyncAPIResource):
 
 
 class AsyncFinetunings(AsyncAPIResource):
-    with_raw_response: AsyncFinetuningsWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncFinetuningsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncFinetuningsWithRawResponse:
+        return AsyncFinetuningsWithRawResponse(self)
 
     async def create(
         self,

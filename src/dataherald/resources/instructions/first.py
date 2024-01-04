@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..._types import (
@@ -13,6 +11,7 @@ from ..._types import (
     Headers,
     NotGiven,
 )
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -20,18 +19,13 @@ from ..._base_client import (
 )
 from ...types.shared import InstructionResponse
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["First", "AsyncFirst"]
 
 
 class First(SyncAPIResource):
-    with_raw_response: FirstWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = FirstWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> FirstWithRawResponse:
+        return FirstWithRawResponse(self)
 
     def retrieve(
         self,
@@ -54,11 +48,9 @@ class First(SyncAPIResource):
 
 
 class AsyncFirst(AsyncAPIResource):
-    with_raw_response: AsyncFirstWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncFirstWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncFirstWithRawResponse:
+        return AsyncFirstWithRawResponse(self)
 
     async def retrieve(
         self,

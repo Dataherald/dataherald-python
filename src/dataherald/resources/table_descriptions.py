@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import List
 
 import httpx
 
@@ -22,24 +22,20 @@ from .._types import (
     UnknownResponse,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
     make_request_options,
 )
 
-if TYPE_CHECKING:
-    from .._client import Dataherald, AsyncDataherald
-
 __all__ = ["TableDescriptions", "AsyncTableDescriptions"]
 
 
 class TableDescriptions(SyncAPIResource):
-    with_raw_response: TableDescriptionsWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = TableDescriptionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> TableDescriptionsWithRawResponse:
+        return TableDescriptionsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -119,6 +115,7 @@ class TableDescriptions(SyncAPIResource):
     def list(
         self,
         *,
+        db_connection_id: str,
         table_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -128,7 +125,7 @@ class TableDescriptions(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TableDescriptionListResponse:
         """
-        Api Get Table Descriptions
+        Get Table Descriptions
 
         Args:
           extra_headers: Send extra headers
@@ -147,7 +144,11 @@ class TableDescriptions(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"table_name": table_name}, table_description_list_params.TableDescriptionListParams
+                    {
+                        "db_connection_id": db_connection_id,
+                        "table_name": table_name,
+                    },
+                    table_description_list_params.TableDescriptionListParams,
                 ),
             ),
             cast_to=TableDescriptionListResponse,
@@ -194,11 +195,9 @@ class TableDescriptions(SyncAPIResource):
 
 
 class AsyncTableDescriptions(AsyncAPIResource):
-    with_raw_response: AsyncTableDescriptionsWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncTableDescriptionsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncTableDescriptionsWithRawResponse:
+        return AsyncTableDescriptionsWithRawResponse(self)
 
     async def retrieve(
         self,
@@ -278,6 +277,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
     async def list(
         self,
         *,
+        db_connection_id: str,
         table_name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -287,7 +287,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TableDescriptionListResponse:
         """
-        Api Get Table Descriptions
+        Get Table Descriptions
 
         Args:
           extra_headers: Send extra headers
@@ -306,7 +306,11 @@ class AsyncTableDescriptions(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"table_name": table_name}, table_description_list_params.TableDescriptionListParams
+                    {
+                        "db_connection_id": db_connection_id,
+                        "table_name": table_name,
+                    },
+                    table_description_list_params.TableDescriptionListParams,
                 ),
             ),
             cast_to=TableDescriptionListResponse,

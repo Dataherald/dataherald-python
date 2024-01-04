@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ..types import NlGenerationListResponse, nl_generation_list_params
@@ -15,6 +13,7 @@ from .._types import (
     NotGiven,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
@@ -22,18 +21,13 @@ from .._base_client import (
 )
 from ..types.shared import NlGenerationResponse
 
-if TYPE_CHECKING:
-    from .._client import Dataherald, AsyncDataherald
-
 __all__ = ["NlGenerations", "AsyncNlGenerations"]
 
 
 class NlGenerations(SyncAPIResource):
-    with_raw_response: NlGenerationsWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = NlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> NlGenerationsWithRawResponse:
+        return NlGenerationsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -114,11 +108,9 @@ class NlGenerations(SyncAPIResource):
 
 
 class AsyncNlGenerations(AsyncAPIResource):
-    with_raw_response: AsyncNlGenerationsWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncNlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncNlGenerationsWithRawResponse:
+        return AsyncNlGenerationsWithRawResponse(self)
 
     async def retrieve(
         self,

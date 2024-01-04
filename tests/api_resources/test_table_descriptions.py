@@ -96,19 +96,24 @@ class TestTableDescriptions:
 
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
-        table_description = client.table_descriptions.list()
+        table_description = client.table_descriptions.list(
+            db_connection_id="string",
+        )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.list(
+            db_connection_id="string",
             table_name="string",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
-        response = client.table_descriptions.with_raw_response.list()
+        response = client.table_descriptions.with_raw_response.list(
+            db_connection_id="string",
+        )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         table_description = response.parse()
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
@@ -216,19 +221,24 @@ class TestAsyncTableDescriptions:
 
     @parametrize
     async def test_method_list(self, client: AsyncDataherald) -> None:
-        table_description = await client.table_descriptions.list()
+        table_description = await client.table_descriptions.list(
+            db_connection_id="string",
+        )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, client: AsyncDataherald) -> None:
         table_description = await client.table_descriptions.list(
+            db_connection_id="string",
             table_name="string",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, client: AsyncDataherald) -> None:
-        response = await client.table_descriptions.with_raw_response.list()
+        response = await client.table_descriptions.with_raw_response.list(
+            db_connection_id="string",
+        )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         table_description = response.parse()
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
