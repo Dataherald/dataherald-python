@@ -16,10 +16,12 @@ from .generation_list_item import GenerationListItem as GenerationListItem
 from .prompt_create_params import PromptCreateParams as PromptCreateParams
 from .prompt_list_response import PromptListResponse as PromptListResponse
 from .db_connection_response import DBConnectionResponse as DBConnectionResponse
+from .finetuning_list_params import FinetuningListParams as FinetuningListParams
 from .generation_list_params import GenerationListParams as GenerationListParams
 from .golden_sql_list_params import GoldenSqlListParams as GoldenSqlListParams
 from .instruction_list_params import InstructionListParams as InstructionListParams
 from .finetuning_create_params import FinetuningCreateParams as FinetuningCreateParams
+from .finetuning_list_response import FinetuningListResponse as FinetuningListResponse
 from .generation_list_response import GenerationListResponse as GenerationListResponse
 from .generation_update_params import GenerationUpdateParams as GenerationUpdateParams
 from .golden_sql_list_response import GoldenSqlListResponse as GoldenSqlListResponse
