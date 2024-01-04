@@ -6,7 +6,12 @@ from typing import TYPE_CHECKING, List
 
 import httpx
 
-from ..types import FinetuningResponse, finetuning_create_params
+from ..types import (
+    FinetuningResponse,
+    FinetuningListResponse,
+    finetuning_list_params,
+    finetuning_create_params,
+)
 from .._types import (
     NOT_GIVEN,
     Body,
@@ -108,6 +113,43 @@ class Finetunings(SyncAPIResource):
             cast_to=FinetuningResponse,
         )
 
+    def list(
+        self,
+        *,
+        db_connection_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinetuningListResponse:
+        """
+        Get Finetuning Jobs
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/api/finetunings",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"db_connection_id": db_connection_id}, finetuning_list_params.FinetuningListParams
+                ),
+            ),
+            cast_to=FinetuningListResponse,
+        )
+
 
 class AsyncFinetunings(AsyncAPIResource):
     with_raw_response: AsyncFinetuningsWithRawResponse
@@ -190,6 +232,43 @@ class AsyncFinetunings(AsyncAPIResource):
             cast_to=FinetuningResponse,
         )
 
+    async def list(
+        self,
+        *,
+        db_connection_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinetuningListResponse:
+        """
+        Get Finetuning Jobs
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/api/finetunings",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"db_connection_id": db_connection_id}, finetuning_list_params.FinetuningListParams
+                ),
+            ),
+            cast_to=FinetuningListResponse,
+        )
+
 
 class FinetuningsWithRawResponse:
     def __init__(self, finetunings: Finetunings) -> None:
@@ -198,6 +277,9 @@ class FinetuningsWithRawResponse:
         )
         self.retrieve = to_raw_response_wrapper(
             finetunings.retrieve,
+        )
+        self.list = to_raw_response_wrapper(
+            finetunings.list,
         )
 
 
@@ -208,4 +290,7 @@ class AsyncFinetuningsWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             finetunings.retrieve,
+        )
+        self.list = async_to_raw_response_wrapper(
+            finetunings.list,
         )

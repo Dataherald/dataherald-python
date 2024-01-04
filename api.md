@@ -41,13 +41,14 @@ Methods:
 Types:
 
 ```python
-from dataherald.types import FinetuningResponse
+from dataherald.types import FinetuningResponse, FinetuningListResponse
 ```
 
 Methods:
 
 - <code title="post /api/finetunings">client.finetunings.<a href="./src/dataherald/resources/finetunings.py">create</a>(\*\*<a href="src/dataherald/types/finetuning_create_params.py">params</a>) -> <a href="./src/dataherald/types/finetuning_response.py">FinetuningResponse</a></code>
 - <code title="get /api/finetunings/{id}">client.finetunings.<a href="./src/dataherald/resources/finetunings.py">retrieve</a>(id) -> <a href="./src/dataherald/types/finetuning_response.py">FinetuningResponse</a></code>
+- <code title="get /api/finetunings">client.finetunings.<a href="./src/dataherald/resources/finetunings.py">list</a>(\*\*<a href="src/dataherald/types/finetuning_list_params.py">params</a>) -> <a href="./src/dataherald/types/finetuning_list_response.py">FinetuningListResponse</a></code>
 
 # GoldenSqls
 
