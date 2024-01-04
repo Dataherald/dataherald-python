@@ -58,7 +58,6 @@ from dataherald.types import (
     AdminConsoleGoldenSqlResponse,
     GoldenSqlListResponse,
     GoldenSqlDeleteResponse,
-    GoldenSqlUserUploadResponse,
 )
 ```
 
@@ -67,7 +66,6 @@ Methods:
 - <code title="get /api/golden-sqls/{id}">client.golden_sqls.<a href="./src/dataherald/resources/golden_sqls.py">retrieve</a>(id) -> <a href="./src/dataherald/types/shared/golden_sql_response.py">GoldenSqlResponse</a></code>
 - <code title="get /api/golden-sqls">client.golden_sqls.<a href="./src/dataherald/resources/golden_sqls.py">list</a>(\*\*<a href="src/dataherald/types/golden_sql_list_params.py">params</a>) -> <a href="./src/dataherald/types/golden_sql_list_response.py">GoldenSqlListResponse</a></code>
 - <code title="delete /api/golden-sqls/{id}">client.golden_sqls.<a href="./src/dataherald/resources/golden_sqls.py">delete</a>(id) -> <a href="./src/dataherald/types/golden_sql_delete_response.py">object</a></code>
-- <code title="post /api/golden-sqls/user-upload">client.golden_sqls.<a href="./src/dataherald/resources/golden_sqls.py">user_upload</a>(\*\*<a href="src/dataherald/types/golden_sql_user_upload_params.py">params</a>) -> <a href="./src/dataherald/types/golden_sql_user_upload_response.py">GoldenSqlUserUploadResponse</a></code>
 
 # Instructions
 
