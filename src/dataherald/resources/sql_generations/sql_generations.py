@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import httpx
 
 from ...types import (
@@ -21,6 +19,7 @@ from ..._types import (
     NotGiven,
 )
 from ..._utils import maybe_transform
+from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from ..._base_client import (
@@ -34,20 +33,17 @@ from .nl_generations import (
     AsyncNlGenerationsWithRawResponse,
 )
 
-if TYPE_CHECKING:
-    from ..._client import Dataherald, AsyncDataherald
-
 __all__ = ["SqlGenerations", "AsyncSqlGenerations"]
 
 
 class SqlGenerations(SyncAPIResource):
-    nl_generations: NlGenerations
-    with_raw_response: SqlGenerationsWithRawResponse
+    @cached_property
+    def nl_generations(self) -> NlGenerations:
+        return NlGenerations(self._client)
 
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.nl_generations = NlGenerations(client)
-        self.with_raw_response = SqlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> SqlGenerationsWithRawResponse:
+        return SqlGenerationsWithRawResponse(self)
 
     def create(
         self,
@@ -206,13 +202,13 @@ class SqlGenerations(SyncAPIResource):
 
 
 class AsyncSqlGenerations(AsyncAPIResource):
-    nl_generations: AsyncNlGenerations
-    with_raw_response: AsyncSqlGenerationsWithRawResponse
+    @cached_property
+    def nl_generations(self) -> AsyncNlGenerations:
+        return AsyncNlGenerations(self._client)
 
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.nl_generations = AsyncNlGenerations(client)
-        self.with_raw_response = AsyncSqlGenerationsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncSqlGenerationsWithRawResponse:
+        return AsyncSqlGenerationsWithRawResponse(self)
 
     async def create(
         self,

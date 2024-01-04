@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import List
 
 import httpx
 
@@ -21,6 +21,7 @@ from .._types import (
     UnknownResponse,
 )
 from .._utils import maybe_transform
+from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
 from .._base_client import (
@@ -28,18 +29,13 @@ from .._base_client import (
 )
 from ..types.shared import GoldenSqlResponse
 
-if TYPE_CHECKING:
-    from .._client import Dataherald, AsyncDataherald
-
 __all__ = ["GoldenSqls", "AsyncGoldenSqls"]
 
 
 class GoldenSqls(SyncAPIResource):
-    with_raw_response: GoldenSqlsWithRawResponse
-
-    def __init__(self, client: Dataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = GoldenSqlsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> GoldenSqlsWithRawResponse:
+        return GoldenSqlsWithRawResponse(self)
 
     def retrieve(
         self,
@@ -183,11 +179,9 @@ class GoldenSqls(SyncAPIResource):
 
 
 class AsyncGoldenSqls(AsyncAPIResource):
-    with_raw_response: AsyncGoldenSqlsWithRawResponse
-
-    def __init__(self, client: AsyncDataherald) -> None:
-        super().__init__(client)
-        self.with_raw_response = AsyncGoldenSqlsWithRawResponse(self)
+    @cached_property
+    def with_raw_response(self) -> AsyncGoldenSqlsWithRawResponse:
+        return AsyncGoldenSqlsWithRawResponse(self)
 
     async def retrieve(
         self,
