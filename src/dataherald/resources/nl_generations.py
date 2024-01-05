@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import NlGenerationListResponse, nl_generation_list_params
+from ..types import NlGenerationListResponse, nl_generation_list_params, nl_generation_create_params
 from .._types import (
     NOT_GIVEN,
     Body,
@@ -28,6 +28,47 @@ class NlGenerations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> NlGenerationsWithRawResponse:
         return NlGenerationsWithRawResponse(self)
+
+    def create(
+        self,
+        *,
+        sql_generation: nl_generation_create_params.SqlGeneration,
+        max_rows: int | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> NlGenerationResponse:
+        """
+        Create Prompt Sql Nl Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/api/prompts/sql-generations/nl-generations",
+            body=maybe_transform(
+                {
+                    "sql_generation": sql_generation,
+                    "max_rows": max_rows,
+                    "metadata": metadata,
+                },
+                nl_generation_create_params.NlGenerationCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NlGenerationResponse,
+        )
 
     def retrieve(
         self,
@@ -112,6 +153,47 @@ class AsyncNlGenerations(AsyncAPIResource):
     def with_raw_response(self) -> AsyncNlGenerationsWithRawResponse:
         return AsyncNlGenerationsWithRawResponse(self)
 
+    async def create(
+        self,
+        *,
+        sql_generation: nl_generation_create_params.SqlGeneration,
+        max_rows: int | NotGiven = NOT_GIVEN,
+        metadata: object | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> NlGenerationResponse:
+        """
+        Create Prompt Sql Nl Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/api/prompts/sql-generations/nl-generations",
+            body=maybe_transform(
+                {
+                    "sql_generation": sql_generation,
+                    "max_rows": max_rows,
+                    "metadata": metadata,
+                },
+                nl_generation_create_params.NlGenerationCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NlGenerationResponse,
+        )
+
     async def retrieve(
         self,
         id: str,
@@ -192,6 +274,9 @@ class AsyncNlGenerations(AsyncAPIResource):
 
 class NlGenerationsWithRawResponse:
     def __init__(self, nl_generations: NlGenerations) -> None:
+        self.create = to_raw_response_wrapper(
+            nl_generations.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             nl_generations.retrieve,
         )
@@ -202,6 +287,9 @@ class NlGenerationsWithRawResponse:
 
 class AsyncNlGenerationsWithRawResponse:
     def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+        self.create = async_to_raw_response_wrapper(
+            nl_generations.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             nl_generations.retrieve,
         )

@@ -174,6 +174,7 @@ from dataherald.types import NlGenerationListResponse
 
 Methods:
 
+- <code title="post /api/prompts/sql-generations/nl-generations">client.nl_generations.<a href="./src/dataherald/resources/nl_generations.py">create</a>(\*\*<a href="src/dataherald/types/nl_generation_create_params.py">params</a>) -> <a href="./src/dataherald/types/shared/nl_generation_response.py">NlGenerationResponse</a></code>
 - <code title="get /api/nl-generations/{id}">client.nl_generations.<a href="./src/dataherald/resources/nl_generations.py">retrieve</a>(id) -> <a href="./src/dataherald/types/shared/nl_generation_response.py">NlGenerationResponse</a></code>
 - <code title="get /api/nl-generations">client.nl_generations.<a href="./src/dataherald/resources/nl_generations.py">list</a>(\*\*<a href="src/dataherald/types/nl_generation_list_params.py">params</a>) -> <a href="./src/dataherald/types/nl_generation_list_response.py">NlGenerationListResponse</a></code>
 
