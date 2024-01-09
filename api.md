@@ -141,7 +141,7 @@ Methods:
 Types:
 
 ```python
-from dataherald.types import SqlGenerationListResponse, SqlGenerationExecuteResponse
+from dataherald.types import SqlGenerationListResponse
 ```
 
 Methods:
@@ -149,7 +149,6 @@ Methods:
 - <code title="post /api/prompts/sql-generations">client.sql_generations.<a href="./src/dataherald/resources/sql_generations/sql_generations.py">create</a>(\*\*<a href="src/dataherald/types/sql_generation_create_params.py">params</a>) -> <a href="./src/dataherald/types/shared/sql_generation_response.py">SqlGenerationResponse</a></code>
 - <code title="get /api/sql-generations/{id}">client.sql_generations.<a href="./src/dataherald/resources/sql_generations/sql_generations.py">retrieve</a>(id) -> <a href="./src/dataherald/types/shared/sql_generation_response.py">SqlGenerationResponse</a></code>
 - <code title="get /api/sql-generations">client.sql_generations.<a href="./src/dataherald/resources/sql_generations/sql_generations.py">list</a>(\*\*<a href="src/dataherald/types/sql_generation_list_params.py">params</a>) -> <a href="./src/dataherald/types/sql_generation_list_response.py">SqlGenerationListResponse</a></code>
-- <code title="post /api/sql-generations/{id}/execute">client.sql_generations.<a href="./src/dataherald/resources/sql_generations/sql_generations.py">execute</a>(id, \*\*<a href="src/dataherald/types/sql_generation_execute_params.py">params</a>) -> <a href="./src/dataherald/types/sql_generation_execute_response.py">SqlGenerationExecuteResponse</a></code>
 
 ## NlGenerations
 
