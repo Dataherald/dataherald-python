@@ -25,7 +25,7 @@ class Column(TypedDict, total=False):
 
     description: str
 
-    forengin_key: object
+    foreign_key: object
 
     is_primary_key: bool
 

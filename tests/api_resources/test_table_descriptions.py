@@ -58,7 +58,7 @@ class TestTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
                 {
                     "name": "string",
@@ -67,7 +67,7 @@ class TestTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
                 {
                     "name": "string",
@@ -76,7 +76,7 @@ class TestTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
             ],
             description="string",
@@ -183,7 +183,7 @@ class TestAsyncTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
                 {
                     "name": "string",
@@ -192,7 +192,7 @@ class TestAsyncTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
                 {
                     "name": "string",
@@ -201,7 +201,7 @@ class TestAsyncTableDescriptions:
                     "data_type": "string",
                     "low_cardinality": True,
                     "categories": ["string", "string", "string"],
-                    "forengin_key": {},
+                    "foreign_key": {},
                 },
             ],
             description="string",

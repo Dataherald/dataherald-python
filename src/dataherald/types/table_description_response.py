@@ -16,7 +16,7 @@ class Column(BaseModel):
 
     description: Optional[str] = None
 
-    forengin_key: Optional[object] = None
+    foreign_key: Optional[object] = None
 
     is_primary_key: Optional[bool] = None
 
