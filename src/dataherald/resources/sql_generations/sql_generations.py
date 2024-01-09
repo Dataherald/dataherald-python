@@ -4,7 +4,13 @@ from __future__ import annotations
 
 import httpx
 
-from ...types import SqlGenerationListResponse, sql_generation_list_params, sql_generation_create_params
+from ...types import (
+    SqlGenerationListResponse,
+    SqlGenerationExecuteResponse,
+    sql_generation_list_params,
+    sql_generation_create_params,
+    sql_generation_execute_params,
+)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
@@ -155,6 +161,42 @@ class SqlGenerations(SyncAPIResource):
             cast_to=SqlGenerationListResponse,
         )
 
+    def execute(
+        self,
+        id: str,
+        *,
+        max_rows: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SqlGenerationExecuteResponse:
+        """
+        Execute Sql Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/api/sql-generations/{id}/execute",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"max_rows": max_rows}, sql_generation_execute_params.SqlGenerationExecuteParams),
+            ),
+            cast_to=SqlGenerationExecuteResponse,
+        )
+
 
 class AsyncSqlGenerations(AsyncAPIResource):
     @cached_property
@@ -287,6 +329,42 @@ class AsyncSqlGenerations(AsyncAPIResource):
             cast_to=SqlGenerationListResponse,
         )
 
+    async def execute(
+        self,
+        id: str,
+        *,
+        max_rows: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SqlGenerationExecuteResponse:
+        """
+        Execute Sql Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/api/sql-generations/{id}/execute",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"max_rows": max_rows}, sql_generation_execute_params.SqlGenerationExecuteParams),
+            ),
+            cast_to=SqlGenerationExecuteResponse,
+        )
+
 
 class SqlGenerationsWithRawResponse:
     def __init__(self, sql_generations: SqlGenerations) -> None:
@@ -300,6 +378,9 @@ class SqlGenerationsWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             sql_generations.list,
+        )
+        self.execute = to_raw_response_wrapper(
+            sql_generations.execute,
         )
 
 
@@ -315,4 +396,7 @@ class AsyncSqlGenerationsWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             sql_generations.list,
+        )
+        self.execute = async_to_raw_response_wrapper(
+            sql_generations.execute,
         )

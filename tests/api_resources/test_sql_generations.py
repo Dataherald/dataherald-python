@@ -8,7 +8,10 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald.types import SqlGenerationListResponse
+from dataherald.types import (
+    SqlGenerationListResponse,
+    SqlGenerationExecuteResponse,
+)
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald.types.shared import SqlGenerationResponse
 
@@ -96,6 +99,30 @@ class TestSqlGenerations:
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
 
+    @parametrize
+    def test_method_execute(self, client: Dataherald) -> None:
+        sql_generation = client.sql_generations.execute(
+            "string",
+        )
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_method_execute_with_all_params(self, client: Dataherald) -> None:
+        sql_generation = client.sql_generations.execute(
+            "string",
+            max_rows=0,
+        )
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_raw_response_execute(self, client: Dataherald) -> None:
+        response = client.sql_generations.with_raw_response.execute(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sql_generation = response.parse()
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
 
 class TestAsyncSqlGenerations:
     strict_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -176,3 +203,27 @@ class TestAsyncSqlGenerations:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_method_execute(self, client: AsyncDataherald) -> None:
+        sql_generation = await client.sql_generations.execute(
+            "string",
+        )
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_method_execute_with_all_params(self, client: AsyncDataherald) -> None:
+        sql_generation = await client.sql_generations.execute(
+            "string",
+            max_rows=0,
+        )
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_raw_response_execute(self, client: AsyncDataherald) -> None:
+        response = await client.sql_generations.with_raw_response.execute(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        sql_generation = response.parse()
+        assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
