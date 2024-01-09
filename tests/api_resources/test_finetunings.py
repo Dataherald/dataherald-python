@@ -26,7 +26,6 @@ class TestFinetunings:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
-            base_llm={},
             db_connection_id="string",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -34,12 +33,13 @@ class TestFinetunings:
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
+            db_connection_id="string",
+            alias="string",
             base_llm={
                 "_model_provider": "string",
                 "_model_name": "string",
                 "_model_parameters": {"foo": "string"},
             },
-            db_connection_id="string",
             golden_records=["string", "string", "string"],
             metadata={},
         )
@@ -48,7 +48,6 @@ class TestFinetunings:
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.create(
-            base_llm={},
             db_connection_id="string",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -96,7 +95,6 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_create(self, client: AsyncDataherald) -> None:
         finetuning = await client.finetunings.create(
-            base_llm={},
             db_connection_id="string",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -104,12 +102,13 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_create_with_all_params(self, client: AsyncDataherald) -> None:
         finetuning = await client.finetunings.create(
+            db_connection_id="string",
+            alias="string",
             base_llm={
                 "_model_provider": "string",
                 "_model_name": "string",
                 "_model_parameters": {"foo": "string"},
             },
-            db_connection_id="string",
             golden_records=["string", "string", "string"],
             metadata={},
         )
@@ -118,7 +117,6 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_raw_response_create(self, client: AsyncDataherald) -> None:
         response = await client.finetunings.with_raw_response.create(
-            base_llm={},
             db_connection_id="string",
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
