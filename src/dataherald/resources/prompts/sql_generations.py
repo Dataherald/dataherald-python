@@ -4,14 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-    UnknownResponse,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -122,7 +115,7 @@ class SqlGenerations(SyncAPIResource):
                     sql_generation_retrieve_params.SqlGenerationRetrieveParams,
                 ),
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
     def nl_generations(
@@ -261,7 +254,7 @@ class AsyncSqlGenerations(AsyncAPIResource):
                     sql_generation_retrieve_params.SqlGenerationRetrieveParams,
                 ),
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
     async def nl_generations(

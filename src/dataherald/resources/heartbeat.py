@@ -4,14 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from .._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-    UnknownResponse,
-)
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
@@ -43,7 +36,7 @@ class Heartbeat(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
 
@@ -68,7 +61,7 @@ class AsyncHeartbeat(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
 

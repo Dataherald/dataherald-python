@@ -4,14 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import (
-    NOT_GIVEN,
-    Body,
-    Query,
-    Headers,
-    NotGiven,
-    UnknownResponse,
-)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -114,7 +107,7 @@ class NlGenerations(SyncAPIResource):
                     nl_generation_retrieve_params.NlGenerationRetrieveParams,
                 ),
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
 
@@ -207,7 +200,7 @@ class AsyncNlGenerations(AsyncAPIResource):
                     nl_generation_retrieve_params.NlGenerationRetrieveParams,
                 ),
             ),
-            cast_to=UnknownResponse,
+            cast_to=object,
         )
 
 
