@@ -86,6 +86,22 @@ class TestFinetunings:
         finetuning = response.parse()
         assert_matches_type(FinetuningListResponse, finetuning, path=["response"])
 
+    @parametrize
+    def test_method_cancel(self, client: Dataherald) -> None:
+        finetuning = client.finetunings.cancel(
+            "string",
+        )
+        assert_matches_type(FinetuningResponse, finetuning, path=["response"])
+
+    @parametrize
+    def test_raw_response_cancel(self, client: Dataherald) -> None:
+        response = client.finetunings.with_raw_response.cancel(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        finetuning = response.parse()
+        assert_matches_type(FinetuningResponse, finetuning, path=["response"])
+
 
 class TestAsyncFinetunings:
     strict_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
@@ -154,3 +170,19 @@ class TestAsyncFinetunings:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         finetuning = response.parse()
         assert_matches_type(FinetuningListResponse, finetuning, path=["response"])
+
+    @parametrize
+    async def test_method_cancel(self, client: AsyncDataherald) -> None:
+        finetuning = await client.finetunings.cancel(
+            "string",
+        )
+        assert_matches_type(FinetuningResponse, finetuning, path=["response"])
+
+    @parametrize
+    async def test_raw_response_cancel(self, client: AsyncDataherald) -> None:
+        response = await client.finetunings.with_raw_response.cancel(
+            "string",
+        )
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        finetuning = response.parse()
+        assert_matches_type(FinetuningResponse, finetuning, path=["response"])
