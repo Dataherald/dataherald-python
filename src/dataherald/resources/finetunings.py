@@ -142,6 +142,37 @@ class Finetunings(SyncAPIResource):
             cast_to=FinetuningListResponse,
         )
 
+    def cancel(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinetuningResponse:
+        """
+        Cancel Finetuning Job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            f"/api/finetunings/{id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinetuningResponse,
+        )
+
 
 class AsyncFinetunings(AsyncAPIResource):
     @cached_property
@@ -261,6 +292,37 @@ class AsyncFinetunings(AsyncAPIResource):
             cast_to=FinetuningListResponse,
         )
 
+    async def cancel(
+        self,
+        id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> FinetuningResponse:
+        """
+        Cancel Finetuning Job
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            f"/api/finetunings/{id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=FinetuningResponse,
+        )
+
 
 class FinetuningsWithRawResponse:
     def __init__(self, finetunings: Finetunings) -> None:
@@ -272,6 +334,9 @@ class FinetuningsWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             finetunings.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            finetunings.cancel,
         )
 
 
@@ -285,4 +350,7 @@ class AsyncFinetuningsWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             finetunings.list,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            finetunings.cancel,
         )
