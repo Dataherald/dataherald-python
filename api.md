@@ -196,7 +196,7 @@ Methods:
 - <code title="get /api/table-descriptions/{id}">client.table_descriptions.<a href="./src/dataherald/resources/table_descriptions.py">retrieve</a>(id) -> <a href="./src/dataherald/types/table_description_response.py">TableDescriptionResponse</a></code>
 - <code title="put /api/table-descriptions/{id}">client.table_descriptions.<a href="./src/dataherald/resources/table_descriptions.py">update</a>(id, \*\*<a href="src/dataherald/types/table_description_update_params.py">params</a>) -> <a href="./src/dataherald/types/table_description_response.py">TableDescriptionResponse</a></code>
 - <code title="get /api/table-descriptions">client.table_descriptions.<a href="./src/dataherald/resources/table_descriptions.py">list</a>(\*\*<a href="src/dataherald/types/table_description_list_params.py">params</a>) -> <a href="./src/dataherald/types/table_description_list_response.py">TableDescriptionListResponse</a></code>
-- <code title="post /api/table-descriptions/sync-schemas">client.table_descriptions.<a href="./src/dataherald/resources/table_descriptions.py">sync_schemas</a>(\*\*<a href="src/dataherald/types/table_description_sync_schemas_params.py">params</a>) -> <a href="./src/dataherald/types/table_description_sync_schemas_response.py">object</a></code>
+- <code title="post /api/table-descriptions/sync-schemas">client.table_descriptions.<a href="./src/dataherald/resources/table_descriptions.py">sync_schemas</a>(\*\*<a href="src/dataherald/types/table_description_sync_schemas_params.py">params</a>) -> <a href="./src/dataherald/types/table_description_sync_schemas_response.py">TableDescriptionSyncSchemasResponse</a></code>
 
 # Heartbeat
 
