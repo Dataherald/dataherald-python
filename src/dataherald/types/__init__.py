@@ -49,3 +49,6 @@ from .database_connection_update_params import DatabaseConnectionUpdateParams as
 from .table_description_sync_schemas_params import (
     TableDescriptionSyncSchemasParams as TableDescriptionSyncSchemasParams,
 )
+from .table_description_sync_schemas_response import (
+    TableDescriptionSyncSchemasResponse as TableDescriptionSyncSchemasResponse,
+)
