@@ -11,6 +11,7 @@ from tests.utils import assert_matches_type
 from dataherald.types import (
     TableDescriptionResponse,
     TableDescriptionListResponse,
+    TableDescriptionSyncSchemasResponse,
 )
 from dataherald._client import Dataherald, AsyncDataherald
 
@@ -123,7 +124,7 @@ class TestTableDescriptions:
         table_description = client.table_descriptions.sync_schemas(
             db_connection_id="string",
         )
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     def test_method_sync_schemas_with_all_params(self, client: Dataherald) -> None:
@@ -131,7 +132,7 @@ class TestTableDescriptions:
             db_connection_id="string",
             table_names=["string", "string", "string"],
         )
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_sync_schemas(self, client: Dataherald) -> None:
@@ -140,7 +141,7 @@ class TestTableDescriptions:
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         table_description = response.parse()
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
 
 class TestAsyncTableDescriptions:
@@ -248,7 +249,7 @@ class TestAsyncTableDescriptions:
         table_description = await client.table_descriptions.sync_schemas(
             db_connection_id="string",
         )
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     async def test_method_sync_schemas_with_all_params(self, client: AsyncDataherald) -> None:
@@ -256,7 +257,7 @@ class TestAsyncTableDescriptions:
             db_connection_id="string",
             table_names=["string", "string", "string"],
         )
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_sync_schemas(self, client: AsyncDataherald) -> None:
@@ -265,4 +266,4 @@ class TestAsyncTableDescriptions:
         )
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         table_description = response.parse()
-        assert_matches_type(object, table_description, path=["response"])
+        assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])

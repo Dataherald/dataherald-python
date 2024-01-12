@@ -8,7 +8,7 @@ and offers both synchronous and asynchronous clients powered by [httpx](https://
 
 ## Documentation
 
-The API documentation can be found [here](https://dataherald.readthedocs.io/en/latest/).
+The REST API documentation can be found [on dataherald.readthedocs.io](https://dataherald.readthedocs.io/en/latest/). The full API of this library can be found in [api.md](https://www.github.com/Dataherald/dataherald-python/blob/main/api.md).
 
 ## Installation
 

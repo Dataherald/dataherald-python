@@ -9,6 +9,7 @@ import httpx
 from ..types import (
     TableDescriptionResponse,
     TableDescriptionListResponse,
+    TableDescriptionSyncSchemasResponse,
     table_description_list_params,
     table_description_update_params,
     table_description_sync_schemas_params,
@@ -158,9 +159,9 @@ class TableDescriptions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> TableDescriptionSyncSchemasResponse:
         """
-        Api Sync Table Descriptions Schemas
+        Sync Table Descriptions Schemas
 
         Args:
           extra_headers: Send extra headers
@@ -183,7 +184,7 @@ class TableDescriptions(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=TableDescriptionSyncSchemasResponse,
         )
 
 
@@ -320,9 +321,9 @@ class AsyncTableDescriptions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> TableDescriptionSyncSchemasResponse:
         """
-        Api Sync Table Descriptions Schemas
+        Sync Table Descriptions Schemas
 
         Args:
           extra_headers: Send extra headers
@@ -345,7 +346,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=TableDescriptionSyncSchemasResponse,
         )
 
 
