@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import TypedDict
 
-__all__ = ["DatabaseConnectionCreateParams", "SshSettings"]
+__all__ = ["DatabaseConnectionCreateParams", "SSHSettings"]
 
 
 class DatabaseConnectionCreateParams(TypedDict, total=False):
@@ -19,12 +19,12 @@ class DatabaseConnectionCreateParams(TypedDict, total=False):
 
     metadata: object
 
-    ssh_settings: SshSettings
+    ssh_settings: SSHSettings
 
     use_ssh: bool
 
 
-class SshSettings(TypedDict, total=False):
+class SSHSettings(TypedDict, total=False):
     db_driver: str
 
     db_name: str

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -27,9 +28,22 @@ class TestEngine:
     @parametrize
     def test_raw_response_heartbeat(self, client: Dataherald) -> None:
         response = client.engine.with_raw_response.heartbeat()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         engine = response.parse()
         assert_matches_type(object, engine, path=["response"])
+
+    @parametrize
+    def test_streaming_response_heartbeat(self, client: Dataherald) -> None:
+        with client.engine.with_streaming_response.heartbeat() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            engine = response.parse()
+            assert_matches_type(object, engine, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncEngine:
@@ -45,6 +59,19 @@ class TestAsyncEngine:
     @parametrize
     async def test_raw_response_heartbeat(self, client: AsyncDataherald) -> None:
         response = await client.engine.with_raw_response.heartbeat()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        engine = response.parse()
+        engine = await response.parse()
         assert_matches_type(object, engine, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_heartbeat(self, client: AsyncDataherald) -> None:
+        async with client.engine.with_streaming_response.heartbeat() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            engine = await response.parse()
+            assert_matches_type(object, engine, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

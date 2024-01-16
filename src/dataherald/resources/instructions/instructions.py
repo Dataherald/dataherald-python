@@ -4,7 +4,14 @@ from __future__ import annotations
 
 import httpx
 
-from .first import First, AsyncFirst, FirstWithRawResponse, AsyncFirstWithRawResponse
+from .first import (
+    First,
+    AsyncFirst,
+    FirstWithRawResponse,
+    AsyncFirstWithRawResponse,
+    FirstWithStreamingResponse,
+    AsyncFirstWithStreamingResponse,
+)
 from ...types import (
     InstructionListResponse,
     instruction_list_params,
@@ -15,7 +22,12 @@ from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -32,6 +44,10 @@ class Instructions(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> InstructionsWithRawResponse:
         return InstructionsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> InstructionsWithStreamingResponse:
+        return InstructionsWithStreamingResponse(self)
 
     def create(
         self,
@@ -100,6 +116,8 @@ class Instructions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._put(
             f"/api/instructions/{id}",
             body=maybe_transform(
@@ -176,6 +194,8 @@ class Instructions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
             f"/api/instructions/{id}",
             options=make_request_options(
@@ -193,6 +213,10 @@ class AsyncInstructions(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncInstructionsWithRawResponse:
         return AsyncInstructionsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncInstructionsWithStreamingResponse:
+        return AsyncInstructionsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -261,6 +285,8 @@ class AsyncInstructions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/instructions/{id}",
             body=maybe_transform(
@@ -337,6 +363,8 @@ class AsyncInstructions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
             f"/api/instructions/{id}",
             options=make_request_options(
@@ -378,5 +406,41 @@ class AsyncInstructionsWithRawResponse:
             instructions.list,
         )
         self.delete = async_to_raw_response_wrapper(
+            instructions.delete,
+        )
+
+
+class InstructionsWithStreamingResponse:
+    def __init__(self, instructions: Instructions) -> None:
+        self.first = FirstWithStreamingResponse(instructions.first)
+
+        self.create = to_streamed_response_wrapper(
+            instructions.create,
+        )
+        self.update = to_streamed_response_wrapper(
+            instructions.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            instructions.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            instructions.delete,
+        )
+
+
+class AsyncInstructionsWithStreamingResponse:
+    def __init__(self, instructions: AsyncInstructions) -> None:
+        self.first = AsyncFirstWithStreamingResponse(instructions.first)
+
+        self.create = async_to_streamed_response_wrapper(
+            instructions.create,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            instructions.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            instructions.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
             instructions.delete,
         )

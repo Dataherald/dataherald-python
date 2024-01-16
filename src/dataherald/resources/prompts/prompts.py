@@ -9,7 +9,12 @@ from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -18,6 +23,8 @@ from .sql_generations import (
     AsyncSqlGenerations,
     SqlGenerationsWithRawResponse,
     AsyncSqlGenerationsWithRawResponse,
+    SqlGenerationsWithStreamingResponse,
+    AsyncSqlGenerationsWithStreamingResponse,
 )
 
 __all__ = ["Prompts", "AsyncPrompts"]
@@ -31,6 +38,10 @@ class Prompts(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> PromptsWithRawResponse:
         return PromptsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> PromptsWithStreamingResponse:
+        return PromptsWithStreamingResponse(self)
 
     def create(
         self,
@@ -96,6 +107,8 @@ class Prompts(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/prompts/{id}",
             options=make_request_options(
@@ -159,6 +172,10 @@ class AsyncPrompts(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncPromptsWithRawResponse:
         return AsyncPromptsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncPromptsWithStreamingResponse:
+        return AsyncPromptsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -224,6 +241,8 @@ class AsyncPrompts(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/prompts/{id}",
             options=make_request_options(
@@ -305,5 +324,35 @@ class AsyncPromptsWithRawResponse:
             prompts.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
+            prompts.list,
+        )
+
+
+class PromptsWithStreamingResponse:
+    def __init__(self, prompts: Prompts) -> None:
+        self.sql_generations = SqlGenerationsWithStreamingResponse(prompts.sql_generations)
+
+        self.create = to_streamed_response_wrapper(
+            prompts.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            prompts.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            prompts.list,
+        )
+
+
+class AsyncPromptsWithStreamingResponse:
+    def __init__(self, prompts: AsyncPrompts) -> None:
+        self.sql_generations = AsyncSqlGenerationsWithStreamingResponse(prompts.sql_generations)
+
+        self.create = async_to_streamed_response_wrapper(
+            prompts.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            prompts.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
             prompts.list,
         )

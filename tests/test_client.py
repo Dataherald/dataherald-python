@@ -19,6 +19,8 @@ from pydantic import ValidationError
 from dataherald import Dataherald, AsyncDataherald, APIResponseValidationError
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald._models import BaseModel, FinalRequestOptions
+from dataherald._response import APIResponse, AsyncAPIResponse
+from dataherald._constants import RAW_RESPONSE_HEADER
 from dataherald._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from dataherald._base_client import (
     DEFAULT_TIMEOUT,
@@ -224,6 +226,7 @@ class TestDataherald:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
+                        "dataherald/_legacy_response.py",
                         "dataherald/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
                         "dataherald/_compat.py",
@@ -666,6 +669,25 @@ class TestDataherald:
 
     @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
+    def test_streaming_response(self) -> None:
+        response = self.client.post(
+            "/api/database-connections",
+            body=dict(),
+            cast_to=APIResponse[bytes],
+            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+        )
+
+        assert not cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 1
+
+        for _ in response.iter_bytes():
+            ...
+
+        assert cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 0
+
+    @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/api/database-connections").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -674,7 +696,7 @@ class TestDataherald:
                 "/api/database-connections",
                 body=dict(),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -689,7 +711,7 @@ class TestDataherald:
                 "/api/database-connections",
                 body=dict(),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -870,6 +892,7 @@ class TestAsyncDataherald:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
+                        "dataherald/_legacy_response.py",
                         "dataherald/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
                         "dataherald/_compat.py",
@@ -1318,6 +1341,25 @@ class TestAsyncDataherald:
 
     @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
+    async def test_streaming_response(self) -> None:
+        response = await self.client.post(
+            "/api/database-connections",
+            body=dict(),
+            cast_to=AsyncAPIResponse[bytes],
+            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
+        )
+
+        assert not cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 1
+
+        async for _ in response.iter_bytes():
+            ...
+
+        assert cast(Any, response.is_closed)
+        assert _get_open_connections(self.client) == 0
+
+    @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/api/database-connections").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -1326,7 +1368,7 @@ class TestAsyncDataherald:
                 "/api/database-connections",
                 body=dict(),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1341,7 +1383,7 @@ class TestAsyncDataherald:
                 "/api/database-connections",
                 body=dict(),
                 cast_to=httpx.Response,
-                options={"headers": {"X-Stainless-Streamed-Raw-Response": "true"}},
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0

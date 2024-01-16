@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -41,9 +42,31 @@ class TestNlGenerations:
         response = client.sql_generations.nl_generations.with_raw_response.create(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         nl_generation = response.parse()
         assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create(self, client: Dataherald) -> None:
+        with client.sql_generations.nl_generations.with_streaming_response.create(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            nl_generation = response.parse()
+            assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_create(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sql_generations.nl_generations.with_raw_response.create(
+                "",
+            )
 
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
@@ -68,9 +91,31 @@ class TestNlGenerations:
         response = client.sql_generations.nl_generations.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         nl_generation = response.parse()
         assert_matches_type(object, nl_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Dataherald) -> None:
+        with client.sql_generations.nl_generations.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            nl_generation = response.parse()
+            assert_matches_type(object, nl_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sql_generations.nl_generations.with_raw_response.retrieve(
+                "",
+            )
 
 
 class TestAsyncNlGenerations:
@@ -99,9 +144,31 @@ class TestAsyncNlGenerations:
         response = await client.sql_generations.nl_generations.with_raw_response.create(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        nl_generation = response.parse()
+        nl_generation = await response.parse()
         assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.nl_generations.with_streaming_response.create(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            nl_generation = await response.parse()
+            assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_create(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.sql_generations.nl_generations.with_raw_response.create(
+                "",
+            )
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncDataherald) -> None:
@@ -126,6 +193,28 @@ class TestAsyncNlGenerations:
         response = await client.sql_generations.nl_generations.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        nl_generation = response.parse()
+        nl_generation = await response.parse()
         assert_matches_type(object, nl_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.nl_generations.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            nl_generation = await response.parse()
+            assert_matches_type(object, nl_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.sql_generations.nl_generations.with_raw_response.retrieve(
+                "",
+            )

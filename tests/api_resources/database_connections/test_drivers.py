@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -28,9 +29,22 @@ class TestDrivers:
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.database_connections.drivers.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         driver = response.parse()
         assert_matches_type(DriverListResponse, driver, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Dataherald) -> None:
+        with client.database_connections.drivers.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            driver = response.parse()
+            assert_matches_type(DriverListResponse, driver, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncDrivers:
@@ -46,6 +60,19 @@ class TestAsyncDrivers:
     @parametrize
     async def test_raw_response_list(self, client: AsyncDataherald) -> None:
         response = await client.database_connections.drivers.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        driver = response.parse()
+        driver = await response.parse()
         assert_matches_type(DriverListResponse, driver, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncDataherald) -> None:
+        async with client.database_connections.drivers.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            driver = await response.parse()
+            assert_matches_type(DriverListResponse, driver, path=["response"])
+
+        assert cast(Any, response.is_closed) is True

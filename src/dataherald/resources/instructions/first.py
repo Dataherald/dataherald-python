@@ -7,7 +7,12 @@ import httpx
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -20,6 +25,10 @@ class First(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FirstWithRawResponse:
         return FirstWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FirstWithStreamingResponse:
+        return FirstWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -45,6 +54,10 @@ class AsyncFirst(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncFirstWithRawResponse:
         return AsyncFirstWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncFirstWithStreamingResponse:
+        return AsyncFirstWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -76,5 +89,19 @@ class FirstWithRawResponse:
 class AsyncFirstWithRawResponse:
     def __init__(self, first: AsyncFirst) -> None:
         self.retrieve = async_to_raw_response_wrapper(
+            first.retrieve,
+        )
+
+
+class FirstWithStreamingResponse:
+    def __init__(self, first: First) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            first.retrieve,
+        )
+
+
+class AsyncFirstWithStreamingResponse:
+    def __init__(self, first: AsyncFirst) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
             first.retrieve,
         )
