@@ -18,7 +18,12 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -30,6 +35,10 @@ class TableDescriptions(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TableDescriptionsWithRawResponse:
         return TableDescriptionsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> TableDescriptionsWithStreamingResponse:
+        return TableDescriptionsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -54,6 +63,8 @@ class TableDescriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/table-descriptions/{id}",
             options=make_request_options(
@@ -89,6 +100,8 @@ class TableDescriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._put(
             f"/api/table-descriptions/{id}",
             body=maybe_transform(
@@ -193,6 +206,10 @@ class AsyncTableDescriptions(AsyncAPIResource):
     def with_raw_response(self) -> AsyncTableDescriptionsWithRawResponse:
         return AsyncTableDescriptionsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncTableDescriptionsWithStreamingResponse:
+        return AsyncTableDescriptionsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         id: str,
@@ -216,6 +233,8 @@ class AsyncTableDescriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/table-descriptions/{id}",
             options=make_request_options(
@@ -251,6 +270,8 @@ class AsyncTableDescriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/table-descriptions/{id}",
             body=maybe_transform(
@@ -378,5 +399,37 @@ class AsyncTableDescriptionsWithRawResponse:
             table_descriptions.list,
         )
         self.sync_schemas = async_to_raw_response_wrapper(
+            table_descriptions.sync_schemas,
+        )
+
+
+class TableDescriptionsWithStreamingResponse:
+    def __init__(self, table_descriptions: TableDescriptions) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            table_descriptions.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            table_descriptions.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            table_descriptions.list,
+        )
+        self.sync_schemas = to_streamed_response_wrapper(
+            table_descriptions.sync_schemas,
+        )
+
+
+class AsyncTableDescriptionsWithStreamingResponse:
+    def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            table_descriptions.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            table_descriptions.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            table_descriptions.list,
+        )
+        self.sync_schemas = async_to_streamed_response_wrapper(
             table_descriptions.sync_schemas,
         )

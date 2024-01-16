@@ -16,7 +16,12 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -29,6 +34,10 @@ class GoldenSqls(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> GoldenSqlsWithRawResponse:
         return GoldenSqlsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> GoldenSqlsWithStreamingResponse:
+        return GoldenSqlsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -53,6 +62,8 @@ class GoldenSqls(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/golden-sqls/{id}",
             options=make_request_options(
@@ -130,6 +141,8 @@ class GoldenSqls(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
             f"/api/golden-sqls/{id}",
             options=make_request_options(
@@ -176,6 +189,10 @@ class AsyncGoldenSqls(AsyncAPIResource):
     def with_raw_response(self) -> AsyncGoldenSqlsWithRawResponse:
         return AsyncGoldenSqlsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncGoldenSqlsWithStreamingResponse:
+        return AsyncGoldenSqlsWithStreamingResponse(self)
+
     async def retrieve(
         self,
         id: str,
@@ -199,6 +216,8 @@ class AsyncGoldenSqls(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/golden-sqls/{id}",
             options=make_request_options(
@@ -276,6 +295,8 @@ class AsyncGoldenSqls(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
             f"/api/golden-sqls/{id}",
             options=make_request_options(
@@ -345,5 +366,37 @@ class AsyncGoldenSqlsWithRawResponse:
             golden_sqls.delete,
         )
         self.upload = async_to_raw_response_wrapper(
+            golden_sqls.upload,
+        )
+
+
+class GoldenSqlsWithStreamingResponse:
+    def __init__(self, golden_sqls: GoldenSqls) -> None:
+        self.retrieve = to_streamed_response_wrapper(
+            golden_sqls.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            golden_sqls.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            golden_sqls.delete,
+        )
+        self.upload = to_streamed_response_wrapper(
+            golden_sqls.upload,
+        )
+
+
+class AsyncGoldenSqlsWithStreamingResponse:
+    def __init__(self, golden_sqls: AsyncGoldenSqls) -> None:
+        self.retrieve = async_to_streamed_response_wrapper(
+            golden_sqls.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            golden_sqls.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            golden_sqls.delete,
+        )
+        self.upload = async_to_streamed_response_wrapper(
             golden_sqls.upload,
         )

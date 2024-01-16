@@ -7,7 +7,12 @@ import httpx
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -19,6 +24,10 @@ class Engine(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> EngineWithRawResponse:
         return EngineWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> EngineWithStreamingResponse:
+        return EngineWithStreamingResponse(self)
 
     def heartbeat(
         self,
@@ -44,6 +53,10 @@ class AsyncEngine(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncEngineWithRawResponse:
         return AsyncEngineWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncEngineWithStreamingResponse:
+        return AsyncEngineWithStreamingResponse(self)
 
     async def heartbeat(
         self,
@@ -75,5 +88,19 @@ class EngineWithRawResponse:
 class AsyncEngineWithRawResponse:
     def __init__(self, engine: AsyncEngine) -> None:
         self.heartbeat = async_to_raw_response_wrapper(
+            engine.heartbeat,
+        )
+
+
+class EngineWithStreamingResponse:
+    def __init__(self, engine: Engine) -> None:
+        self.heartbeat = to_streamed_response_wrapper(
+            engine.heartbeat,
+        )
+
+
+class AsyncEngineWithStreamingResponse:
+    def __init__(self, engine: AsyncEngine) -> None:
+        self.heartbeat = async_to_streamed_response_wrapper(
             engine.heartbeat,
         )

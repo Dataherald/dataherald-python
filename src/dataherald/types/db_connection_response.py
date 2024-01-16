@@ -5,7 +5,7 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["DBConnectionResponse", "Metadata", "MetadataDataheraldInternal", "SshSettings"]
+__all__ = ["DBConnectionResponse", "Metadata", "MetadataDataheraldInternal", "SSHSettings"]
 
 
 class MetadataDataheraldInternal(BaseModel):
@@ -16,7 +16,7 @@ class Metadata(BaseModel):
     dataherald_internal: Optional[MetadataDataheraldInternal] = None
 
 
-class SshSettings(BaseModel):
+class SSHSettings(BaseModel):
     db_driver: Optional[str] = None
 
     db_name: Optional[str] = None
@@ -49,7 +49,7 @@ class DBConnectionResponse(BaseModel):
 
     path_to_credentials_file: Optional[str] = None
 
-    ssh_settings: Optional[SshSettings] = None
+    ssh_settings: Optional[SSHSettings] = None
 
     uri: Optional[str] = None
 

@@ -21,8 +21,8 @@ class FinetuningCreateParams(TypedDict, total=False):
 
 
 class BaseLlm(TypedDict, total=False):
-    _model_name: str
+    model_name: str
 
-    _model_parameters: Dict[str, str]
+    model_parameters: Dict[str, str]
 
-    _model_provider: str
+    model_provider: str

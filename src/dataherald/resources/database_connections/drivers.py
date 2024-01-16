@@ -7,7 +7,12 @@ import httpx
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -20,6 +25,10 @@ class Drivers(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DriversWithRawResponse:
         return DriversWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DriversWithStreamingResponse:
+        return DriversWithStreamingResponse(self)
 
     def list(
         self,
@@ -45,6 +54,10 @@ class AsyncDrivers(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncDriversWithRawResponse:
         return AsyncDriversWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDriversWithStreamingResponse:
+        return AsyncDriversWithStreamingResponse(self)
 
     async def list(
         self,
@@ -76,5 +89,19 @@ class DriversWithRawResponse:
 class AsyncDriversWithRawResponse:
     def __init__(self, drivers: AsyncDrivers) -> None:
         self.list = async_to_raw_response_wrapper(
+            drivers.list,
+        )
+
+
+class DriversWithStreamingResponse:
+    def __init__(self, drivers: Drivers) -> None:
+        self.list = to_streamed_response_wrapper(
+            drivers.list,
+        )
+
+
+class AsyncDriversWithStreamingResponse:
+    def __init__(self, drivers: AsyncDrivers) -> None:
+        self.list = async_to_streamed_response_wrapper(
             drivers.list,
         )

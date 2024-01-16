@@ -3,17 +3,19 @@
 from typing import Dict, List, Optional
 from datetime import datetime
 
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
 __all__ = ["FinetuningResponse", "BaseLlm", "Metadata", "MetadataDataheraldInternal"]
 
 
 class BaseLlm(BaseModel):
-    _model_name: Optional[str] = None
+    api_model_name: Optional[str] = FieldInfo(alias="model_name", default=None)
 
-    _model_parameters: Optional[Dict[str, str]] = None
+    api_model_parameters: Optional[Dict[str, str]] = FieldInfo(alias="model_parameters", default=None)
 
-    _model_provider: Optional[str] = None
+    api_model_provider: Optional[str] = FieldInfo(alias="model_provider", default=None)
 
 
 class MetadataDataheraldInternal(BaseModel):

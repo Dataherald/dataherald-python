@@ -64,6 +64,7 @@ class Dataherald(SyncAPIClient):
     heartbeat: resources.Heartbeat
     engine: resources.Engine
     with_raw_response: DataheraldWithRawResponse
+    with_streaming_response: DataheraldWithStreamedResponse
 
     # client options
     api_key: str
@@ -153,6 +154,7 @@ class Dataherald(SyncAPIClient):
         self.heartbeat = resources.Heartbeat(self)
         self.engine = resources.Engine(self)
         self.with_raw_response = DataheraldWithRawResponse(self)
+        self.with_streaming_response = DataheraldWithStreamedResponse(self)
 
     @property
     @override
@@ -274,6 +276,7 @@ class AsyncDataherald(AsyncAPIClient):
     heartbeat: resources.AsyncHeartbeat
     engine: resources.AsyncEngine
     with_raw_response: AsyncDataheraldWithRawResponse
+    with_streaming_response: AsyncDataheraldWithStreamedResponse
 
     # client options
     api_key: str
@@ -363,6 +366,7 @@ class AsyncDataherald(AsyncAPIClient):
         self.heartbeat = resources.AsyncHeartbeat(self)
         self.engine = resources.AsyncEngine(self)
         self.with_raw_response = AsyncDataheraldWithRawResponse(self)
+        self.with_streaming_response = AsyncDataheraldWithStreamedResponse(self)
 
     @property
     @override
@@ -499,6 +503,36 @@ class AsyncDataheraldWithRawResponse:
         self.table_descriptions = resources.AsyncTableDescriptionsWithRawResponse(client.table_descriptions)
         self.heartbeat = resources.AsyncHeartbeatWithRawResponse(client.heartbeat)
         self.engine = resources.AsyncEngineWithRawResponse(client.engine)
+
+
+class DataheraldWithStreamedResponse:
+    def __init__(self, client: Dataherald) -> None:
+        self.database_connections = resources.DatabaseConnectionsWithStreamingResponse(client.database_connections)
+        self.finetunings = resources.FinetuningsWithStreamingResponse(client.finetunings)
+        self.golden_sqls = resources.GoldenSqlsWithStreamingResponse(client.golden_sqls)
+        self.instructions = resources.InstructionsWithStreamingResponse(client.instructions)
+        self.generations = resources.GenerationsWithStreamingResponse(client.generations)
+        self.prompts = resources.PromptsWithStreamingResponse(client.prompts)
+        self.sql_generations = resources.SqlGenerationsWithStreamingResponse(client.sql_generations)
+        self.nl_generations = resources.NlGenerationsWithStreamingResponse(client.nl_generations)
+        self.table_descriptions = resources.TableDescriptionsWithStreamingResponse(client.table_descriptions)
+        self.heartbeat = resources.HeartbeatWithStreamingResponse(client.heartbeat)
+        self.engine = resources.EngineWithStreamingResponse(client.engine)
+
+
+class AsyncDataheraldWithStreamedResponse:
+    def __init__(self, client: AsyncDataherald) -> None:
+        self.database_connections = resources.AsyncDatabaseConnectionsWithStreamingResponse(client.database_connections)
+        self.finetunings = resources.AsyncFinetuningsWithStreamingResponse(client.finetunings)
+        self.golden_sqls = resources.AsyncGoldenSqlsWithStreamingResponse(client.golden_sqls)
+        self.instructions = resources.AsyncInstructionsWithStreamingResponse(client.instructions)
+        self.generations = resources.AsyncGenerationsWithStreamingResponse(client.generations)
+        self.prompts = resources.AsyncPromptsWithStreamingResponse(client.prompts)
+        self.sql_generations = resources.AsyncSqlGenerationsWithStreamingResponse(client.sql_generations)
+        self.nl_generations = resources.AsyncNlGenerationsWithStreamingResponse(client.nl_generations)
+        self.table_descriptions = resources.AsyncTableDescriptionsWithStreamingResponse(client.table_descriptions)
+        self.heartbeat = resources.AsyncHeartbeatWithStreamingResponse(client.heartbeat)
+        self.engine = resources.AsyncEngineWithStreamingResponse(client.engine)
 
 
 Client = Dataherald

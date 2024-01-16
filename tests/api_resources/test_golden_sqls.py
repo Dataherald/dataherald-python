@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -36,9 +37,31 @@ class TestGoldenSqls:
         response = client.golden_sqls.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         golden_sql = response.parse()
         assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Dataherald) -> None:
+        with client.golden_sqls.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = response.parse()
+            assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.golden_sqls.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
@@ -58,9 +81,22 @@ class TestGoldenSqls:
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.golden_sqls.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         golden_sql = response.parse()
         assert_matches_type(GoldenSqlListResponse, golden_sql, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Dataherald) -> None:
+        with client.golden_sqls.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = response.parse()
+            assert_matches_type(GoldenSqlListResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_delete(self, client: Dataherald) -> None:
@@ -74,9 +110,31 @@ class TestGoldenSqls:
         response = client.golden_sqls.with_raw_response.delete(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         golden_sql = response.parse()
         assert_matches_type(object, golden_sql, path=["response"])
+
+    @parametrize
+    def test_streaming_response_delete(self, client: Dataherald) -> None:
+        with client.golden_sqls.with_streaming_response.delete(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = response.parse()
+            assert_matches_type(object, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_delete(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.golden_sqls.with_raw_response.delete(
+                "",
+            )
 
     @parametrize
     def test_method_upload(self, client: Dataherald) -> None:
@@ -122,9 +180,40 @@ class TestGoldenSqls:
                 },
             ],
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         golden_sql = response.parse()
         assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
+
+    @parametrize
+    def test_streaming_response_upload(self, client: Dataherald) -> None:
+        with client.golden_sqls.with_streaming_response.upload(
+            body=[
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = response.parse()
+            assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncGoldenSqls:
@@ -144,9 +233,31 @@ class TestAsyncGoldenSqls:
         response = await client.golden_sqls.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
+        golden_sql = await response.parse()
         assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncDataherald) -> None:
+        async with client.golden_sqls.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = await response.parse()
+            assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.golden_sqls.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncDataherald) -> None:
@@ -166,9 +277,22 @@ class TestAsyncGoldenSqls:
     @parametrize
     async def test_raw_response_list(self, client: AsyncDataherald) -> None:
         response = await client.golden_sqls.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
+        golden_sql = await response.parse()
         assert_matches_type(GoldenSqlListResponse, golden_sql, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncDataherald) -> None:
+        async with client.golden_sqls.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = await response.parse()
+            assert_matches_type(GoldenSqlListResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_delete(self, client: AsyncDataherald) -> None:
@@ -182,9 +306,31 @@ class TestAsyncGoldenSqls:
         response = await client.golden_sqls.with_raw_response.delete(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
+        golden_sql = await response.parse()
         assert_matches_type(object, golden_sql, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_delete(self, client: AsyncDataherald) -> None:
+        async with client.golden_sqls.with_streaming_response.delete(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = await response.parse()
+            assert_matches_type(object, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_delete(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.golden_sqls.with_raw_response.delete(
+                "",
+            )
 
     @parametrize
     async def test_method_upload(self, client: AsyncDataherald) -> None:
@@ -230,6 +376,37 @@ class TestAsyncGoldenSqls:
                 },
             ],
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        golden_sql = response.parse()
+        golden_sql = await response.parse()
         assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_upload(self, client: AsyncDataherald) -> None:
+        async with client.golden_sqls.with_streaming_response.upload(
+            body=[
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+                {
+                    "db_connection_id": "string",
+                    "prompt_text": "string",
+                    "sql": "string",
+                },
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            golden_sql = await response.parse()
+            assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
