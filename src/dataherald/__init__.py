@@ -16,6 +16,7 @@ from ._client import (
     AsyncDataherald,
 )
 from ._version import __title__, __version__
+from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._exceptions import (
     APIError,
     ConflictError,

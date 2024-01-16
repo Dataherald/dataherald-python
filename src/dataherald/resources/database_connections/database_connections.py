@@ -12,12 +12,24 @@ from ...types import (
     database_connection_create_params,
     database_connection_update_params,
 )
-from .drivers import Drivers, AsyncDrivers, DriversWithRawResponse, AsyncDriversWithRawResponse
+from .drivers import (
+    Drivers,
+    AsyncDrivers,
+    DriversWithRawResponse,
+    AsyncDriversWithRawResponse,
+    DriversWithStreamingResponse,
+    AsyncDriversWithStreamingResponse,
+)
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -34,6 +46,10 @@ class DatabaseConnections(SyncAPIResource):
     def with_raw_response(self) -> DatabaseConnectionsWithRawResponse:
         return DatabaseConnectionsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> DatabaseConnectionsWithStreamingResponse:
+        return DatabaseConnectionsWithStreamingResponse(self)
+
     def create(
         self,
         *,
@@ -42,7 +58,7 @@ class DatabaseConnections(SyncAPIResource):
         credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
-        ssh_settings: database_connection_create_params.SshSettings | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -106,6 +122,8 @@ class DatabaseConnections(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/database-connections/{id}",
             options=make_request_options(
@@ -123,7 +141,7 @@ class DatabaseConnections(SyncAPIResource):
         credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
-        ssh_settings: database_connection_update_params.SshSettings | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -144,6 +162,8 @@ class DatabaseConnections(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._put(
             f"/api/database-connections/{id}",
             body=maybe_transform(
@@ -193,6 +213,10 @@ class AsyncDatabaseConnections(AsyncAPIResource):
     def with_raw_response(self) -> AsyncDatabaseConnectionsWithRawResponse:
         return AsyncDatabaseConnectionsWithRawResponse(self)
 
+    @cached_property
+    def with_streaming_response(self) -> AsyncDatabaseConnectionsWithStreamingResponse:
+        return AsyncDatabaseConnectionsWithStreamingResponse(self)
+
     async def create(
         self,
         *,
@@ -201,7 +225,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
-        ssh_settings: database_connection_create_params.SshSettings | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -265,6 +289,8 @@ class AsyncDatabaseConnections(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/database-connections/{id}",
             options=make_request_options(
@@ -282,7 +308,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
-        ssh_settings: database_connection_update_params.SshSettings | NotGiven = NOT_GIVEN,
+        ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -303,6 +329,8 @@ class AsyncDatabaseConnections(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/database-connections/{id}",
             body=maybe_transform(
@@ -375,5 +403,41 @@ class AsyncDatabaseConnectionsWithRawResponse:
             database_connections.update,
         )
         self.list = async_to_raw_response_wrapper(
+            database_connections.list,
+        )
+
+
+class DatabaseConnectionsWithStreamingResponse:
+    def __init__(self, database_connections: DatabaseConnections) -> None:
+        self.drivers = DriversWithStreamingResponse(database_connections.drivers)
+
+        self.create = to_streamed_response_wrapper(
+            database_connections.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            database_connections.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            database_connections.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            database_connections.list,
+        )
+
+
+class AsyncDatabaseConnectionsWithStreamingResponse:
+    def __init__(self, database_connections: AsyncDatabaseConnections) -> None:
+        self.drivers = AsyncDriversWithStreamingResponse(database_connections.drivers)
+
+        self.create = async_to_streamed_response_wrapper(
+            database_connections.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            database_connections.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            database_connections.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
             database_connections.list,
         )

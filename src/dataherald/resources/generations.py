@@ -17,7 +17,12 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -30,6 +35,10 @@ class Generations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> GenerationsWithRawResponse:
         return GenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> GenerationsWithStreamingResponse:
+        return GenerationsWithStreamingResponse(self)
 
     def create(
         self,
@@ -54,6 +63,8 @@ class Generations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/api/generations/{id}",
             options=make_request_options(
@@ -85,6 +96,8 @@ class Generations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/generations/{id}",
             options=make_request_options(
@@ -121,6 +134,8 @@ class Generations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._put(
             f"/api/generations/{id}",
             body=maybe_transform(
@@ -205,6 +220,8 @@ class Generations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/api/generations/{id}/nl-generation",
             options=make_request_options(
@@ -237,6 +254,8 @@ class Generations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/api/generations/{id}/sql-generation",
             body=maybe_transform({"sql": sql}, generation_sql_generation_params.GenerationSqlGenerationParams),
@@ -251,6 +270,10 @@ class AsyncGenerations(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncGenerationsWithRawResponse:
         return AsyncGenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncGenerationsWithStreamingResponse:
+        return AsyncGenerationsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -275,6 +298,8 @@ class AsyncGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/generations/{id}",
             options=make_request_options(
@@ -306,6 +331,8 @@ class AsyncGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/generations/{id}",
             options=make_request_options(
@@ -342,6 +369,8 @@ class AsyncGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/generations/{id}",
             body=maybe_transform(
@@ -426,6 +455,8 @@ class AsyncGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/generations/{id}/nl-generation",
             options=make_request_options(
@@ -458,6 +489,8 @@ class AsyncGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/generations/{id}/sql-generation",
             body=maybe_transform({"sql": sql}, generation_sql_generation_params.GenerationSqlGenerationParams),
@@ -508,5 +541,49 @@ class AsyncGenerationsWithRawResponse:
             generations.nl_generation,
         )
         self.sql_generation = async_to_raw_response_wrapper(
+            generations.sql_generation,
+        )
+
+
+class GenerationsWithStreamingResponse:
+    def __init__(self, generations: Generations) -> None:
+        self.create = to_streamed_response_wrapper(
+            generations.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            generations.retrieve,
+        )
+        self.update = to_streamed_response_wrapper(
+            generations.update,
+        )
+        self.list = to_streamed_response_wrapper(
+            generations.list,
+        )
+        self.nl_generation = to_streamed_response_wrapper(
+            generations.nl_generation,
+        )
+        self.sql_generation = to_streamed_response_wrapper(
+            generations.sql_generation,
+        )
+
+
+class AsyncGenerationsWithStreamingResponse:
+    def __init__(self, generations: AsyncGenerations) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            generations.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            generations.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            generations.update,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            generations.list,
+        )
+        self.nl_generation = async_to_streamed_response_wrapper(
+            generations.nl_generation,
+        )
+        self.sql_generation = async_to_streamed_response_wrapper(
             generations.sql_generation,
         )

@@ -9,7 +9,12 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -22,6 +27,10 @@ class NlGenerations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> NlGenerationsWithRawResponse:
         return NlGenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> NlGenerationsWithStreamingResponse:
+        return NlGenerationsWithStreamingResponse(self)
 
     def create(
         self,
@@ -87,6 +96,8 @@ class NlGenerations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/nl-generations/{id}",
             options=make_request_options(
@@ -146,6 +157,10 @@ class AsyncNlGenerations(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncNlGenerationsWithRawResponse:
         return AsyncNlGenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncNlGenerationsWithStreamingResponse:
+        return AsyncNlGenerationsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -211,6 +226,8 @@ class AsyncNlGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/nl-generations/{id}",
             options=make_request_options(
@@ -288,5 +305,31 @@ class AsyncNlGenerationsWithRawResponse:
             nl_generations.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
+            nl_generations.list,
+        )
+
+
+class NlGenerationsWithStreamingResponse:
+    def __init__(self, nl_generations: NlGenerations) -> None:
+        self.create = to_streamed_response_wrapper(
+            nl_generations.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            nl_generations.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            nl_generations.list,
+        )
+
+
+class AsyncNlGenerationsWithStreamingResponse:
+    def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            nl_generations.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            nl_generations.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
             nl_generations.list,
         )

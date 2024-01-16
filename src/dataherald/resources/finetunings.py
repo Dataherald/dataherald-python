@@ -16,7 +16,12 @@ from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .._base_client import (
     make_request_options,
 )
@@ -28,6 +33,10 @@ class Finetunings(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FinetuningsWithRawResponse:
         return FinetuningsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> FinetuningsWithStreamingResponse:
+        return FinetuningsWithStreamingResponse(self)
 
     def create(
         self,
@@ -97,6 +106,8 @@ class Finetunings(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/finetunings/{id}",
             options=make_request_options(
@@ -165,6 +176,8 @@ class Finetunings(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/api/finetunings/{id}/cancel",
             options=make_request_options(
@@ -178,6 +191,10 @@ class AsyncFinetunings(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncFinetuningsWithRawResponse:
         return AsyncFinetuningsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncFinetuningsWithStreamingResponse:
+        return AsyncFinetuningsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -247,6 +264,8 @@ class AsyncFinetunings(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/finetunings/{id}",
             options=make_request_options(
@@ -315,6 +334,8 @@ class AsyncFinetunings(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/finetunings/{id}/cancel",
             options=make_request_options(
@@ -352,5 +373,37 @@ class AsyncFinetuningsWithRawResponse:
             finetunings.list,
         )
         self.cancel = async_to_raw_response_wrapper(
+            finetunings.cancel,
+        )
+
+
+class FinetuningsWithStreamingResponse:
+    def __init__(self, finetunings: Finetunings) -> None:
+        self.create = to_streamed_response_wrapper(
+            finetunings.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            finetunings.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            finetunings.list,
+        )
+        self.cancel = to_streamed_response_wrapper(
+            finetunings.cancel,
+        )
+
+
+class AsyncFinetuningsWithStreamingResponse:
+    def __init__(self, finetunings: AsyncFinetunings) -> None:
+        self.create = async_to_streamed_response_wrapper(
+            finetunings.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            finetunings.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            finetunings.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
             finetunings.cancel,
         )

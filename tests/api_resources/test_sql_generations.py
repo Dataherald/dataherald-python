@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -57,9 +58,27 @@ class TestSqlGenerations:
                 "db_connection_id": "string",
             },
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create(self, client: Dataherald) -> None:
+        with client.sql_generations.with_streaming_response.create(
+            prompt={
+                "text": "string",
+                "db_connection_id": "string",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = response.parse()
+            assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
@@ -73,9 +92,31 @@ class TestSqlGenerations:
         response = client.sql_generations.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Dataherald) -> None:
+        with client.sql_generations.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = response.parse()
+            assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_retrieve(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sql_generations.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
@@ -95,9 +136,22 @@ class TestSqlGenerations:
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.sql_generations.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_list(self, client: Dataherald) -> None:
+        with client.sql_generations.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = response.parse()
+            assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_execute(self, client: Dataherald) -> None:
@@ -119,9 +173,31 @@ class TestSqlGenerations:
         response = client.sql_generations.with_raw_response.execute(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sql_generation = response.parse()
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    def test_streaming_response_execute(self, client: Dataherald) -> None:
+        with client.sql_generations.with_streaming_response.execute(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = response.parse()
+            assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_execute(self, client: Dataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.sql_generations.with_raw_response.execute(
+                "",
+            )
 
 
 class TestAsyncSqlGenerations:
@@ -162,9 +238,27 @@ class TestAsyncSqlGenerations:
                 "db_connection_id": "string",
             },
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sql_generation = response.parse()
+        sql_generation = await response.parse()
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.with_streaming_response.create(
+            prompt={
+                "text": "string",
+                "db_connection_id": "string",
+            },
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = await response.parse()
+            assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_retrieve(self, client: AsyncDataherald) -> None:
@@ -178,9 +272,31 @@ class TestAsyncSqlGenerations:
         response = await client.sql_generations.with_raw_response.retrieve(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sql_generation = response.parse()
+        sql_generation = await response.parse()
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.with_streaming_response.retrieve(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = await response.parse()
+            assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_retrieve(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.sql_generations.with_raw_response.retrieve(
+                "",
+            )
 
     @parametrize
     async def test_method_list(self, client: AsyncDataherald) -> None:
@@ -200,9 +316,22 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_raw_response_list(self, client: AsyncDataherald) -> None:
         response = await client.sql_generations.with_raw_response.list()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sql_generation = response.parse()
+        sql_generation = await response.parse()
         assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_list(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = await response.parse()
+            assert_matches_type(SqlGenerationListResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_execute(self, client: AsyncDataherald) -> None:
@@ -224,6 +353,28 @@ class TestAsyncSqlGenerations:
         response = await client.sql_generations.with_raw_response.execute(
             "string",
         )
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sql_generation = response.parse()
+        sql_generation = await response.parse()
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_execute(self, client: AsyncDataherald) -> None:
+        async with client.sql_generations.with_streaming_response.execute(
+            "string",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            sql_generation = await response.parse()
+            assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_execute(self, client: AsyncDataherald) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await client.sql_generations.with_raw_response.execute(
+                "",
+            )

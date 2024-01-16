@@ -1,35 +1,92 @@
 # File generated from our OpenAPI spec by Stainless.
 
-from .engine import Engine, AsyncEngine, EngineWithRawResponse, AsyncEngineWithRawResponse
-from .prompts import Prompts, AsyncPrompts, PromptsWithRawResponse, AsyncPromptsWithRawResponse
-from .heartbeat import Heartbeat, AsyncHeartbeat, HeartbeatWithRawResponse, AsyncHeartbeatWithRawResponse
-from .finetunings import Finetunings, AsyncFinetunings, FinetuningsWithRawResponse, AsyncFinetuningsWithRawResponse
-from .generations import Generations, AsyncGenerations, GenerationsWithRawResponse, AsyncGenerationsWithRawResponse
-from .golden_sqls import GoldenSqls, AsyncGoldenSqls, GoldenSqlsWithRawResponse, AsyncGoldenSqlsWithRawResponse
-from .instructions import Instructions, AsyncInstructions, InstructionsWithRawResponse, AsyncInstructionsWithRawResponse
+from .engine import (
+    Engine,
+    AsyncEngine,
+    EngineWithRawResponse,
+    AsyncEngineWithRawResponse,
+    EngineWithStreamingResponse,
+    AsyncEngineWithStreamingResponse,
+)
+from .prompts import (
+    Prompts,
+    AsyncPrompts,
+    PromptsWithRawResponse,
+    AsyncPromptsWithRawResponse,
+    PromptsWithStreamingResponse,
+    AsyncPromptsWithStreamingResponse,
+)
+from .heartbeat import (
+    Heartbeat,
+    AsyncHeartbeat,
+    HeartbeatWithRawResponse,
+    AsyncHeartbeatWithRawResponse,
+    HeartbeatWithStreamingResponse,
+    AsyncHeartbeatWithStreamingResponse,
+)
+from .finetunings import (
+    Finetunings,
+    AsyncFinetunings,
+    FinetuningsWithRawResponse,
+    AsyncFinetuningsWithRawResponse,
+    FinetuningsWithStreamingResponse,
+    AsyncFinetuningsWithStreamingResponse,
+)
+from .generations import (
+    Generations,
+    AsyncGenerations,
+    GenerationsWithRawResponse,
+    AsyncGenerationsWithRawResponse,
+    GenerationsWithStreamingResponse,
+    AsyncGenerationsWithStreamingResponse,
+)
+from .golden_sqls import (
+    GoldenSqls,
+    AsyncGoldenSqls,
+    GoldenSqlsWithRawResponse,
+    AsyncGoldenSqlsWithRawResponse,
+    GoldenSqlsWithStreamingResponse,
+    AsyncGoldenSqlsWithStreamingResponse,
+)
+from .instructions import (
+    Instructions,
+    AsyncInstructions,
+    InstructionsWithRawResponse,
+    AsyncInstructionsWithRawResponse,
+    InstructionsWithStreamingResponse,
+    AsyncInstructionsWithStreamingResponse,
+)
 from .nl_generations import (
     NlGenerations,
     AsyncNlGenerations,
     NlGenerationsWithRawResponse,
     AsyncNlGenerationsWithRawResponse,
+    NlGenerationsWithStreamingResponse,
+    AsyncNlGenerationsWithStreamingResponse,
 )
 from .sql_generations import (
     SqlGenerations,
     AsyncSqlGenerations,
     SqlGenerationsWithRawResponse,
     AsyncSqlGenerationsWithRawResponse,
+    SqlGenerationsWithStreamingResponse,
+    AsyncSqlGenerationsWithStreamingResponse,
 )
 from .table_descriptions import (
     TableDescriptions,
     AsyncTableDescriptions,
     TableDescriptionsWithRawResponse,
     AsyncTableDescriptionsWithRawResponse,
+    TableDescriptionsWithStreamingResponse,
+    AsyncTableDescriptionsWithStreamingResponse,
 )
 from .database_connections import (
     DatabaseConnections,
     AsyncDatabaseConnections,
     DatabaseConnectionsWithRawResponse,
     AsyncDatabaseConnectionsWithRawResponse,
+    DatabaseConnectionsWithStreamingResponse,
+    AsyncDatabaseConnectionsWithStreamingResponse,
 )
 
 __all__ = [
@@ -37,44 +94,66 @@ __all__ = [
     "AsyncDatabaseConnections",
     "DatabaseConnectionsWithRawResponse",
     "AsyncDatabaseConnectionsWithRawResponse",
+    "DatabaseConnectionsWithStreamingResponse",
+    "AsyncDatabaseConnectionsWithStreamingResponse",
     "Finetunings",
     "AsyncFinetunings",
     "FinetuningsWithRawResponse",
     "AsyncFinetuningsWithRawResponse",
+    "FinetuningsWithStreamingResponse",
+    "AsyncFinetuningsWithStreamingResponse",
     "GoldenSqls",
     "AsyncGoldenSqls",
     "GoldenSqlsWithRawResponse",
     "AsyncGoldenSqlsWithRawResponse",
+    "GoldenSqlsWithStreamingResponse",
+    "AsyncGoldenSqlsWithStreamingResponse",
     "Instructions",
     "AsyncInstructions",
     "InstructionsWithRawResponse",
     "AsyncInstructionsWithRawResponse",
+    "InstructionsWithStreamingResponse",
+    "AsyncInstructionsWithStreamingResponse",
     "Generations",
     "AsyncGenerations",
     "GenerationsWithRawResponse",
     "AsyncGenerationsWithRawResponse",
+    "GenerationsWithStreamingResponse",
+    "AsyncGenerationsWithStreamingResponse",
     "Prompts",
     "AsyncPrompts",
     "PromptsWithRawResponse",
     "AsyncPromptsWithRawResponse",
+    "PromptsWithStreamingResponse",
+    "AsyncPromptsWithStreamingResponse",
     "SqlGenerations",
     "AsyncSqlGenerations",
     "SqlGenerationsWithRawResponse",
     "AsyncSqlGenerationsWithRawResponse",
+    "SqlGenerationsWithStreamingResponse",
+    "AsyncSqlGenerationsWithStreamingResponse",
     "NlGenerations",
     "AsyncNlGenerations",
     "NlGenerationsWithRawResponse",
     "AsyncNlGenerationsWithRawResponse",
+    "NlGenerationsWithStreamingResponse",
+    "AsyncNlGenerationsWithStreamingResponse",
     "TableDescriptions",
     "AsyncTableDescriptions",
     "TableDescriptionsWithRawResponse",
     "AsyncTableDescriptionsWithRawResponse",
+    "TableDescriptionsWithStreamingResponse",
+    "AsyncTableDescriptionsWithStreamingResponse",
     "Heartbeat",
     "AsyncHeartbeat",
     "HeartbeatWithRawResponse",
     "AsyncHeartbeatWithRawResponse",
+    "HeartbeatWithStreamingResponse",
+    "AsyncHeartbeatWithStreamingResponse",
     "Engine",
     "AsyncEngine",
     "EngineWithRawResponse",
     "AsyncEngineWithRawResponse",
+    "EngineWithStreamingResponse",
+    "AsyncEngineWithStreamingResponse",
 ]

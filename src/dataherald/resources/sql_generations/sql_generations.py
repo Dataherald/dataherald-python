@@ -15,7 +15,12 @@ from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ..._base_client import (
     make_request_options,
 )
@@ -25,6 +30,8 @@ from .nl_generations import (
     AsyncNlGenerations,
     NlGenerationsWithRawResponse,
     AsyncNlGenerationsWithRawResponse,
+    NlGenerationsWithStreamingResponse,
+    AsyncNlGenerationsWithStreamingResponse,
 )
 
 __all__ = ["SqlGenerations", "AsyncSqlGenerations"]
@@ -38,6 +45,10 @@ class SqlGenerations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SqlGenerationsWithRawResponse:
         return SqlGenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> SqlGenerationsWithStreamingResponse:
+        return SqlGenerationsWithStreamingResponse(self)
 
     def create(
         self,
@@ -107,6 +118,8 @@ class SqlGenerations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/sql-generations/{id}",
             options=make_request_options(
@@ -185,6 +198,8 @@ class SqlGenerations(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
             f"/api/sql-generations/{id}/execute",
             options=make_request_options(
@@ -206,6 +221,10 @@ class AsyncSqlGenerations(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncSqlGenerationsWithRawResponse:
         return AsyncSqlGenerationsWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncSqlGenerationsWithStreamingResponse:
+        return AsyncSqlGenerationsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -275,6 +294,8 @@ class AsyncSqlGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/sql-generations/{id}",
             options=make_request_options(
@@ -353,6 +374,8 @@ class AsyncSqlGenerations(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
             f"/api/sql-generations/{id}/execute",
             options=make_request_options(
@@ -398,5 +421,41 @@ class AsyncSqlGenerationsWithRawResponse:
             sql_generations.list,
         )
         self.execute = async_to_raw_response_wrapper(
+            sql_generations.execute,
+        )
+
+
+class SqlGenerationsWithStreamingResponse:
+    def __init__(self, sql_generations: SqlGenerations) -> None:
+        self.nl_generations = NlGenerationsWithStreamingResponse(sql_generations.nl_generations)
+
+        self.create = to_streamed_response_wrapper(
+            sql_generations.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            sql_generations.retrieve,
+        )
+        self.list = to_streamed_response_wrapper(
+            sql_generations.list,
+        )
+        self.execute = to_streamed_response_wrapper(
+            sql_generations.execute,
+        )
+
+
+class AsyncSqlGenerationsWithStreamingResponse:
+    def __init__(self, sql_generations: AsyncSqlGenerations) -> None:
+        self.nl_generations = AsyncNlGenerationsWithStreamingResponse(sql_generations.nl_generations)
+
+        self.create = async_to_streamed_response_wrapper(
+            sql_generations.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            sql_generations.retrieve,
+        )
+        self.list = async_to_streamed_response_wrapper(
+            sql_generations.list,
+        )
+        self.execute = async_to_streamed_response_wrapper(
             sql_generations.execute,
         )

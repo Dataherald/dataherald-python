@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any, cast
 
 import pytest
 
@@ -28,9 +29,22 @@ class TestFirst:
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.instructions.first.with_raw_response.retrieve()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         first = response.parse()
         assert_matches_type(InstructionResponse, first, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Dataherald) -> None:
+        with client.instructions.first.with_streaming_response.retrieve() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            first = response.parse()
+            assert_matches_type(InstructionResponse, first, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
 
 class TestAsyncFirst:
@@ -46,6 +60,19 @@ class TestAsyncFirst:
     @parametrize
     async def test_raw_response_retrieve(self, client: AsyncDataherald) -> None:
         response = await client.instructions.first.with_raw_response.retrieve()
+
+        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        first = response.parse()
+        first = await response.parse()
         assert_matches_type(InstructionResponse, first, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, client: AsyncDataherald) -> None:
+        async with client.instructions.first.with_streaming_response.retrieve() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            first = await response.parse()
+            assert_matches_type(InstructionResponse, first, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
