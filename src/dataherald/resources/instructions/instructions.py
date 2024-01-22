@@ -376,7 +376,7 @@ class AsyncInstructions(AsyncAPIResource):
 
 class InstructionsWithRawResponse:
     def __init__(self, instructions: Instructions) -> None:
-        self.first = FirstWithRawResponse(instructions.first)
+        self._instructions = instructions
 
         self.create = to_raw_response_wrapper(
             instructions.create,
@@ -391,10 +391,14 @@ class InstructionsWithRawResponse:
             instructions.delete,
         )
 
+    @cached_property
+    def first(self) -> FirstWithRawResponse:
+        return FirstWithRawResponse(self._instructions.first)
+
 
 class AsyncInstructionsWithRawResponse:
     def __init__(self, instructions: AsyncInstructions) -> None:
-        self.first = AsyncFirstWithRawResponse(instructions.first)
+        self._instructions = instructions
 
         self.create = async_to_raw_response_wrapper(
             instructions.create,
@@ -409,10 +413,14 @@ class AsyncInstructionsWithRawResponse:
             instructions.delete,
         )
 
+    @cached_property
+    def first(self) -> AsyncFirstWithRawResponse:
+        return AsyncFirstWithRawResponse(self._instructions.first)
+
 
 class InstructionsWithStreamingResponse:
     def __init__(self, instructions: Instructions) -> None:
-        self.first = FirstWithStreamingResponse(instructions.first)
+        self._instructions = instructions
 
         self.create = to_streamed_response_wrapper(
             instructions.create,
@@ -427,10 +435,14 @@ class InstructionsWithStreamingResponse:
             instructions.delete,
         )
 
+    @cached_property
+    def first(self) -> FirstWithStreamingResponse:
+        return FirstWithStreamingResponse(self._instructions.first)
+
 
 class AsyncInstructionsWithStreamingResponse:
     def __init__(self, instructions: AsyncInstructions) -> None:
-        self.first = AsyncFirstWithStreamingResponse(instructions.first)
+        self._instructions = instructions
 
         self.create = async_to_streamed_response_wrapper(
             instructions.create,
@@ -444,3 +456,7 @@ class AsyncInstructionsWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             instructions.delete,
         )
+
+    @cached_property
+    def first(self) -> AsyncFirstWithStreamingResponse:
+        return AsyncFirstWithStreamingResponse(self._instructions.first)

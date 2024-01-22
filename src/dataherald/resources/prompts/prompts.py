@@ -300,7 +300,7 @@ class AsyncPrompts(AsyncAPIResource):
 
 class PromptsWithRawResponse:
     def __init__(self, prompts: Prompts) -> None:
-        self.sql_generations = SqlGenerationsWithRawResponse(prompts.sql_generations)
+        self._prompts = prompts
 
         self.create = to_raw_response_wrapper(
             prompts.create,
@@ -312,10 +312,14 @@ class PromptsWithRawResponse:
             prompts.list,
         )
 
+    @cached_property
+    def sql_generations(self) -> SqlGenerationsWithRawResponse:
+        return SqlGenerationsWithRawResponse(self._prompts.sql_generations)
+
 
 class AsyncPromptsWithRawResponse:
     def __init__(self, prompts: AsyncPrompts) -> None:
-        self.sql_generations = AsyncSqlGenerationsWithRawResponse(prompts.sql_generations)
+        self._prompts = prompts
 
         self.create = async_to_raw_response_wrapper(
             prompts.create,
@@ -327,10 +331,14 @@ class AsyncPromptsWithRawResponse:
             prompts.list,
         )
 
+    @cached_property
+    def sql_generations(self) -> AsyncSqlGenerationsWithRawResponse:
+        return AsyncSqlGenerationsWithRawResponse(self._prompts.sql_generations)
+
 
 class PromptsWithStreamingResponse:
     def __init__(self, prompts: Prompts) -> None:
-        self.sql_generations = SqlGenerationsWithStreamingResponse(prompts.sql_generations)
+        self._prompts = prompts
 
         self.create = to_streamed_response_wrapper(
             prompts.create,
@@ -342,10 +350,14 @@ class PromptsWithStreamingResponse:
             prompts.list,
         )
 
+    @cached_property
+    def sql_generations(self) -> SqlGenerationsWithStreamingResponse:
+        return SqlGenerationsWithStreamingResponse(self._prompts.sql_generations)
+
 
 class AsyncPromptsWithStreamingResponse:
     def __init__(self, prompts: AsyncPrompts) -> None:
-        self.sql_generations = AsyncSqlGenerationsWithStreamingResponse(prompts.sql_generations)
+        self._prompts = prompts
 
         self.create = async_to_streamed_response_wrapper(
             prompts.create,
@@ -356,3 +368,7 @@ class AsyncPromptsWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             prompts.list,
         )
+
+    @cached_property
+    def sql_generations(self) -> AsyncSqlGenerationsWithStreamingResponse:
+        return AsyncSqlGenerationsWithStreamingResponse(self._prompts.sql_generations)

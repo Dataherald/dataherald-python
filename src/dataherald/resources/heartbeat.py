@@ -80,6 +80,8 @@ class AsyncHeartbeat(AsyncAPIResource):
 
 class HeartbeatWithRawResponse:
     def __init__(self, heartbeat: Heartbeat) -> None:
+        self._heartbeat = heartbeat
+
         self.retrieve = to_raw_response_wrapper(
             heartbeat.retrieve,
         )
@@ -87,6 +89,8 @@ class HeartbeatWithRawResponse:
 
 class AsyncHeartbeatWithRawResponse:
     def __init__(self, heartbeat: AsyncHeartbeat) -> None:
+        self._heartbeat = heartbeat
+
         self.retrieve = async_to_raw_response_wrapper(
             heartbeat.retrieve,
         )
@@ -94,6 +98,8 @@ class AsyncHeartbeatWithRawResponse:
 
 class HeartbeatWithStreamingResponse:
     def __init__(self, heartbeat: Heartbeat) -> None:
+        self._heartbeat = heartbeat
+
         self.retrieve = to_streamed_response_wrapper(
             heartbeat.retrieve,
         )
@@ -101,6 +107,8 @@ class HeartbeatWithStreamingResponse:
 
 class AsyncHeartbeatWithStreamingResponse:
     def __init__(self, heartbeat: AsyncHeartbeat) -> None:
+        self._heartbeat = heartbeat
+
         self.retrieve = async_to_streamed_response_wrapper(
             heartbeat.retrieve,
         )

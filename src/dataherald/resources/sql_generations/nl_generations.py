@@ -227,6 +227,8 @@ class AsyncNlGenerations(AsyncAPIResource):
 
 class NlGenerationsWithRawResponse:
     def __init__(self, nl_generations: NlGenerations) -> None:
+        self._nl_generations = nl_generations
+
         self.create = to_raw_response_wrapper(
             nl_generations.create,
         )
@@ -237,6 +239,8 @@ class NlGenerationsWithRawResponse:
 
 class AsyncNlGenerationsWithRawResponse:
     def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+        self._nl_generations = nl_generations
+
         self.create = async_to_raw_response_wrapper(
             nl_generations.create,
         )
@@ -247,6 +251,8 @@ class AsyncNlGenerationsWithRawResponse:
 
 class NlGenerationsWithStreamingResponse:
     def __init__(self, nl_generations: NlGenerations) -> None:
+        self._nl_generations = nl_generations
+
         self.create = to_streamed_response_wrapper(
             nl_generations.create,
         )
@@ -257,6 +263,8 @@ class NlGenerationsWithStreamingResponse:
 
 class AsyncNlGenerationsWithStreamingResponse:
     def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+        self._nl_generations = nl_generations
+
         self.create = async_to_streamed_response_wrapper(
             nl_generations.create,
         )

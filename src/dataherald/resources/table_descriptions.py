@@ -373,6 +373,8 @@ class AsyncTableDescriptions(AsyncAPIResource):
 
 class TableDescriptionsWithRawResponse:
     def __init__(self, table_descriptions: TableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = to_raw_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -389,6 +391,8 @@ class TableDescriptionsWithRawResponse:
 
 class AsyncTableDescriptionsWithRawResponse:
     def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = async_to_raw_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -405,6 +409,8 @@ class AsyncTableDescriptionsWithRawResponse:
 
 class TableDescriptionsWithStreamingResponse:
     def __init__(self, table_descriptions: TableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = to_streamed_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -421,6 +427,8 @@ class TableDescriptionsWithStreamingResponse:
 
 class AsyncTableDescriptionsWithStreamingResponse:
     def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = async_to_streamed_response_wrapper(
             table_descriptions.retrieve,
         )
