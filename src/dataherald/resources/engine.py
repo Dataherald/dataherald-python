@@ -80,6 +80,8 @@ class AsyncEngine(AsyncAPIResource):
 
 class EngineWithRawResponse:
     def __init__(self, engine: Engine) -> None:
+        self._engine = engine
+
         self.heartbeat = to_raw_response_wrapper(
             engine.heartbeat,
         )
@@ -87,6 +89,8 @@ class EngineWithRawResponse:
 
 class AsyncEngineWithRawResponse:
     def __init__(self, engine: AsyncEngine) -> None:
+        self._engine = engine
+
         self.heartbeat = async_to_raw_response_wrapper(
             engine.heartbeat,
         )
@@ -94,6 +98,8 @@ class AsyncEngineWithRawResponse:
 
 class EngineWithStreamingResponse:
     def __init__(self, engine: Engine) -> None:
+        self._engine = engine
+
         self.heartbeat = to_streamed_response_wrapper(
             engine.heartbeat,
         )
@@ -101,6 +107,8 @@ class EngineWithStreamingResponse:
 
 class AsyncEngineWithStreamingResponse:
     def __init__(self, engine: AsyncEngine) -> None:
+        self._engine = engine
+
         self.heartbeat = async_to_streamed_response_wrapper(
             engine.heartbeat,
         )

@@ -9,16 +9,12 @@ import pytest
 
 from dataherald import Dataherald, AsyncDataherald
 from tests.utils import assert_matches_type
-from dataherald._client import Dataherald, AsyncDataherald
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My API Key"
 
 
 class TestEngine:
-    strict_client = Dataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Dataherald(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_heartbeat(self, client: Dataherald) -> None:
@@ -47,18 +43,16 @@ class TestEngine:
 
 
 class TestAsyncEngine:
-    strict_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_heartbeat(self, client: AsyncDataherald) -> None:
-        engine = await client.engine.heartbeat()
+    async def test_method_heartbeat(self, async_client: AsyncDataherald) -> None:
+        engine = await async_client.engine.heartbeat()
         assert_matches_type(object, engine, path=["response"])
 
     @parametrize
-    async def test_raw_response_heartbeat(self, client: AsyncDataherald) -> None:
-        response = await client.engine.with_raw_response.heartbeat()
+    async def test_raw_response_heartbeat(self, async_client: AsyncDataherald) -> None:
+        response = await async_client.engine.with_raw_response.heartbeat()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -66,8 +60,8 @@ class TestAsyncEngine:
         assert_matches_type(object, engine, path=["response"])
 
     @parametrize
-    async def test_streaming_response_heartbeat(self, client: AsyncDataherald) -> None:
-        async with client.engine.with_streaming_response.heartbeat() as response:
+    async def test_streaming_response_heartbeat(self, async_client: AsyncDataherald) -> None:
+        async with async_client.engine.with_streaming_response.heartbeat() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

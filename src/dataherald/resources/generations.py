@@ -503,6 +503,8 @@ class AsyncGenerations(AsyncAPIResource):
 
 class GenerationsWithRawResponse:
     def __init__(self, generations: Generations) -> None:
+        self._generations = generations
+
         self.create = to_raw_response_wrapper(
             generations.create,
         )
@@ -525,6 +527,8 @@ class GenerationsWithRawResponse:
 
 class AsyncGenerationsWithRawResponse:
     def __init__(self, generations: AsyncGenerations) -> None:
+        self._generations = generations
+
         self.create = async_to_raw_response_wrapper(
             generations.create,
         )
@@ -547,6 +551,8 @@ class AsyncGenerationsWithRawResponse:
 
 class GenerationsWithStreamingResponse:
     def __init__(self, generations: Generations) -> None:
+        self._generations = generations
+
         self.create = to_streamed_response_wrapper(
             generations.create,
         )
@@ -569,6 +575,8 @@ class GenerationsWithStreamingResponse:
 
 class AsyncGenerationsWithStreamingResponse:
     def __init__(self, generations: AsyncGenerations) -> None:
+        self._generations = generations
+
         self.create = async_to_streamed_response_wrapper(
             generations.create,
         )

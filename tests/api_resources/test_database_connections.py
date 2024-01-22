@@ -13,16 +13,12 @@ from dataherald.types import (
     DBConnectionResponse,
     DatabaseConnectionListResponse,
 )
-from dataherald._client import Dataherald, AsyncDataherald
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-api_key = "My API Key"
 
 
 class TestDatabaseConnections:
-    strict_client = Dataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = Dataherald(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
@@ -199,18 +195,16 @@ class TestDatabaseConnections:
 
 
 class TestAsyncDatabaseConnections:
-    strict_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-    loose_client = AsyncDataherald(base_url=base_url, api_key=api_key, _strict_response_validation=False)
-    parametrize = pytest.mark.parametrize("client", [strict_client, loose_client], ids=["strict", "loose"])
+    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.create()
+    async def test_method_create(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.create()
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.create(
+    async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.create(
             alias="string",
             connection_uri="string",
             credential_file_content={},
@@ -232,8 +226,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, client: AsyncDataherald) -> None:
-        response = await client.database_connections.with_raw_response.create()
+    async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
+        response = await async_client.database_connections.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -241,8 +235,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, client: AsyncDataherald) -> None:
-        async with client.database_connections.with_streaming_response.create() as response:
+    async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
+        async with async_client.database_connections.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -252,15 +246,15 @@ class TestAsyncDatabaseConnections:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_retrieve(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.retrieve(
+    async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.retrieve(
             "string",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, client: AsyncDataherald) -> None:
-        response = await client.database_connections.with_raw_response.retrieve(
+    async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
+        response = await async_client.database_connections.with_raw_response.retrieve(
             "string",
         )
 
@@ -270,8 +264,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, client: AsyncDataherald) -> None:
-        async with client.database_connections.with_streaming_response.retrieve(
+    async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
+        async with async_client.database_connections.with_streaming_response.retrieve(
             "string",
         ) as response:
             assert not response.is_closed
@@ -283,22 +277,22 @@ class TestAsyncDatabaseConnections:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, client: AsyncDataherald) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await client.database_connections.with_raw_response.retrieve(
+            await async_client.database_connections.with_raw_response.retrieve(
                 "",
             )
 
     @parametrize
-    async def test_method_update(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.update(
+    async def test_method_update(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.update(
             "string",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.update(
+    async def test_method_update_with_all_params(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.update(
             "string",
             alias="string",
             connection_uri="string",
@@ -321,8 +315,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, client: AsyncDataherald) -> None:
-        response = await client.database_connections.with_raw_response.update(
+    async def test_raw_response_update(self, async_client: AsyncDataherald) -> None:
+        response = await async_client.database_connections.with_raw_response.update(
             "string",
         )
 
@@ -332,8 +326,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, client: AsyncDataherald) -> None:
-        async with client.database_connections.with_streaming_response.update(
+    async def test_streaming_response_update(self, async_client: AsyncDataherald) -> None:
+        async with async_client.database_connections.with_streaming_response.update(
             "string",
         ) as response:
             assert not response.is_closed
@@ -345,20 +339,20 @@ class TestAsyncDatabaseConnections:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, client: AsyncDataherald) -> None:
+    async def test_path_params_update(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await client.database_connections.with_raw_response.update(
+            await async_client.database_connections.with_raw_response.update(
                 "",
             )
 
     @parametrize
-    async def test_method_list(self, client: AsyncDataherald) -> None:
-        database_connection = await client.database_connections.list()
+    async def test_method_list(self, async_client: AsyncDataherald) -> None:
+        database_connection = await async_client.database_connections.list()
         assert_matches_type(DatabaseConnectionListResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, client: AsyncDataherald) -> None:
-        response = await client.database_connections.with_raw_response.list()
+    async def test_raw_response_list(self, async_client: AsyncDataherald) -> None:
+        response = await async_client.database_connections.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -366,8 +360,8 @@ class TestAsyncDatabaseConnections:
         assert_matches_type(DatabaseConnectionListResponse, database_connection, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, client: AsyncDataherald) -> None:
-        async with client.database_connections.with_streaming_response.list() as response:
+    async def test_streaming_response_list(self, async_client: AsyncDataherald) -> None:
+        async with async_client.database_connections.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

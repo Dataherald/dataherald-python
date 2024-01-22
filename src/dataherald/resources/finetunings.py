@@ -347,6 +347,8 @@ class AsyncFinetunings(AsyncAPIResource):
 
 class FinetuningsWithRawResponse:
     def __init__(self, finetunings: Finetunings) -> None:
+        self._finetunings = finetunings
+
         self.create = to_raw_response_wrapper(
             finetunings.create,
         )
@@ -363,6 +365,8 @@ class FinetuningsWithRawResponse:
 
 class AsyncFinetuningsWithRawResponse:
     def __init__(self, finetunings: AsyncFinetunings) -> None:
+        self._finetunings = finetunings
+
         self.create = async_to_raw_response_wrapper(
             finetunings.create,
         )
@@ -379,6 +383,8 @@ class AsyncFinetuningsWithRawResponse:
 
 class FinetuningsWithStreamingResponse:
     def __init__(self, finetunings: Finetunings) -> None:
+        self._finetunings = finetunings
+
         self.create = to_streamed_response_wrapper(
             finetunings.create,
         )
@@ -395,6 +401,8 @@ class FinetuningsWithStreamingResponse:
 
 class AsyncFinetuningsWithStreamingResponse:
     def __init__(self, finetunings: AsyncFinetunings) -> None:
+        self._finetunings = finetunings
+
         self.create = async_to_streamed_response_wrapper(
             finetunings.create,
         )

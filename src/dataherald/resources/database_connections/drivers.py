@@ -81,6 +81,8 @@ class AsyncDrivers(AsyncAPIResource):
 
 class DriversWithRawResponse:
     def __init__(self, drivers: Drivers) -> None:
+        self._drivers = drivers
+
         self.list = to_raw_response_wrapper(
             drivers.list,
         )
@@ -88,6 +90,8 @@ class DriversWithRawResponse:
 
 class AsyncDriversWithRawResponse:
     def __init__(self, drivers: AsyncDrivers) -> None:
+        self._drivers = drivers
+
         self.list = async_to_raw_response_wrapper(
             drivers.list,
         )
@@ -95,6 +99,8 @@ class AsyncDriversWithRawResponse:
 
 class DriversWithStreamingResponse:
     def __init__(self, drivers: Drivers) -> None:
+        self._drivers = drivers
+
         self.list = to_streamed_response_wrapper(
             drivers.list,
         )
@@ -102,6 +108,8 @@ class DriversWithStreamingResponse:
 
 class AsyncDriversWithStreamingResponse:
     def __init__(self, drivers: AsyncDrivers) -> None:
+        self._drivers = drivers
+
         self.list = async_to_streamed_response_wrapper(
             drivers.list,
         )
