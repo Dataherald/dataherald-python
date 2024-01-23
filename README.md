@@ -31,7 +31,10 @@ client = Dataherald(
     environment="staging",
 )
 
-db_connection_response = client.database_connections.create()
+db_connection_response = client.database_connections.create(
+    alias="string",
+    connection_uri="string",
+)
 print(db_connection_response.id)
 ```
 
@@ -58,7 +61,10 @@ client = AsyncDataherald(
 
 
 async def main() -> None:
-    db_connection_response = await client.database_connections.create()
+    db_connection_response = await client.database_connections.create(
+        alias="string",
+        connection_uri="string",
+    )
     print(db_connection_response.id)
 
 
@@ -92,7 +98,10 @@ from dataherald import Dataherald
 client = Dataherald()
 
 try:
-    client.database_connections.create()
+    client.database_connections.create(
+        alias="string",
+        connection_uri="string",
+    )
 except dataherald.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -135,7 +144,10 @@ client = Dataherald(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).database_connections.create()
+client.with_options(max_retries=5).database_connections.create(
+    alias="string",
+    connection_uri="string",
+)
 ```
 
 ### Timeouts
@@ -158,7 +170,10 @@ client = Dataherald(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).database_connections.create()
+client.with_options(timeout=5 * 1000).database_connections.create(
+    alias="string",
+    connection_uri="string",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -197,7 +212,10 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from dataherald import Dataherald
 
 client = Dataherald()
-response = client.database_connections.with_raw_response.create()
+response = client.database_connections.with_raw_response.create(
+    alias="string",
+    connection_uri="string",
+)
 print(response.headers.get('X-My-Header'))
 
 database_connection = response.parse()  # get the object that `database_connections.create()` would have returned
@@ -215,7 +233,10 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.database_connections.with_streaming_response.create() as response:
+with client.database_connections.with_streaming_response.create(
+    alias="string",
+    connection_uri="string",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

@@ -3,17 +3,17 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import TypedDict
+from typing_extensions import Required, TypedDict
 
 __all__ = ["DatabaseConnectionCreateParams", "SSHSettings"]
 
 
 class DatabaseConnectionCreateParams(TypedDict, total=False):
-    alias: str
+    alias: Required[str]
 
-    connection_uri: str
+    connection_uri: Required[str]
 
-    credential_file_content: Union[object, str]
+    bigquery_credential_file_content: Union[object, str]
 
     llm_api_key: str
 
@@ -25,20 +25,8 @@ class DatabaseConnectionCreateParams(TypedDict, total=False):
 
 
 class SSHSettings(TypedDict, total=False):
-    db_driver: str
-
-    db_name: str
-
     host: str
 
     password: str
-
-    private_key_password: str
-
-    remote_db_name: str
-
-    remote_db_password: str
-
-    remote_host: str
 
     username: str

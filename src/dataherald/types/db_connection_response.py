@@ -17,29 +17,21 @@ class Metadata(BaseModel):
 
 
 class SSHSettings(BaseModel):
-    db_driver: Optional[str] = None
-
-    db_name: Optional[str] = None
-
     host: Optional[str] = None
 
     password: Optional[str] = None
 
     private_key_password: Optional[str] = None
 
-    remote_db_name: Optional[str] = None
-
-    remote_db_password: Optional[str] = None
-
-    remote_host: Optional[str] = None
-
     username: Optional[str] = None
 
 
 class DBConnectionResponse(BaseModel):
-    id: str
+    alias: str
 
-    alias: Optional[str] = None
+    connection_uri: str
+
+    id: Optional[str] = None
 
     created_at: Optional[datetime] = None
 
@@ -50,7 +42,5 @@ class DBConnectionResponse(BaseModel):
     path_to_credentials_file: Optional[str] = None
 
     ssh_settings: Optional[SSHSettings] = None
-
-    uri: Optional[str] = None
 
     use_ssh: Optional[bool] = None
