@@ -5,10 +5,14 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-__all__ = ["TableDescriptionSyncSchemasParams"]
+__all__ = ["TableDescriptionSyncSchemasParams", "Body"]
 
 
 class TableDescriptionSyncSchemasParams(TypedDict, total=False):
+    body: Required[List[Body]]
+
+
+class Body(TypedDict, total=False):
     db_connection_id: Required[str]
 
     table_names: List[str]
