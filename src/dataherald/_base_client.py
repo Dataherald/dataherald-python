@@ -776,6 +776,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
             proxies=proxies,
             transport=transport,
             limits=limits,
+            follow_redirects=True,
         )
 
     def is_closed(self) -> bool:
@@ -1304,6 +1305,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
             proxies=proxies,
             transport=transport,
             limits=limits,
+            follow_redirects=True,
         )
 
     def is_closed(self) -> bool:
