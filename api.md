@@ -82,6 +82,7 @@ from dataherald.types import InstructionListResponse, InstructionDeleteResponse
 Methods:
 
 - <code title="post /api/instructions">client.instructions.<a href="./src/dataherald/resources/instructions/instructions.py">create</a>(\*\*<a href="src/dataherald/types/instruction_create_params.py">params</a>) -> <a href="./src/dataherald/types/shared/instruction_response.py">InstructionResponse</a></code>
+- <code title="get /api/instructions/{id}">client.instructions.<a href="./src/dataherald/resources/instructions/instructions.py">retrieve</a>(id) -> <a href="./src/dataherald/types/shared/instruction_response.py">InstructionResponse</a></code>
 - <code title="put /api/instructions/{id}">client.instructions.<a href="./src/dataherald/resources/instructions/instructions.py">update</a>(id, \*\*<a href="src/dataherald/types/instruction_update_params.py">params</a>) -> <a href="./src/dataherald/types/shared/instruction_response.py">InstructionResponse</a></code>
 - <code title="get /api/instructions">client.instructions.<a href="./src/dataherald/resources/instructions/instructions.py">list</a>(\*\*<a href="src/dataherald/types/instruction_list_params.py">params</a>) -> <a href="./src/dataherald/types/instruction_list_response.py">InstructionListResponse</a></code>
 - <code title="delete /api/instructions/{id}">client.instructions.<a href="./src/dataherald/resources/instructions/instructions.py">delete</a>(id) -> <a href="./src/dataherald/types/instruction_delete_response.py">object</a></code>

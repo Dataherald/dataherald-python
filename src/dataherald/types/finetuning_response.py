@@ -29,7 +29,7 @@ class Metadata(BaseModel):
 class FinetuningResponse(BaseModel):
     id: str
 
-    _model_id: Optional[str] = None
+    api_model_id: Optional[str] = FieldInfo(alias="_model_id", default=None)
 
     base_llm: Optional[BaseLlm] = None
 

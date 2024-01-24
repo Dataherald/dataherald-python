@@ -53,9 +53,9 @@ class DatabaseConnections(SyncAPIResource):
     def create(
         self,
         *,
-        alias: str | NotGiven = NOT_GIVEN,
-        connection_uri: str | NotGiven = NOT_GIVEN,
-        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        alias: str,
+        connection_uri: str,
+        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -85,7 +85,7 @@ class DatabaseConnections(SyncAPIResource):
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
-                    "credential_file_content": credential_file_content,
+                    "bigquery_credential_file_content": bigquery_credential_file_content,
                     "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
@@ -136,9 +136,9 @@ class DatabaseConnections(SyncAPIResource):
         self,
         id: str,
         *,
-        alias: str | NotGiven = NOT_GIVEN,
-        connection_uri: str | NotGiven = NOT_GIVEN,
-        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        alias: str,
+        connection_uri: str,
+        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -170,7 +170,7 @@ class DatabaseConnections(SyncAPIResource):
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
-                    "credential_file_content": credential_file_content,
+                    "bigquery_credential_file_content": bigquery_credential_file_content,
                     "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
@@ -220,9 +220,9 @@ class AsyncDatabaseConnections(AsyncAPIResource):
     async def create(
         self,
         *,
-        alias: str | NotGiven = NOT_GIVEN,
-        connection_uri: str | NotGiven = NOT_GIVEN,
-        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        alias: str,
+        connection_uri: str,
+        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -252,7 +252,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
-                    "credential_file_content": credential_file_content,
+                    "bigquery_credential_file_content": bigquery_credential_file_content,
                     "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
@@ -303,9 +303,9 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         self,
         id: str,
         *,
-        alias: str | NotGiven = NOT_GIVEN,
-        connection_uri: str | NotGiven = NOT_GIVEN,
-        credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        alias: str,
+        connection_uri: str,
+        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -337,7 +337,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
-                    "credential_file_content": credential_file_content,
+                    "bigquery_credential_file_content": bigquery_credential_file_content,
                     "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
@@ -373,7 +373,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
 
 class DatabaseConnectionsWithRawResponse:
     def __init__(self, database_connections: DatabaseConnections) -> None:
-        self.drivers = DriversWithRawResponse(database_connections.drivers)
+        self._database_connections = database_connections
 
         self.create = to_raw_response_wrapper(
             database_connections.create,
@@ -388,10 +388,14 @@ class DatabaseConnectionsWithRawResponse:
             database_connections.list,
         )
 
+    @cached_property
+    def drivers(self) -> DriversWithRawResponse:
+        return DriversWithRawResponse(self._database_connections.drivers)
+
 
 class AsyncDatabaseConnectionsWithRawResponse:
     def __init__(self, database_connections: AsyncDatabaseConnections) -> None:
-        self.drivers = AsyncDriversWithRawResponse(database_connections.drivers)
+        self._database_connections = database_connections
 
         self.create = async_to_raw_response_wrapper(
             database_connections.create,
@@ -406,10 +410,14 @@ class AsyncDatabaseConnectionsWithRawResponse:
             database_connections.list,
         )
 
+    @cached_property
+    def drivers(self) -> AsyncDriversWithRawResponse:
+        return AsyncDriversWithRawResponse(self._database_connections.drivers)
+
 
 class DatabaseConnectionsWithStreamingResponse:
     def __init__(self, database_connections: DatabaseConnections) -> None:
-        self.drivers = DriversWithStreamingResponse(database_connections.drivers)
+        self._database_connections = database_connections
 
         self.create = to_streamed_response_wrapper(
             database_connections.create,
@@ -424,10 +432,14 @@ class DatabaseConnectionsWithStreamingResponse:
             database_connections.list,
         )
 
+    @cached_property
+    def drivers(self) -> DriversWithStreamingResponse:
+        return DriversWithStreamingResponse(self._database_connections.drivers)
+
 
 class AsyncDatabaseConnectionsWithStreamingResponse:
     def __init__(self, database_connections: AsyncDatabaseConnections) -> None:
-        self.drivers = AsyncDriversWithStreamingResponse(database_connections.drivers)
+        self._database_connections = database_connections
 
         self.create = async_to_streamed_response_wrapper(
             database_connections.create,
@@ -441,3 +453,7 @@ class AsyncDatabaseConnectionsWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             database_connections.list,
         )
+
+    @cached_property
+    def drivers(self) -> AsyncDriversWithStreamingResponse:
+        return AsyncDriversWithStreamingResponse(self._database_connections.drivers)

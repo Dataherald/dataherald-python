@@ -340,6 +340,8 @@ class AsyncGoldenSqls(AsyncAPIResource):
 
 class GoldenSqlsWithRawResponse:
     def __init__(self, golden_sqls: GoldenSqls) -> None:
+        self._golden_sqls = golden_sqls
+
         self.retrieve = to_raw_response_wrapper(
             golden_sqls.retrieve,
         )
@@ -356,6 +358,8 @@ class GoldenSqlsWithRawResponse:
 
 class AsyncGoldenSqlsWithRawResponse:
     def __init__(self, golden_sqls: AsyncGoldenSqls) -> None:
+        self._golden_sqls = golden_sqls
+
         self.retrieve = async_to_raw_response_wrapper(
             golden_sqls.retrieve,
         )
@@ -372,6 +376,8 @@ class AsyncGoldenSqlsWithRawResponse:
 
 class GoldenSqlsWithStreamingResponse:
     def __init__(self, golden_sqls: GoldenSqls) -> None:
+        self._golden_sqls = golden_sqls
+
         self.retrieve = to_streamed_response_wrapper(
             golden_sqls.retrieve,
         )
@@ -388,6 +394,8 @@ class GoldenSqlsWithStreamingResponse:
 
 class AsyncGoldenSqlsWithStreamingResponse:
     def __init__(self, golden_sqls: AsyncGoldenSqls) -> None:
+        self._golden_sqls = golden_sqls
+
         self.retrieve = async_to_streamed_response_wrapper(
             golden_sqls.retrieve,
         )

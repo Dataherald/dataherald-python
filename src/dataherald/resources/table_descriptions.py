@@ -164,8 +164,7 @@ class TableDescriptions(SyncAPIResource):
     def sync_schemas(
         self,
         *,
-        db_connection_id: str,
-        table_names: List[str] | NotGiven = NOT_GIVEN,
+        body: List[table_description_sync_schemas_params.Body],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -187,13 +186,7 @@ class TableDescriptions(SyncAPIResource):
         """
         return self._post(
             "/api/table-descriptions/sync-schemas",
-            body=maybe_transform(
-                {
-                    "db_connection_id": db_connection_id,
-                    "table_names": table_names,
-                },
-                table_description_sync_schemas_params.TableDescriptionSyncSchemasParams,
-            ),
+            body=maybe_transform(body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -334,8 +327,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
     async def sync_schemas(
         self,
         *,
-        db_connection_id: str,
-        table_names: List[str] | NotGiven = NOT_GIVEN,
+        body: List[table_description_sync_schemas_params.Body],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -357,13 +349,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
         """
         return await self._post(
             "/api/table-descriptions/sync-schemas",
-            body=maybe_transform(
-                {
-                    "db_connection_id": db_connection_id,
-                    "table_names": table_names,
-                },
-                table_description_sync_schemas_params.TableDescriptionSyncSchemasParams,
-            ),
+            body=maybe_transform(body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -373,6 +359,8 @@ class AsyncTableDescriptions(AsyncAPIResource):
 
 class TableDescriptionsWithRawResponse:
     def __init__(self, table_descriptions: TableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = to_raw_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -389,6 +377,8 @@ class TableDescriptionsWithRawResponse:
 
 class AsyncTableDescriptionsWithRawResponse:
     def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = async_to_raw_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -405,6 +395,8 @@ class AsyncTableDescriptionsWithRawResponse:
 
 class TableDescriptionsWithStreamingResponse:
     def __init__(self, table_descriptions: TableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = to_streamed_response_wrapper(
             table_descriptions.retrieve,
         )
@@ -421,6 +413,8 @@ class TableDescriptionsWithStreamingResponse:
 
 class AsyncTableDescriptionsWithStreamingResponse:
     def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+        self._table_descriptions = table_descriptions
+
         self.retrieve = async_to_streamed_response_wrapper(
             table_descriptions.retrieve,
         )

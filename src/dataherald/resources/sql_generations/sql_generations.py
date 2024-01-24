@@ -391,7 +391,7 @@ class AsyncSqlGenerations(AsyncAPIResource):
 
 class SqlGenerationsWithRawResponse:
     def __init__(self, sql_generations: SqlGenerations) -> None:
-        self.nl_generations = NlGenerationsWithRawResponse(sql_generations.nl_generations)
+        self._sql_generations = sql_generations
 
         self.create = to_raw_response_wrapper(
             sql_generations.create,
@@ -406,10 +406,14 @@ class SqlGenerationsWithRawResponse:
             sql_generations.execute,
         )
 
+    @cached_property
+    def nl_generations(self) -> NlGenerationsWithRawResponse:
+        return NlGenerationsWithRawResponse(self._sql_generations.nl_generations)
+
 
 class AsyncSqlGenerationsWithRawResponse:
     def __init__(self, sql_generations: AsyncSqlGenerations) -> None:
-        self.nl_generations = AsyncNlGenerationsWithRawResponse(sql_generations.nl_generations)
+        self._sql_generations = sql_generations
 
         self.create = async_to_raw_response_wrapper(
             sql_generations.create,
@@ -424,10 +428,14 @@ class AsyncSqlGenerationsWithRawResponse:
             sql_generations.execute,
         )
 
+    @cached_property
+    def nl_generations(self) -> AsyncNlGenerationsWithRawResponse:
+        return AsyncNlGenerationsWithRawResponse(self._sql_generations.nl_generations)
+
 
 class SqlGenerationsWithStreamingResponse:
     def __init__(self, sql_generations: SqlGenerations) -> None:
-        self.nl_generations = NlGenerationsWithStreamingResponse(sql_generations.nl_generations)
+        self._sql_generations = sql_generations
 
         self.create = to_streamed_response_wrapper(
             sql_generations.create,
@@ -442,10 +450,14 @@ class SqlGenerationsWithStreamingResponse:
             sql_generations.execute,
         )
 
+    @cached_property
+    def nl_generations(self) -> NlGenerationsWithStreamingResponse:
+        return NlGenerationsWithStreamingResponse(self._sql_generations.nl_generations)
+
 
 class AsyncSqlGenerationsWithStreamingResponse:
     def __init__(self, sql_generations: AsyncSqlGenerations) -> None:
-        self.nl_generations = AsyncNlGenerationsWithStreamingResponse(sql_generations.nl_generations)
+        self._sql_generations = sql_generations
 
         self.create = async_to_streamed_response_wrapper(
             sql_generations.create,
@@ -459,3 +471,7 @@ class AsyncSqlGenerationsWithStreamingResponse:
         self.execute = async_to_streamed_response_wrapper(
             sql_generations.execute,
         )
+
+    @cached_property
+    def nl_generations(self) -> AsyncNlGenerationsWithStreamingResponse:
+        return AsyncNlGenerationsWithStreamingResponse(self._sql_generations.nl_generations)

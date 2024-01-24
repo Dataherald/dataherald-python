@@ -81,6 +81,8 @@ class AsyncFirst(AsyncAPIResource):
 
 class FirstWithRawResponse:
     def __init__(self, first: First) -> None:
+        self._first = first
+
         self.retrieve = to_raw_response_wrapper(
             first.retrieve,
         )
@@ -88,6 +90,8 @@ class FirstWithRawResponse:
 
 class AsyncFirstWithRawResponse:
     def __init__(self, first: AsyncFirst) -> None:
+        self._first = first
+
         self.retrieve = async_to_raw_response_wrapper(
             first.retrieve,
         )
@@ -95,6 +99,8 @@ class AsyncFirstWithRawResponse:
 
 class FirstWithStreamingResponse:
     def __init__(self, first: First) -> None:
+        self._first = first
+
         self.retrieve = to_streamed_response_wrapper(
             first.retrieve,
         )
@@ -102,6 +108,8 @@ class FirstWithStreamingResponse:
 
 class AsyncFirstWithStreamingResponse:
     def __init__(self, first: AsyncFirst) -> None:
+        self._first = first
+
         self.retrieve = async_to_streamed_response_wrapper(
             first.retrieve,
         )

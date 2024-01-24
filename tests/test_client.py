@@ -19,7 +19,6 @@ from pydantic import ValidationError
 from dataherald import Dataherald, AsyncDataherald, APIResponseValidationError
 from dataherald._client import Dataherald, AsyncDataherald
 from dataherald._models import BaseModel, FinalRequestOptions
-from dataherald._response import APIResponse, AsyncAPIResponse
 from dataherald._constants import RAW_RESPONSE_HEADER
 from dataherald._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from dataherald._base_client import (
@@ -669,32 +668,13 @@ class TestDataherald:
 
     @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_streaming_response(self) -> None:
-        response = self.client.post(
-            "/api/database-connections",
-            body=dict(),
-            cast_to=APIResponse[bytes],
-            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-        )
-
-        assert not cast(Any, response.is_closed)
-        assert _get_open_connections(self.client) == 1
-
-        for _ in response.iter_bytes():
-            ...
-
-        assert cast(Any, response.is_closed)
-        assert _get_open_connections(self.client) == 0
-
-    @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
-    @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/api/database-connections").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/api/database-connections",
-                body=dict(),
+                body=dict(alias="string", connection_uri="string"),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -709,7 +689,7 @@ class TestDataherald:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/api/database-connections",
-                body=dict(),
+                body=dict(alias="string", connection_uri="string"),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1341,32 +1321,13 @@ class TestAsyncDataherald:
 
     @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_streaming_response(self) -> None:
-        response = await self.client.post(
-            "/api/database-connections",
-            body=dict(),
-            cast_to=AsyncAPIResponse[bytes],
-            options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-        )
-
-        assert not cast(Any, response.is_closed)
-        assert _get_open_connections(self.client) == 1
-
-        async for _ in response.iter_bytes():
-            ...
-
-        assert cast(Any, response.is_closed)
-        assert _get_open_connections(self.client) == 0
-
-    @mock.patch("dataherald._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
-    @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/api/database-connections").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/api/database-connections",
-                body=dict(),
+                body=dict(alias="string", connection_uri="string"),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1381,7 +1342,7 @@ class TestAsyncDataherald:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/api/database-connections",
-                body=dict(),
+                body=dict(alias="string", connection_uri="string"),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )

@@ -327,6 +327,8 @@ class AsyncSqlGenerations(AsyncAPIResource):
 
 class SqlGenerationsWithRawResponse:
     def __init__(self, sql_generations: SqlGenerations) -> None:
+        self._sql_generations = sql_generations
+
         self.create = to_raw_response_wrapper(
             sql_generations.create,
         )
@@ -340,6 +342,8 @@ class SqlGenerationsWithRawResponse:
 
 class AsyncSqlGenerationsWithRawResponse:
     def __init__(self, sql_generations: AsyncSqlGenerations) -> None:
+        self._sql_generations = sql_generations
+
         self.create = async_to_raw_response_wrapper(
             sql_generations.create,
         )
@@ -353,6 +357,8 @@ class AsyncSqlGenerationsWithRawResponse:
 
 class SqlGenerationsWithStreamingResponse:
     def __init__(self, sql_generations: SqlGenerations) -> None:
+        self._sql_generations = sql_generations
+
         self.create = to_streamed_response_wrapper(
             sql_generations.create,
         )
@@ -366,6 +372,8 @@ class SqlGenerationsWithStreamingResponse:
 
 class AsyncSqlGenerationsWithStreamingResponse:
     def __init__(self, sql_generations: AsyncSqlGenerations) -> None:
+        self._sql_generations = sql_generations
+
         self.create = async_to_streamed_response_wrapper(
             sql_generations.create,
         )
