@@ -56,7 +56,6 @@ class DatabaseConnections(SyncAPIResource):
         alias: str,
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
-        llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
@@ -86,7 +85,6 @@ class DatabaseConnections(SyncAPIResource):
                     "alias": alias,
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
-                    "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
@@ -139,7 +137,6 @@ class DatabaseConnections(SyncAPIResource):
         alias: str,
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
-        llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
@@ -171,7 +168,6 @@ class DatabaseConnections(SyncAPIResource):
                     "alias": alias,
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
-                    "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
@@ -194,7 +190,7 @@ class DatabaseConnections(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DatabaseConnectionListResponse:
-        """Api Get Db Connections"""
+        """Get Db Connections"""
         return self._get(
             "/api/database-connections",
             options=make_request_options(
@@ -223,7 +219,6 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         alias: str,
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
-        llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
@@ -253,7 +248,6 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                     "alias": alias,
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
-                    "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
@@ -306,7 +300,6 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         alias: str,
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
-        llm_api_key: str | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
@@ -338,7 +331,6 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                     "alias": alias,
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
-                    "llm_api_key": llm_api_key,
                     "metadata": metadata,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
@@ -361,7 +353,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DatabaseConnectionListResponse:
-        """Api Get Db Connections"""
+        """Get Db Connections"""
         return await self._get(
             "/api/database-connections",
             options=make_request_options(

@@ -34,7 +34,6 @@ class TestDatabaseConnections:
             alias="string",
             connection_uri="string",
             bigquery_credential_file_content={},
-            llm_api_key="string",
             metadata={},
             ssh_settings={
                 "host": "string",
@@ -125,7 +124,6 @@ class TestDatabaseConnections:
             alias="string",
             connection_uri="string",
             bigquery_credential_file_content={},
-            llm_api_key="string",
             metadata={},
             ssh_settings={
                 "host": "string",
@@ -216,7 +214,6 @@ class TestAsyncDatabaseConnections:
             alias="string",
             connection_uri="string",
             bigquery_credential_file_content={},
-            llm_api_key="string",
             metadata={},
             ssh_settings={
                 "host": "string",
@@ -307,7 +304,6 @@ class TestAsyncDatabaseConnections:
             alias="string",
             connection_uri="string",
             bigquery_credential_file_content={},
-            llm_api_key="string",
             metadata={},
             ssh_settings={
                 "host": "string",
