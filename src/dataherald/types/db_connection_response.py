@@ -35,8 +35,6 @@ class DBConnectionResponse(BaseModel):
 
     created_at: Optional[datetime] = None
 
-    llm_api_key: Optional[str] = None
-
     metadata: Optional[Metadata] = None
 
     path_to_credentials_file: Optional[str] = None

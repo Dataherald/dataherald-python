@@ -15,8 +15,6 @@ class DatabaseConnectionUpdateParams(TypedDict, total=False):
 
     bigquery_credential_file_content: Union[object, str]
 
-    llm_api_key: str
-
     metadata: object
 
     ssh_settings: SSHSettings
