@@ -37,7 +37,7 @@ class TestFinetunings:
                 "model_name": "string",
                 "model_parameters": {"foo": "string"},
             },
-            golden_records=["string", "string", "string"],
+            golden_sqls=["string", "string", "string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -194,7 +194,7 @@ class TestAsyncFinetunings:
                 "model_name": "string",
                 "model_parameters": {"foo": "string"},
             },
-            golden_records=["string", "string", "string"],
+            golden_sqls=["string", "string", "string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])

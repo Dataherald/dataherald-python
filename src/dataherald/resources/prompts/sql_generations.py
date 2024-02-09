@@ -42,6 +42,7 @@ class SqlGenerations(SyncAPIResource):
         *,
         evaluate: bool | NotGiven = NOT_GIVEN,
         finetuning_id: str | NotGiven = NOT_GIVEN,
+        low_latency_mode: bool | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sql: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -71,6 +72,7 @@ class SqlGenerations(SyncAPIResource):
                 {
                     "evaluate": evaluate,
                     "finetuning_id": finetuning_id,
+                    "low_latency_mode": low_latency_mode,
                     "metadata": metadata,
                     "sql": sql,
                 },
@@ -191,6 +193,7 @@ class AsyncSqlGenerations(AsyncAPIResource):
         *,
         evaluate: bool | NotGiven = NOT_GIVEN,
         finetuning_id: str | NotGiven = NOT_GIVEN,
+        low_latency_mode: bool | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sql: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -220,6 +223,7 @@ class AsyncSqlGenerations(AsyncAPIResource):
                 {
                     "evaluate": evaluate,
                     "finetuning_id": finetuning_id,
+                    "low_latency_mode": low_latency_mode,
                     "metadata": metadata,
                     "sql": sql,
                 },

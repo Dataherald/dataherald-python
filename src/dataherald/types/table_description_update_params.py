@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Iterable
 from typing_extensions import TypedDict
 
 __all__ = ["TableDescriptionUpdateParams", "Column"]
 
 
 class TableDescriptionUpdateParams(TypedDict, total=False):
-    columns: List[Column]
+    columns: Iterable[Column]
 
     description: str
 
-    examples: List[object]
+    examples: Iterable[object]
 
     metadata: object
 

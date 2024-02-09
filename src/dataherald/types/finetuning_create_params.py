@@ -15,7 +15,7 @@ class FinetuningCreateParams(TypedDict, total=False):
 
     base_llm: BaseLlm
 
-    golden_records: List[str]
+    golden_sqls: List[str]
 
     metadata: object
 

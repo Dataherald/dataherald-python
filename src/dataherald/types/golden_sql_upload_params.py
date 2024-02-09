@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
 __all__ = ["GoldenSqlUploadParams", "Body"]
 
 
 class GoldenSqlUploadParams(TypedDict, total=False):
-    body: Required[List[Body]]
+    body: Required[Iterable[Body]]
 
 
 class Body(TypedDict, total=False):
