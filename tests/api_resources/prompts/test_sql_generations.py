@@ -30,6 +30,7 @@ class TestSqlGenerations:
             "string",
             evaluate=True,
             finetuning_id="string",
+            low_latency_mode=True,
             metadata={},
             sql="string",
         )
@@ -129,6 +130,7 @@ class TestSqlGenerations:
             "string",
             sql_generation={
                 "finetuning_id": "string",
+                "low_latency_mode": True,
                 "evaluate": True,
                 "sql": "string",
                 "metadata": {},
@@ -189,6 +191,7 @@ class TestAsyncSqlGenerations:
             "string",
             evaluate=True,
             finetuning_id="string",
+            low_latency_mode=True,
             metadata={},
             sql="string",
         )
@@ -288,6 +291,7 @@ class TestAsyncSqlGenerations:
             "string",
             sql_generation={
                 "finetuning_id": "string",
+                "low_latency_mode": True,
                 "evaluate": True,
                 "sql": "string",
                 "metadata": {},

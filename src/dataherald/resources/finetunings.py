@@ -44,7 +44,7 @@ class Finetunings(SyncAPIResource):
         db_connection_id: str,
         alias: str | NotGiven = NOT_GIVEN,
         base_llm: finetuning_create_params.BaseLlm | NotGiven = NOT_GIVEN,
-        golden_records: List[str] | NotGiven = NOT_GIVEN,
+        golden_sqls: List[str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -72,7 +72,7 @@ class Finetunings(SyncAPIResource):
                     "db_connection_id": db_connection_id,
                     "alias": alias,
                     "base_llm": base_llm,
-                    "golden_records": golden_records,
+                    "golden_sqls": golden_sqls,
                     "metadata": metadata,
                 },
                 finetuning_create_params.FinetuningCreateParams,
@@ -202,7 +202,7 @@ class AsyncFinetunings(AsyncAPIResource):
         db_connection_id: str,
         alias: str | NotGiven = NOT_GIVEN,
         base_llm: finetuning_create_params.BaseLlm | NotGiven = NOT_GIVEN,
-        golden_records: List[str] | NotGiven = NOT_GIVEN,
+        golden_sqls: List[str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -230,7 +230,7 @@ class AsyncFinetunings(AsyncAPIResource):
                     "db_connection_id": db_connection_id,
                     "alias": alias,
                     "base_llm": base_llm,
-                    "golden_records": golden_records,
+                    "golden_sqls": golden_sqls,
                     "metadata": metadata,
                 },
                 finetuning_create_params.FinetuningCreateParams,

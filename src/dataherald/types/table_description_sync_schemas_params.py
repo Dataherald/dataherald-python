@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Iterable
 from typing_extensions import Required, TypedDict
 
 __all__ = ["TableDescriptionSyncSchemasParams", "Body"]
 
 
 class TableDescriptionSyncSchemasParams(TypedDict, total=False):
-    body: Required[List[Body]]
+    body: Required[Iterable[Body]]
 
 
 class Body(TypedDict, total=False):
