@@ -20,6 +20,8 @@ class SqlGeneration(TypedDict, total=False):
 
     finetuning_id: str
 
+    low_latency_mode: bool
+
     metadata: object
 
     sql: str
