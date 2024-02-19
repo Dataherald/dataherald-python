@@ -1,6 +1,6 @@
 [project]
 name = "dataherald"
-version = "0.16.0"
+version = "0.17.1"
 description = "The official Python library for the Dataherald API"
 readme = "README.md"
 license = "Apache-2.0"
