@@ -222,9 +222,9 @@ database_connection = response.parse()  # get the object that `database_connecti
 print(database_connection.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/Dataherald/dataherald-python/tree/main/src/dataherald/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/Dataherald/dataherald-python/tree/stainless/src/dataherald/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/Dataherald/dataherald-python/tree/main/src/dataherald/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/Dataherald/dataherald-python/tree/stainless/src/dataherald/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
