@@ -76,6 +76,7 @@ class GoldenSqls(SyncAPIResource):
         self,
         *,
         ascend: bool | NotGiven = NOT_GIVEN,
+        db_connection_id: str | NotGiven = NOT_GIVEN,
         order: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -108,6 +109,7 @@ class GoldenSqls(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "ascend": ascend,
+                        "db_connection_id": db_connection_id,
                         "order": order,
                         "page": page,
                         "page_size": page_size,
@@ -230,6 +232,7 @@ class AsyncGoldenSqls(AsyncAPIResource):
         self,
         *,
         ascend: bool | NotGiven = NOT_GIVEN,
+        db_connection_id: str | NotGiven = NOT_GIVEN,
         order: str | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
@@ -262,6 +265,7 @@ class AsyncGoldenSqls(AsyncAPIResource):
                 query=maybe_transform(
                     {
                         "ascend": ascend,
+                        "db_connection_id": db_connection_id,
                         "order": order,
                         "page": page,
                         "page_size": page_size,

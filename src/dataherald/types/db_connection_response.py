@@ -5,15 +5,15 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["DBConnectionResponse", "Metadata", "MetadataDataheraldInternal", "SSHSettings"]
+__all__ = ["DBConnectionResponse", "Metadata", "MetadataDhInternal", "SSHSettings"]
 
 
-class MetadataDataheraldInternal(BaseModel):
+class MetadataDhInternal(BaseModel):
     organization_id: Optional[str] = None
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[MetadataDataheraldInternal] = None
+    dh_internal: Optional[MetadataDhInternal] = None
 
 
 class SSHSettings(BaseModel):

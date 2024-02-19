@@ -23,6 +23,8 @@ class TestFinetunings:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -30,13 +32,13 @@ class TestFinetunings:
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
-            db_connection_id="string",
             alias="string",
             base_llm={
                 "model_provider": "string",
                 "model_name": "string",
                 "model_parameters": {"foo": "string"},
             },
+            db_connection_id="string",
             golden_sqls=["string", "string", "string"],
             metadata={},
         )
@@ -45,6 +47,8 @@ class TestFinetunings:
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         )
 
@@ -56,6 +60,8 @@ class TestFinetunings:
     @parametrize
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.finetunings.with_streaming_response.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         ) as response:
             assert not response.is_closed
@@ -180,6 +186,8 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -187,13 +195,13 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.create(
-            db_connection_id="string",
             alias="string",
             base_llm={
                 "model_provider": "string",
                 "model_name": "string",
                 "model_parameters": {"foo": "string"},
             },
+            db_connection_id="string",
             golden_sqls=["string", "string", "string"],
             metadata={},
         )
@@ -202,6 +210,8 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.finetunings.with_raw_response.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         )
 
@@ -213,6 +223,8 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.finetunings.with_streaming_response.create(
+            alias="string",
+            base_llm={},
             db_connection_id="string",
         ) as response:
             assert not response.is_closed

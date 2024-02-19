@@ -87,7 +87,7 @@ class TestDataherald:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 2
+        assert self.client.max_retries == 3
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6
@@ -763,7 +763,7 @@ class TestAsyncDataherald:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 2
+        assert self.client.max_retries == 3
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6

@@ -10,6 +10,8 @@ __all__ = ["GoldenSqlListParams"]
 class GoldenSqlListParams(TypedDict, total=False):
     ascend: bool
 
+    db_connection_id: str
+
     order: str
 
     page: int

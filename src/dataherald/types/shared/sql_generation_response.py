@@ -6,15 +6,15 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["SqlGenerationResponse", "Metadata", "MetadataDataheraldInternal"]
+__all__ = ["SqlGenerationResponse", "Metadata", "MetadataDhInternal"]
 
 
-class MetadataDataheraldInternal(BaseModel):
+class MetadataDhInternal(BaseModel):
     organization_id: Optional[str] = None
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[MetadataDataheraldInternal] = None
+    dh_internal: Optional[MetadataDhInternal] = None
 
 
 class SqlGenerationResponse(BaseModel):
