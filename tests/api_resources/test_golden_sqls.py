@@ -68,6 +68,7 @@ class TestGoldenSqls:
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         golden_sql = client.golden_sqls.list(
             ascend=True,
+            db_connection_id="string",
             order="string",
             page=0,
             page_size=0,
@@ -262,6 +263,7 @@ class TestAsyncGoldenSqls:
     async def test_method_list_with_all_params(self, async_client: AsyncDataherald) -> None:
         golden_sql = await async_client.golden_sqls.list(
             ascend=True,
+            db_connection_id="string",
             order="string",
             page=0,
             page_size=0,

@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["FinetuningResponse", "BaseLlm", "Metadata", "MetadataDataheraldInternal"]
+__all__ = ["FinetuningResponse", "BaseLlm", "Metadata", "MetadataDhInternal"]
 
 
 class BaseLlm(BaseModel):
@@ -18,24 +18,24 @@ class BaseLlm(BaseModel):
     api_model_provider: Optional[str] = FieldInfo(alias="model_provider", default=None)
 
 
-class MetadataDataheraldInternal(BaseModel):
+class MetadataDhInternal(BaseModel):
     organization_id: Optional[str] = None
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[MetadataDataheraldInternal] = None
+    dh_internal: Optional[MetadataDhInternal] = None
 
 
 class FinetuningResponse(BaseModel):
     id: str
 
-    api_model_id: Optional[str] = FieldInfo(alias="_model_id", default=None)
+    alias: str
+
+    db_connection_id: str
 
     base_llm: Optional[BaseLlm] = None
 
     created_at: Optional[datetime] = None
-
-    db_connection_id: Optional[str] = None
 
     error: Optional[str] = None
 
@@ -43,8 +43,10 @@ class FinetuningResponse(BaseModel):
 
     finetuning_job_id: Optional[str] = None
 
-    golden_records: Optional[List[str]] = None
+    golden_sqls: Optional[List[str]] = None
 
     metadata: Optional[Metadata] = None
+
+    api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
 
     status: Optional[str] = None

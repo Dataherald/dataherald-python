@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["PromptResponse", "Metadata", "MetadataDataheraldInternal", "MetadataDataheraldInternalSlackInfo"]
+__all__ = ["PromptResponse", "Metadata", "MetadataDhInternal", "MetadataDhInternalSlackInfo"]
 
 
-class MetadataDataheraldInternalSlackInfo(BaseModel):
+class MetadataDhInternalSlackInfo(BaseModel):
     channel_id: Optional[str] = None
 
     thread_ts: Optional[str] = None
@@ -19,7 +19,7 @@ class MetadataDataheraldInternalSlackInfo(BaseModel):
     username: Optional[str] = None
 
 
-class MetadataDataheraldInternal(BaseModel):
+class MetadataDhInternal(BaseModel):
     created_by: Optional[str] = None
 
     display_id: Optional[str] = None
@@ -33,13 +33,13 @@ class MetadataDataheraldInternal(BaseModel):
 
     organization_id: Optional[str] = None
 
-    slack_info: Optional[MetadataDataheraldInternalSlackInfo] = None
+    slack_info: Optional[MetadataDhInternalSlackInfo] = None
 
     updated_by: Optional[str] = None
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[MetadataDataheraldInternal] = None
+    dh_internal: Optional[MetadataDhInternal] = None
 
 
 class PromptResponse(BaseModel):

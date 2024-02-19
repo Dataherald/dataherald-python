@@ -1,12 +1,21 @@
 # Changelog
 
-## 0.17.0 (2024-02-09)
+## 0.17.1 (2024-02-19)
 
-Full Changelog: [v0.16.0...v0.17.0](https://github.com/Dataherald/dataherald-python/compare/v0.16.0...v0.17.0)
+Full Changelog: [v0.16.0...v0.17.1](https://github.com/Dataherald/dataherald-python/compare/v0.16.0...v0.17.1)
 
 ### Features
 
-* OpenAPI spec update ([#38](https://github.com/Dataherald/dataherald-python/issues/38)) ([5852d74](https://github.com/Dataherald/dataherald-python/commit/5852d745b443ac13bf771c1bd4c507f66a91620c))
+* Add initial Stainless SDK ([6609250](https://github.com/Dataherald/dataherald-python/commit/6609250456ab0823a593a5ba0d02273480ee2b3c))
+* Add initial Stainless SDK ([5bb16c7](https://github.com/Dataherald/dataherald-python/commit/5bb16c71c17bc7b284112e3b154d1d02baeb4694))
+* Add initial Stainless SDK ([4ef184a](https://github.com/Dataherald/dataherald-python/commit/4ef184a773477c504daa960910d01045d92b0640))
+* update via SDK Studio ([#42](https://github.com/Dataherald/dataherald-python/issues/42)) ([5fb018b](https://github.com/Dataherald/dataherald-python/commit/5fb018b58c6e283496bc2ff8b3a178cbe09c41f4))
+* update via SDK Studio ([#44](https://github.com/Dataherald/dataherald-python/issues/44)) ([0e38464](https://github.com/Dataherald/dataherald-python/commit/0e38464bc3291186574a1b7bbde84e653a9f5cf0))
+
+
+### Chores
+
+* go live ([#40](https://github.com/Dataherald/dataherald-python/issues/40)) ([1bcb040](https://github.com/Dataherald/dataherald-python/commit/1bcb04011466fb4e338c416d23bfed1ebb2ab2e6))
 
 ## 0.16.0 (2024-01-24)
 

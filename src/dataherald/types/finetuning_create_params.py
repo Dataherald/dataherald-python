@@ -9,11 +9,11 @@ __all__ = ["FinetuningCreateParams", "BaseLlm"]
 
 
 class FinetuningCreateParams(TypedDict, total=False):
+    alias: Required[str]
+
+    base_llm: Required[BaseLlm]
+
     db_connection_id: Required[str]
-
-    alias: str
-
-    base_llm: BaseLlm
 
     golden_sqls: List[str]
 

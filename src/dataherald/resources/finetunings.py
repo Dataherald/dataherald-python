@@ -41,9 +41,9 @@ class Finetunings(SyncAPIResource):
     def create(
         self,
         *,
+        alias: str,
+        base_llm: finetuning_create_params.BaseLlm,
         db_connection_id: str,
-        alias: str | NotGiven = NOT_GIVEN,
-        base_llm: finetuning_create_params.BaseLlm | NotGiven = NOT_GIVEN,
         golden_sqls: List[str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -69,9 +69,9 @@ class Finetunings(SyncAPIResource):
             "/api/finetunings",
             body=maybe_transform(
                 {
-                    "db_connection_id": db_connection_id,
                     "alias": alias,
                     "base_llm": base_llm,
+                    "db_connection_id": db_connection_id,
                     "golden_sqls": golden_sqls,
                     "metadata": metadata,
                 },
@@ -199,9 +199,9 @@ class AsyncFinetunings(AsyncAPIResource):
     async def create(
         self,
         *,
+        alias: str,
+        base_llm: finetuning_create_params.BaseLlm,
         db_connection_id: str,
-        alias: str | NotGiven = NOT_GIVEN,
-        base_llm: finetuning_create_params.BaseLlm | NotGiven = NOT_GIVEN,
         golden_sqls: List[str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -227,9 +227,9 @@ class AsyncFinetunings(AsyncAPIResource):
             "/api/finetunings",
             body=maybe_transform(
                 {
-                    "db_connection_id": db_connection_id,
                     "alias": alias,
                     "base_llm": base_llm,
+                    "db_connection_id": db_connection_id,
                     "golden_sqls": golden_sqls,
                     "metadata": metadata,
                 },

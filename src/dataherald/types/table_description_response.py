@@ -26,7 +26,7 @@ class Column(BaseModel):
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[object] = None
+    dh_internal: Optional[object] = None
 
 
 class TableDescriptionResponse(BaseModel):

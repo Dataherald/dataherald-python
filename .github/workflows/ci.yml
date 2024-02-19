@@ -11,7 +11,7 @@ jobs:
   lint:
     name: lint
     runs-on: ubuntu-latest
-    if: github.repository == 'Dataherald/dataherald-python'
+    
 
     steps:
       - uses: actions/checkout@v3

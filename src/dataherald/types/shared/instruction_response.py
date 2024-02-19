@@ -9,7 +9,7 @@ __all__ = ["InstructionResponse", "Metadata"]
 
 
 class Metadata(BaseModel):
-    dataherald_internal: Optional[object] = None
+    dh_internal: Optional[object] = None
 
 
 class InstructionResponse(BaseModel):
