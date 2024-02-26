@@ -128,7 +128,7 @@ Error codes are as followed:
 
 ### Retries
 
-Certain errors are automatically retried 2 times by default, with a short exponential backoff.
+Certain errors are automatically retried 1 times by default, with a short exponential backoff.
 Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
 429 Rate Limit, and >=500 Internal errors are all retried by default.
 
@@ -152,7 +152,7 @@ client.with_options(max_retries=5).database_connections.create(
 
 ### Timeouts
 
-By default requests time out after 1 minute. You can configure this with a `timeout` option,
+By default requests time out after 6 minutes. You can configure this with a `timeout` option,
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
@@ -160,7 +160,7 @@ from dataherald import Dataherald
 
 # Configure the default for all requests:
 client = Dataherald(
-    # 20 seconds (default is 1 minute)
+    # 20 seconds (default is 6 minutes)
     timeout=20.0,
 )
 
