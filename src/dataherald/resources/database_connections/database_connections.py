@@ -57,6 +57,7 @@ class DatabaseConnections(SyncAPIResource):
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
+        sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -86,6 +87,7 @@ class DatabaseConnections(SyncAPIResource):
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
                     "metadata": metadata,
+                    "sqlite_file_path": sqlite_file_path,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
                 },
@@ -138,6 +140,7 @@ class DatabaseConnections(SyncAPIResource):
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
+        sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -169,6 +172,7 @@ class DatabaseConnections(SyncAPIResource):
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
                     "metadata": metadata,
+                    "sqlite_file_path": sqlite_file_path,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
                 },
@@ -220,6 +224,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
+        sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -249,6 +254,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
                     "metadata": metadata,
+                    "sqlite_file_path": sqlite_file_path,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
                 },
@@ -301,6 +307,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         connection_uri: str,
         bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
+        sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
         use_ssh: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -332,6 +339,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
                     "connection_uri": connection_uri,
                     "bigquery_credential_file_content": bigquery_credential_file_content,
                     "metadata": metadata,
+                    "sqlite_file_path": sqlite_file_path,
                     "ssh_settings": ssh_settings,
                     "use_ssh": use_ssh,
                 },
