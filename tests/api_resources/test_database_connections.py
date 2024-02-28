@@ -35,6 +35,7 @@ class TestDatabaseConnections:
             connection_uri="string",
             bigquery_credential_file_content={},
             metadata={},
+            sqlite_file_path="string",
             ssh_settings={
                 "host": "string",
                 "username": "string",
@@ -125,6 +126,7 @@ class TestDatabaseConnections:
             connection_uri="string",
             bigquery_credential_file_content={},
             metadata={},
+            sqlite_file_path="string",
             ssh_settings={
                 "host": "string",
                 "username": "string",
@@ -215,6 +217,7 @@ class TestAsyncDatabaseConnections:
             connection_uri="string",
             bigquery_credential_file_content={},
             metadata={},
+            sqlite_file_path="string",
             ssh_settings={
                 "host": "string",
                 "username": "string",
@@ -305,6 +308,7 @@ class TestAsyncDatabaseConnections:
             connection_uri="string",
             bigquery_credential_file_content={},
             metadata={},
+            sqlite_file_path="string",
             ssh_settings={
                 "host": "string",
                 "username": "string",

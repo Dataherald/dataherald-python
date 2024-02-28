@@ -17,6 +17,8 @@ class DatabaseConnectionUpdateParams(TypedDict, total=False):
 
     metadata: object
 
+    sqlite_file_path: str
+
     ssh_settings: SSHSettings
 
     use_ssh: bool
