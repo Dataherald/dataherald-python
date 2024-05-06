@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -6,14 +6,12 @@ from typing import List
 
 import httpx
 
-from ..types import (
-    FinetuningResponse,
-    FinetuningListResponse,
-    finetuning_list_params,
-    finetuning_create_params,
-)
+from ..types import finetuning_list_params, finetuning_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -25,18 +23,20 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
+from ..types.finetuning_response import FinetuningResponse
+from ..types.finetuning_list_response import FinetuningListResponse
 
-__all__ = ["Finetunings", "AsyncFinetunings"]
+__all__ = ["FinetuningsResource", "AsyncFinetuningsResource"]
 
 
-class Finetunings(SyncAPIResource):
+class FinetuningsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> FinetuningsWithRawResponse:
-        return FinetuningsWithRawResponse(self)
+    def with_raw_response(self) -> FinetuningsResourceWithRawResponse:
+        return FinetuningsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> FinetuningsWithStreamingResponse:
-        return FinetuningsWithStreamingResponse(self)
+    def with_streaming_response(self) -> FinetuningsResourceWithStreamingResponse:
+        return FinetuningsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -187,14 +187,14 @@ class Finetunings(SyncAPIResource):
         )
 
 
-class AsyncFinetunings(AsyncAPIResource):
+class AsyncFinetuningsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncFinetuningsWithRawResponse:
-        return AsyncFinetuningsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncFinetuningsResourceWithRawResponse:
+        return AsyncFinetuningsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncFinetuningsWithStreamingResponse:
-        return AsyncFinetuningsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncFinetuningsResourceWithStreamingResponse:
+        return AsyncFinetuningsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -225,7 +225,7 @@ class AsyncFinetunings(AsyncAPIResource):
         """
         return await self._post(
             "/api/finetunings",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "alias": alias,
                     "base_llm": base_llm,
@@ -304,7 +304,7 @@ class AsyncFinetunings(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {"db_connection_id": db_connection_id}, finetuning_list_params.FinetuningListParams
                 ),
             ),
@@ -345,8 +345,8 @@ class AsyncFinetunings(AsyncAPIResource):
         )
 
 
-class FinetuningsWithRawResponse:
-    def __init__(self, finetunings: Finetunings) -> None:
+class FinetuningsResourceWithRawResponse:
+    def __init__(self, finetunings: FinetuningsResource) -> None:
         self._finetunings = finetunings
 
         self.create = to_raw_response_wrapper(
@@ -363,8 +363,8 @@ class FinetuningsWithRawResponse:
         )
 
 
-class AsyncFinetuningsWithRawResponse:
-    def __init__(self, finetunings: AsyncFinetunings) -> None:
+class AsyncFinetuningsResourceWithRawResponse:
+    def __init__(self, finetunings: AsyncFinetuningsResource) -> None:
         self._finetunings = finetunings
 
         self.create = async_to_raw_response_wrapper(
@@ -381,8 +381,8 @@ class AsyncFinetuningsWithRawResponse:
         )
 
 
-class FinetuningsWithStreamingResponse:
-    def __init__(self, finetunings: Finetunings) -> None:
+class FinetuningsResourceWithStreamingResponse:
+    def __init__(self, finetunings: FinetuningsResource) -> None:
         self._finetunings = finetunings
 
         self.create = to_streamed_response_wrapper(
@@ -399,8 +399,8 @@ class FinetuningsWithStreamingResponse:
         )
 
 
-class AsyncFinetuningsWithStreamingResponse:
-    def __init__(self, finetunings: AsyncFinetunings) -> None:
+class AsyncFinetuningsResourceWithStreamingResponse:
+    def __init__(self, finetunings: AsyncFinetuningsResource) -> None:
         self._finetunings = finetunings
 
         self.create = async_to_streamed_response_wrapper(

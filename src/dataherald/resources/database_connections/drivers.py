@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -16,19 +16,19 @@ from ..._response import (
 from ..._base_client import (
     make_request_options,
 )
-from ...types.database_connections import DriverListResponse
+from ...types.database_connections.driver_list_response import DriverListResponse
 
-__all__ = ["Drivers", "AsyncDrivers"]
+__all__ = ["DriversResource", "AsyncDriversResource"]
 
 
-class Drivers(SyncAPIResource):
+class DriversResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> DriversWithRawResponse:
-        return DriversWithRawResponse(self)
+    def with_raw_response(self) -> DriversResourceWithRawResponse:
+        return DriversResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> DriversWithStreamingResponse:
-        return DriversWithStreamingResponse(self)
+    def with_streaming_response(self) -> DriversResourceWithStreamingResponse:
+        return DriversResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -50,14 +50,14 @@ class Drivers(SyncAPIResource):
         )
 
 
-class AsyncDrivers(AsyncAPIResource):
+class AsyncDriversResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncDriversWithRawResponse:
-        return AsyncDriversWithRawResponse(self)
+    def with_raw_response(self) -> AsyncDriversResourceWithRawResponse:
+        return AsyncDriversResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncDriversWithStreamingResponse:
-        return AsyncDriversWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncDriversResourceWithStreamingResponse:
+        return AsyncDriversResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -79,8 +79,8 @@ class AsyncDrivers(AsyncAPIResource):
         )
 
 
-class DriversWithRawResponse:
-    def __init__(self, drivers: Drivers) -> None:
+class DriversResourceWithRawResponse:
+    def __init__(self, drivers: DriversResource) -> None:
         self._drivers = drivers
 
         self.list = to_raw_response_wrapper(
@@ -88,8 +88,8 @@ class DriversWithRawResponse:
         )
 
 
-class AsyncDriversWithRawResponse:
-    def __init__(self, drivers: AsyncDrivers) -> None:
+class AsyncDriversResourceWithRawResponse:
+    def __init__(self, drivers: AsyncDriversResource) -> None:
         self._drivers = drivers
 
         self.list = async_to_raw_response_wrapper(
@@ -97,8 +97,8 @@ class AsyncDriversWithRawResponse:
         )
 
 
-class DriversWithStreamingResponse:
-    def __init__(self, drivers: Drivers) -> None:
+class DriversResourceWithStreamingResponse:
+    def __init__(self, drivers: DriversResource) -> None:
         self._drivers = drivers
 
         self.list = to_streamed_response_wrapper(
@@ -106,8 +106,8 @@ class DriversWithStreamingResponse:
         )
 
 
-class AsyncDriversWithStreamingResponse:
-    def __init__(self, drivers: AsyncDrivers) -> None:
+class AsyncDriversResourceWithStreamingResponse:
+    def __init__(self, drivers: AsyncDriversResource) -> None:
         self._drivers = drivers
 
         self.list = async_to_streamed_response_wrapper(

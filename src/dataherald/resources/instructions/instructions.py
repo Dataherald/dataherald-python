@@ -1,25 +1,23 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
 import httpx
 
 from .first import (
-    First,
-    AsyncFirst,
-    FirstWithRawResponse,
-    AsyncFirstWithRawResponse,
-    FirstWithStreamingResponse,
-    AsyncFirstWithStreamingResponse,
+    FirstResource,
+    AsyncFirstResource,
+    FirstResourceWithRawResponse,
+    AsyncFirstResourceWithRawResponse,
+    FirstResourceWithStreamingResponse,
+    AsyncFirstResourceWithStreamingResponse,
 )
-from ...types import (
-    InstructionListResponse,
-    instruction_list_params,
-    instruction_create_params,
-    instruction_update_params,
-)
+from ...types import instruction_list_params, instruction_create_params, instruction_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -31,23 +29,24 @@ from ..._response import (
 from ..._base_client import (
     make_request_options,
 )
-from ...types.shared import InstructionResponse
+from ...types.instruction_list_response import InstructionListResponse
+from ...types.shared.instruction_response import InstructionResponse
 
-__all__ = ["Instructions", "AsyncInstructions"]
+__all__ = ["InstructionsResource", "AsyncInstructionsResource"]
 
 
-class Instructions(SyncAPIResource):
+class InstructionsResource(SyncAPIResource):
     @cached_property
-    def first(self) -> First:
-        return First(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> InstructionsWithRawResponse:
-        return InstructionsWithRawResponse(self)
+    def first(self) -> FirstResource:
+        return FirstResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> InstructionsWithStreamingResponse:
-        return InstructionsWithStreamingResponse(self)
+    def with_raw_response(self) -> InstructionsResourceWithRawResponse:
+        return InstructionsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> InstructionsResourceWithStreamingResponse:
+        return InstructionsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -238,18 +237,18 @@ class Instructions(SyncAPIResource):
         )
 
 
-class AsyncInstructions(AsyncAPIResource):
+class AsyncInstructionsResource(AsyncAPIResource):
     @cached_property
-    def first(self) -> AsyncFirst:
-        return AsyncFirst(self._client)
+    def first(self) -> AsyncFirstResource:
+        return AsyncFirstResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncInstructionsWithRawResponse:
-        return AsyncInstructionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncInstructionsResourceWithRawResponse:
+        return AsyncInstructionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncInstructionsWithStreamingResponse:
-        return AsyncInstructionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncInstructionsResourceWithStreamingResponse:
+        return AsyncInstructionsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -278,7 +277,7 @@ class AsyncInstructions(AsyncAPIResource):
         """
         return await self._post(
             "/api/instructions",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "instruction": instruction,
                     "db_connection_id": db_connection_id,
@@ -355,7 +354,7 @@ class AsyncInstructions(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/instructions/{id}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "instruction": instruction,
                     "db_connection_id": db_connection_id,
@@ -399,7 +398,7 @@ class AsyncInstructions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {"db_connection_id": db_connection_id}, instruction_list_params.InstructionListParams
                 ),
             ),
@@ -440,8 +439,8 @@ class AsyncInstructions(AsyncAPIResource):
         )
 
 
-class InstructionsWithRawResponse:
-    def __init__(self, instructions: Instructions) -> None:
+class InstructionsResourceWithRawResponse:
+    def __init__(self, instructions: InstructionsResource) -> None:
         self._instructions = instructions
 
         self.create = to_raw_response_wrapper(
@@ -461,12 +460,12 @@ class InstructionsWithRawResponse:
         )
 
     @cached_property
-    def first(self) -> FirstWithRawResponse:
-        return FirstWithRawResponse(self._instructions.first)
+    def first(self) -> FirstResourceWithRawResponse:
+        return FirstResourceWithRawResponse(self._instructions.first)
 
 
-class AsyncInstructionsWithRawResponse:
-    def __init__(self, instructions: AsyncInstructions) -> None:
+class AsyncInstructionsResourceWithRawResponse:
+    def __init__(self, instructions: AsyncInstructionsResource) -> None:
         self._instructions = instructions
 
         self.create = async_to_raw_response_wrapper(
@@ -486,12 +485,12 @@ class AsyncInstructionsWithRawResponse:
         )
 
     @cached_property
-    def first(self) -> AsyncFirstWithRawResponse:
-        return AsyncFirstWithRawResponse(self._instructions.first)
+    def first(self) -> AsyncFirstResourceWithRawResponse:
+        return AsyncFirstResourceWithRawResponse(self._instructions.first)
 
 
-class InstructionsWithStreamingResponse:
-    def __init__(self, instructions: Instructions) -> None:
+class InstructionsResourceWithStreamingResponse:
+    def __init__(self, instructions: InstructionsResource) -> None:
         self._instructions = instructions
 
         self.create = to_streamed_response_wrapper(
@@ -511,12 +510,12 @@ class InstructionsWithStreamingResponse:
         )
 
     @cached_property
-    def first(self) -> FirstWithStreamingResponse:
-        return FirstWithStreamingResponse(self._instructions.first)
+    def first(self) -> FirstResourceWithStreamingResponse:
+        return FirstResourceWithStreamingResponse(self._instructions.first)
 
 
-class AsyncInstructionsWithStreamingResponse:
-    def __init__(self, instructions: AsyncInstructions) -> None:
+class AsyncInstructionsResourceWithStreamingResponse:
+    def __init__(self, instructions: AsyncInstructionsResource) -> None:
         self._instructions = instructions
 
         self.create = async_to_streamed_response_wrapper(
@@ -536,5 +535,5 @@ class AsyncInstructionsWithStreamingResponse:
         )
 
     @cached_property
-    def first(self) -> AsyncFirstWithStreamingResponse:
-        return AsyncFirstWithStreamingResponse(self._instructions.first)
+    def first(self) -> AsyncFirstResourceWithStreamingResponse:
+        return AsyncFirstResourceWithStreamingResponse(self._instructions.first)

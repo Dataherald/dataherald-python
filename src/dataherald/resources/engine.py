@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -17,17 +17,17 @@ from .._base_client import (
     make_request_options,
 )
 
-__all__ = ["Engine", "AsyncEngine"]
+__all__ = ["EngineResource", "AsyncEngineResource"]
 
 
-class Engine(SyncAPIResource):
+class EngineResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> EngineWithRawResponse:
-        return EngineWithRawResponse(self)
+    def with_raw_response(self) -> EngineResourceWithRawResponse:
+        return EngineResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> EngineWithStreamingResponse:
-        return EngineWithStreamingResponse(self)
+    def with_streaming_response(self) -> EngineResourceWithStreamingResponse:
+        return EngineResourceWithStreamingResponse(self)
 
     def heartbeat(
         self,
@@ -49,14 +49,14 @@ class Engine(SyncAPIResource):
         )
 
 
-class AsyncEngine(AsyncAPIResource):
+class AsyncEngineResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncEngineWithRawResponse:
-        return AsyncEngineWithRawResponse(self)
+    def with_raw_response(self) -> AsyncEngineResourceWithRawResponse:
+        return AsyncEngineResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncEngineWithStreamingResponse:
-        return AsyncEngineWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncEngineResourceWithStreamingResponse:
+        return AsyncEngineResourceWithStreamingResponse(self)
 
     async def heartbeat(
         self,
@@ -78,8 +78,8 @@ class AsyncEngine(AsyncAPIResource):
         )
 
 
-class EngineWithRawResponse:
-    def __init__(self, engine: Engine) -> None:
+class EngineResourceWithRawResponse:
+    def __init__(self, engine: EngineResource) -> None:
         self._engine = engine
 
         self.heartbeat = to_raw_response_wrapper(
@@ -87,8 +87,8 @@ class EngineWithRawResponse:
         )
 
 
-class AsyncEngineWithRawResponse:
-    def __init__(self, engine: AsyncEngine) -> None:
+class AsyncEngineResourceWithRawResponse:
+    def __init__(self, engine: AsyncEngineResource) -> None:
         self._engine = engine
 
         self.heartbeat = async_to_raw_response_wrapper(
@@ -96,8 +96,8 @@ class AsyncEngineWithRawResponse:
         )
 
 
-class EngineWithStreamingResponse:
-    def __init__(self, engine: Engine) -> None:
+class EngineResourceWithStreamingResponse:
+    def __init__(self, engine: EngineResource) -> None:
         self._engine = engine
 
         self.heartbeat = to_streamed_response_wrapper(
@@ -105,8 +105,8 @@ class EngineWithStreamingResponse:
         )
 
 
-class AsyncEngineWithStreamingResponse:
-    def __init__(self, engine: AsyncEngine) -> None:
+class AsyncEngineResourceWithStreamingResponse:
+    def __init__(self, engine: AsyncEngineResource) -> None:
         self._engine = engine
 
         self.heartbeat = async_to_streamed_response_wrapper(

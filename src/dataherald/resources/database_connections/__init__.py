@@ -1,33 +1,33 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .drivers import (
-    Drivers,
-    AsyncDrivers,
-    DriversWithRawResponse,
-    AsyncDriversWithRawResponse,
-    DriversWithStreamingResponse,
-    AsyncDriversWithStreamingResponse,
+    DriversResource,
+    AsyncDriversResource,
+    DriversResourceWithRawResponse,
+    AsyncDriversResourceWithRawResponse,
+    DriversResourceWithStreamingResponse,
+    AsyncDriversResourceWithStreamingResponse,
 )
 from .database_connections import (
-    DatabaseConnections,
-    AsyncDatabaseConnections,
-    DatabaseConnectionsWithRawResponse,
-    AsyncDatabaseConnectionsWithRawResponse,
-    DatabaseConnectionsWithStreamingResponse,
-    AsyncDatabaseConnectionsWithStreamingResponse,
+    DatabaseConnectionsResource,
+    AsyncDatabaseConnectionsResource,
+    DatabaseConnectionsResourceWithRawResponse,
+    AsyncDatabaseConnectionsResourceWithRawResponse,
+    DatabaseConnectionsResourceWithStreamingResponse,
+    AsyncDatabaseConnectionsResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "Drivers",
-    "AsyncDrivers",
-    "DriversWithRawResponse",
-    "AsyncDriversWithRawResponse",
-    "DriversWithStreamingResponse",
-    "AsyncDriversWithStreamingResponse",
-    "DatabaseConnections",
-    "AsyncDatabaseConnections",
-    "DatabaseConnectionsWithRawResponse",
-    "AsyncDatabaseConnectionsWithRawResponse",
-    "DatabaseConnectionsWithStreamingResponse",
-    "AsyncDatabaseConnectionsWithStreamingResponse",
+    "DriversResource",
+    "AsyncDriversResource",
+    "DriversResourceWithRawResponse",
+    "AsyncDriversResourceWithRawResponse",
+    "DriversResourceWithStreamingResponse",
+    "AsyncDriversResourceWithStreamingResponse",
+    "DatabaseConnectionsResource",
+    "AsyncDatabaseConnectionsResource",
+    "DatabaseConnectionsResourceWithRawResponse",
+    "AsyncDatabaseConnectionsResourceWithRawResponse",
+    "DatabaseConnectionsResourceWithStreamingResponse",
+    "AsyncDatabaseConnectionsResourceWithStreamingResponse",
 ]

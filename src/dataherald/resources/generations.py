@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -6,15 +6,12 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import (
-    GenerationResponse,
-    GenerationListResponse,
-    generation_list_params,
-    generation_update_params,
-    generation_sql_generation_params,
-)
+from ..types import generation_list_params, generation_update_params, generation_sql_generation_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -26,19 +23,21 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
-from ..types.shared import NlGenerationResponse
+from ..types.generation_response import GenerationResponse
+from ..types.generation_list_response import GenerationListResponse
+from ..types.shared.nl_generation_response import NlGenerationResponse
 
-__all__ = ["Generations", "AsyncGenerations"]
+__all__ = ["GenerationsResource", "AsyncGenerationsResource"]
 
 
-class Generations(SyncAPIResource):
+class GenerationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> GenerationsWithRawResponse:
-        return GenerationsWithRawResponse(self)
+    def with_raw_response(self) -> GenerationsResourceWithRawResponse:
+        return GenerationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GenerationsWithStreamingResponse:
-        return GenerationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> GenerationsResourceWithStreamingResponse:
+        return GenerationsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -266,14 +265,14 @@ class Generations(SyncAPIResource):
         )
 
 
-class AsyncGenerations(AsyncAPIResource):
+class AsyncGenerationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncGenerationsWithRawResponse:
-        return AsyncGenerationsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncGenerationsResourceWithRawResponse:
+        return AsyncGenerationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGenerationsWithStreamingResponse:
-        return AsyncGenerationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncGenerationsResourceWithStreamingResponse:
+        return AsyncGenerationsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -373,7 +372,7 @@ class AsyncGenerations(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/generations/{id}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "generation_status": generation_status,
                     "message": message,
@@ -419,7 +418,7 @@ class AsyncGenerations(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "ascend": ascend,
                         "order": order,
@@ -493,7 +492,9 @@ class AsyncGenerations(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/generations/{id}/sql-generation",
-            body=maybe_transform({"sql": sql}, generation_sql_generation_params.GenerationSqlGenerationParams),
+            body=await async_maybe_transform(
+                {"sql": sql}, generation_sql_generation_params.GenerationSqlGenerationParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -501,8 +502,8 @@ class AsyncGenerations(AsyncAPIResource):
         )
 
 
-class GenerationsWithRawResponse:
-    def __init__(self, generations: Generations) -> None:
+class GenerationsResourceWithRawResponse:
+    def __init__(self, generations: GenerationsResource) -> None:
         self._generations = generations
 
         self.create = to_raw_response_wrapper(
@@ -525,8 +526,8 @@ class GenerationsWithRawResponse:
         )
 
 
-class AsyncGenerationsWithRawResponse:
-    def __init__(self, generations: AsyncGenerations) -> None:
+class AsyncGenerationsResourceWithRawResponse:
+    def __init__(self, generations: AsyncGenerationsResource) -> None:
         self._generations = generations
 
         self.create = async_to_raw_response_wrapper(
@@ -549,8 +550,8 @@ class AsyncGenerationsWithRawResponse:
         )
 
 
-class GenerationsWithStreamingResponse:
-    def __init__(self, generations: Generations) -> None:
+class GenerationsResourceWithStreamingResponse:
+    def __init__(self, generations: GenerationsResource) -> None:
         self._generations = generations
 
         self.create = to_streamed_response_wrapper(
@@ -573,8 +574,8 @@ class GenerationsWithStreamingResponse:
         )
 
 
-class AsyncGenerationsWithStreamingResponse:
-    def __init__(self, generations: AsyncGenerations) -> None:
+class AsyncGenerationsResourceWithStreamingResponse:
+    def __init__(self, generations: AsyncGenerationsResource) -> None:
         self._generations = generations
 
         self.create = async_to_streamed_response_wrapper(
