@@ -1,33 +1,33 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .first import (
-    First,
-    AsyncFirst,
-    FirstWithRawResponse,
-    AsyncFirstWithRawResponse,
-    FirstWithStreamingResponse,
-    AsyncFirstWithStreamingResponse,
+    FirstResource,
+    AsyncFirstResource,
+    FirstResourceWithRawResponse,
+    AsyncFirstResourceWithRawResponse,
+    FirstResourceWithStreamingResponse,
+    AsyncFirstResourceWithStreamingResponse,
 )
 from .instructions import (
-    Instructions,
-    AsyncInstructions,
-    InstructionsWithRawResponse,
-    AsyncInstructionsWithRawResponse,
-    InstructionsWithStreamingResponse,
-    AsyncInstructionsWithStreamingResponse,
+    InstructionsResource,
+    AsyncInstructionsResource,
+    InstructionsResourceWithRawResponse,
+    AsyncInstructionsResourceWithRawResponse,
+    InstructionsResourceWithStreamingResponse,
+    AsyncInstructionsResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "First",
-    "AsyncFirst",
-    "FirstWithRawResponse",
-    "AsyncFirstWithRawResponse",
-    "FirstWithStreamingResponse",
-    "AsyncFirstWithStreamingResponse",
-    "Instructions",
-    "AsyncInstructions",
-    "InstructionsWithRawResponse",
-    "AsyncInstructionsWithRawResponse",
-    "InstructionsWithStreamingResponse",
-    "AsyncInstructionsWithStreamingResponse",
+    "FirstResource",
+    "AsyncFirstResource",
+    "FirstResourceWithRawResponse",
+    "AsyncFirstResourceWithRawResponse",
+    "FirstResourceWithStreamingResponse",
+    "AsyncFirstResourceWithStreamingResponse",
+    "InstructionsResource",
+    "AsyncInstructionsResource",
+    "InstructionsResourceWithRawResponse",
+    "AsyncInstructionsResourceWithRawResponse",
+    "InstructionsResourceWithStreamingResponse",
+    "AsyncInstructionsResourceWithStreamingResponse",
 ]

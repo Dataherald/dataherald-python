@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -7,15 +7,15 @@ from typing import Iterable
 import httpx
 
 from ..types import (
-    TableDescriptionResponse,
-    TableDescriptionListResponse,
-    TableDescriptionSyncSchemasResponse,
     table_description_list_params,
     table_description_update_params,
     table_description_sync_schemas_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -27,18 +27,21 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
+from ..types.table_description_response import TableDescriptionResponse
+from ..types.table_description_list_response import TableDescriptionListResponse
+from ..types.table_description_sync_schemas_response import TableDescriptionSyncSchemasResponse
 
-__all__ = ["TableDescriptions", "AsyncTableDescriptions"]
+__all__ = ["TableDescriptionsResource", "AsyncTableDescriptionsResource"]
 
 
-class TableDescriptions(SyncAPIResource):
+class TableDescriptionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TableDescriptionsWithRawResponse:
-        return TableDescriptionsWithRawResponse(self)
+    def with_raw_response(self) -> TableDescriptionsResourceWithRawResponse:
+        return TableDescriptionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TableDescriptionsWithStreamingResponse:
-        return TableDescriptionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> TableDescriptionsResourceWithStreamingResponse:
+        return TableDescriptionsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -194,14 +197,14 @@ class TableDescriptions(SyncAPIResource):
         )
 
 
-class AsyncTableDescriptions(AsyncAPIResource):
+class AsyncTableDescriptionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTableDescriptionsWithRawResponse:
-        return AsyncTableDescriptionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTableDescriptionsResourceWithRawResponse:
+        return AsyncTableDescriptionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTableDescriptionsWithStreamingResponse:
-        return AsyncTableDescriptionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTableDescriptionsResourceWithStreamingResponse:
+        return AsyncTableDescriptionsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -267,7 +270,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/table-descriptions/{id}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "columns": columns,
                     "description": description,
@@ -313,7 +316,7 @@ class AsyncTableDescriptions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "db_connection_id": db_connection_id,
                         "table_name": table_name,
@@ -349,7 +352,9 @@ class AsyncTableDescriptions(AsyncAPIResource):
         """
         return await self._post(
             "/api/table-descriptions/sync-schemas",
-            body=maybe_transform(body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams),
+            body=await async_maybe_transform(
+                body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -357,8 +362,8 @@ class AsyncTableDescriptions(AsyncAPIResource):
         )
 
 
-class TableDescriptionsWithRawResponse:
-    def __init__(self, table_descriptions: TableDescriptions) -> None:
+class TableDescriptionsResourceWithRawResponse:
+    def __init__(self, table_descriptions: TableDescriptionsResource) -> None:
         self._table_descriptions = table_descriptions
 
         self.retrieve = to_raw_response_wrapper(
@@ -375,8 +380,8 @@ class TableDescriptionsWithRawResponse:
         )
 
 
-class AsyncTableDescriptionsWithRawResponse:
-    def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+class AsyncTableDescriptionsResourceWithRawResponse:
+    def __init__(self, table_descriptions: AsyncTableDescriptionsResource) -> None:
         self._table_descriptions = table_descriptions
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -393,8 +398,8 @@ class AsyncTableDescriptionsWithRawResponse:
         )
 
 
-class TableDescriptionsWithStreamingResponse:
-    def __init__(self, table_descriptions: TableDescriptions) -> None:
+class TableDescriptionsResourceWithStreamingResponse:
+    def __init__(self, table_descriptions: TableDescriptionsResource) -> None:
         self._table_descriptions = table_descriptions
 
         self.retrieve = to_streamed_response_wrapper(
@@ -411,8 +416,8 @@ class TableDescriptionsWithStreamingResponse:
         )
 
 
-class AsyncTableDescriptionsWithStreamingResponse:
-    def __init__(self, table_descriptions: AsyncTableDescriptions) -> None:
+class AsyncTableDescriptionsResourceWithStreamingResponse:
+    def __init__(self, table_descriptions: AsyncTableDescriptionsResource) -> None:
         self._table_descriptions = table_descriptions
 
         self.retrieve = async_to_streamed_response_wrapper(

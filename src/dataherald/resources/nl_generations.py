@@ -1,12 +1,15 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
 import httpx
 
-from ..types import NlGenerationListResponse, nl_generation_list_params, nl_generation_create_params
+from ..types import nl_generation_list_params, nl_generation_create_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -18,19 +21,20 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
-from ..types.shared import NlGenerationResponse
+from ..types.nl_generation_list_response import NlGenerationListResponse
+from ..types.shared.nl_generation_response import NlGenerationResponse
 
-__all__ = ["NlGenerations", "AsyncNlGenerations"]
+__all__ = ["NlGenerationsResource", "AsyncNlGenerationsResource"]
 
 
-class NlGenerations(SyncAPIResource):
+class NlGenerationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> NlGenerationsWithRawResponse:
-        return NlGenerationsWithRawResponse(self)
+    def with_raw_response(self) -> NlGenerationsResourceWithRawResponse:
+        return NlGenerationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> NlGenerationsWithStreamingResponse:
-        return NlGenerationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> NlGenerationsResourceWithStreamingResponse:
+        return NlGenerationsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -153,14 +157,14 @@ class NlGenerations(SyncAPIResource):
         )
 
 
-class AsyncNlGenerations(AsyncAPIResource):
+class AsyncNlGenerationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncNlGenerationsWithRawResponse:
-        return AsyncNlGenerationsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncNlGenerationsResourceWithRawResponse:
+        return AsyncNlGenerationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncNlGenerationsWithStreamingResponse:
-        return AsyncNlGenerationsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncNlGenerationsResourceWithStreamingResponse:
+        return AsyncNlGenerationsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -189,7 +193,7 @@ class AsyncNlGenerations(AsyncAPIResource):
         """
         return await self._post(
             "/api/prompts/sql-generations/nl-generations",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "sql_generation": sql_generation,
                     "max_rows": max_rows,
@@ -269,7 +273,7 @@ class AsyncNlGenerations(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "ascend": ascend,
                         "order": order,
@@ -283,8 +287,8 @@ class AsyncNlGenerations(AsyncAPIResource):
         )
 
 
-class NlGenerationsWithRawResponse:
-    def __init__(self, nl_generations: NlGenerations) -> None:
+class NlGenerationsResourceWithRawResponse:
+    def __init__(self, nl_generations: NlGenerationsResource) -> None:
         self._nl_generations = nl_generations
 
         self.create = to_raw_response_wrapper(
@@ -298,8 +302,8 @@ class NlGenerationsWithRawResponse:
         )
 
 
-class AsyncNlGenerationsWithRawResponse:
-    def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+class AsyncNlGenerationsResourceWithRawResponse:
+    def __init__(self, nl_generations: AsyncNlGenerationsResource) -> None:
         self._nl_generations = nl_generations
 
         self.create = async_to_raw_response_wrapper(
@@ -313,8 +317,8 @@ class AsyncNlGenerationsWithRawResponse:
         )
 
 
-class NlGenerationsWithStreamingResponse:
-    def __init__(self, nl_generations: NlGenerations) -> None:
+class NlGenerationsResourceWithStreamingResponse:
+    def __init__(self, nl_generations: NlGenerationsResource) -> None:
         self._nl_generations = nl_generations
 
         self.create = to_streamed_response_wrapper(
@@ -328,8 +332,8 @@ class NlGenerationsWithStreamingResponse:
         )
 
 
-class AsyncNlGenerationsWithStreamingResponse:
-    def __init__(self, nl_generations: AsyncNlGenerations) -> None:
+class AsyncNlGenerationsResourceWithStreamingResponse:
+    def __init__(self, nl_generations: AsyncNlGenerationsResource) -> None:
         self._nl_generations = nl_generations
 
         self.create = async_to_streamed_response_wrapper(

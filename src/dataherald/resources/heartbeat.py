@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -17,17 +17,17 @@ from .._base_client import (
     make_request_options,
 )
 
-__all__ = ["Heartbeat", "AsyncHeartbeat"]
+__all__ = ["HeartbeatResource", "AsyncHeartbeatResource"]
 
 
-class Heartbeat(SyncAPIResource):
+class HeartbeatResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> HeartbeatWithRawResponse:
-        return HeartbeatWithRawResponse(self)
+    def with_raw_response(self) -> HeartbeatResourceWithRawResponse:
+        return HeartbeatResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> HeartbeatWithStreamingResponse:
-        return HeartbeatWithStreamingResponse(self)
+    def with_streaming_response(self) -> HeartbeatResourceWithStreamingResponse:
+        return HeartbeatResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -49,14 +49,14 @@ class Heartbeat(SyncAPIResource):
         )
 
 
-class AsyncHeartbeat(AsyncAPIResource):
+class AsyncHeartbeatResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncHeartbeatWithRawResponse:
-        return AsyncHeartbeatWithRawResponse(self)
+    def with_raw_response(self) -> AsyncHeartbeatResourceWithRawResponse:
+        return AsyncHeartbeatResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncHeartbeatWithStreamingResponse:
-        return AsyncHeartbeatWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncHeartbeatResourceWithStreamingResponse:
+        return AsyncHeartbeatResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -78,8 +78,8 @@ class AsyncHeartbeat(AsyncAPIResource):
         )
 
 
-class HeartbeatWithRawResponse:
-    def __init__(self, heartbeat: Heartbeat) -> None:
+class HeartbeatResourceWithRawResponse:
+    def __init__(self, heartbeat: HeartbeatResource) -> None:
         self._heartbeat = heartbeat
 
         self.retrieve = to_raw_response_wrapper(
@@ -87,8 +87,8 @@ class HeartbeatWithRawResponse:
         )
 
 
-class AsyncHeartbeatWithRawResponse:
-    def __init__(self, heartbeat: AsyncHeartbeat) -> None:
+class AsyncHeartbeatResourceWithRawResponse:
+    def __init__(self, heartbeat: AsyncHeartbeatResource) -> None:
         self._heartbeat = heartbeat
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -96,8 +96,8 @@ class AsyncHeartbeatWithRawResponse:
         )
 
 
-class HeartbeatWithStreamingResponse:
-    def __init__(self, heartbeat: Heartbeat) -> None:
+class HeartbeatResourceWithStreamingResponse:
+    def __init__(self, heartbeat: HeartbeatResource) -> None:
         self._heartbeat = heartbeat
 
         self.retrieve = to_streamed_response_wrapper(
@@ -105,8 +105,8 @@ class HeartbeatWithStreamingResponse:
         )
 
 
-class AsyncHeartbeatWithStreamingResponse:
-    def __init__(self, heartbeat: AsyncHeartbeat) -> None:
+class AsyncHeartbeatResourceWithStreamingResponse:
+    def __init__(self, heartbeat: AsyncHeartbeatResource) -> None:
         self._heartbeat = heartbeat
 
         self.retrieve = async_to_streamed_response_wrapper(
