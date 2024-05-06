@@ -1,33 +1,33 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .prompts import (
-    Prompts,
-    AsyncPrompts,
-    PromptsWithRawResponse,
-    AsyncPromptsWithRawResponse,
-    PromptsWithStreamingResponse,
-    AsyncPromptsWithStreamingResponse,
+    PromptsResource,
+    AsyncPromptsResource,
+    PromptsResourceWithRawResponse,
+    AsyncPromptsResourceWithRawResponse,
+    PromptsResourceWithStreamingResponse,
+    AsyncPromptsResourceWithStreamingResponse,
 )
 from .sql_generations import (
-    SqlGenerations,
-    AsyncSqlGenerations,
-    SqlGenerationsWithRawResponse,
-    AsyncSqlGenerationsWithRawResponse,
-    SqlGenerationsWithStreamingResponse,
-    AsyncSqlGenerationsWithStreamingResponse,
+    SqlGenerationsResource,
+    AsyncSqlGenerationsResource,
+    SqlGenerationsResourceWithRawResponse,
+    AsyncSqlGenerationsResourceWithRawResponse,
+    SqlGenerationsResourceWithStreamingResponse,
+    AsyncSqlGenerationsResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "SqlGenerations",
-    "AsyncSqlGenerations",
-    "SqlGenerationsWithRawResponse",
-    "AsyncSqlGenerationsWithRawResponse",
-    "SqlGenerationsWithStreamingResponse",
-    "AsyncSqlGenerationsWithStreamingResponse",
-    "Prompts",
-    "AsyncPrompts",
-    "PromptsWithRawResponse",
-    "AsyncPromptsWithRawResponse",
-    "PromptsWithStreamingResponse",
-    "AsyncPromptsWithStreamingResponse",
+    "SqlGenerationsResource",
+    "AsyncSqlGenerationsResource",
+    "SqlGenerationsResourceWithRawResponse",
+    "AsyncSqlGenerationsResourceWithRawResponse",
+    "SqlGenerationsResourceWithStreamingResponse",
+    "AsyncSqlGenerationsResourceWithStreamingResponse",
+    "PromptsResource",
+    "AsyncPromptsResource",
+    "PromptsResourceWithRawResponse",
+    "AsyncPromptsResourceWithRawResponse",
+    "PromptsResourceWithStreamingResponse",
+    "AsyncPromptsResourceWithStreamingResponse",
 ]

@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ from respx import MockRouter
 from pydantic import ValidationError
 
 from dataherald import Dataherald, AsyncDataherald, APIResponseValidationError
-from dataherald._client import Dataherald, AsyncDataherald
 from dataherald._models import BaseModel, FinalRequestOptions
 from dataherald._constants import RAW_RESPONSE_HEADER
 from dataherald._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
@@ -87,7 +86,7 @@ class TestDataherald:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 0
+        assert self.client.max_retries == 2
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6
@@ -297,6 +296,16 @@ class TestDataherald:
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
             assert timeout == DEFAULT_TIMEOUT  # our default
+
+    async def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            async with httpx.AsyncClient() as http_client:
+                Dataherald(
+                    base_url=base_url,
+                    api_key=api_key,
+                    _strict_response_validation=True,
+                    http_client=cast(Any, http_client),
+                )
 
     def test_default_headers_option(self) -> None:
         client = Dataherald(
@@ -649,6 +658,12 @@ class TestDataherald:
 
         assert isinstance(exc.value.__cause__, ValidationError)
 
+    def test_client_max_retries_validation(self) -> None:
+        with pytest.raises(TypeError, match=r"max_retries cannot be None"):
+            Dataherald(
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
+            )
+
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
         class Model(BaseModel):
@@ -763,7 +778,7 @@ class TestAsyncDataherald:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 0
+        assert self.client.max_retries == 2
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6
@@ -973,6 +988,16 @@ class TestAsyncDataherald:
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
             assert timeout == DEFAULT_TIMEOUT  # our default
+
+    def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            with httpx.Client() as http_client:
+                AsyncDataherald(
+                    base_url=base_url,
+                    api_key=api_key,
+                    _strict_response_validation=True,
+                    http_client=cast(Any, http_client),
+                )
 
     def test_default_headers_option(self) -> None:
         client = AsyncDataherald(
@@ -1328,6 +1353,12 @@ class TestAsyncDataherald:
             await self.client.get("/foo", cast_to=Model)
 
         assert isinstance(exc.value.__cause__, ValidationError)
+
+    async def test_client_max_retries_validation(self) -> None:
+        with pytest.raises(TypeError, match=r"max_retries cannot be None"):
+            AsyncDataherald(
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
+            )
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio

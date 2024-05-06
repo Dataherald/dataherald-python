@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ class DatabaseConnectionUpdateParams(TypedDict, total=False):
 
     connection_uri: Required[str]
 
-    bigquery_credential_file_content: Union[object, str]
+    bigquery_credential_file_content: Union[str, object]
 
     metadata: object
 
