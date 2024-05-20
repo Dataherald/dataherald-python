@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -6,22 +6,20 @@ from typing import Union
 
 import httpx
 
-from ...types import (
-    DBConnectionResponse,
-    DatabaseConnectionListResponse,
-    database_connection_create_params,
-    database_connection_update_params,
-)
+from ...types import database_connection_create_params, database_connection_update_params
 from .drivers import (
-    Drivers,
-    AsyncDrivers,
-    DriversWithRawResponse,
-    AsyncDriversWithRawResponse,
-    DriversWithStreamingResponse,
-    AsyncDriversWithStreamingResponse,
+    DriversResource,
+    AsyncDriversResource,
+    DriversResourceWithRawResponse,
+    AsyncDriversResourceWithRawResponse,
+    DriversResourceWithStreamingResponse,
+    AsyncDriversResourceWithStreamingResponse,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -33,29 +31,31 @@ from ..._response import (
 from ..._base_client import (
     make_request_options,
 )
+from ...types.db_connection_response import DBConnectionResponse
+from ...types.database_connection_list_response import DatabaseConnectionListResponse
 
-__all__ = ["DatabaseConnections", "AsyncDatabaseConnections"]
+__all__ = ["DatabaseConnectionsResource", "AsyncDatabaseConnectionsResource"]
 
 
-class DatabaseConnections(SyncAPIResource):
+class DatabaseConnectionsResource(SyncAPIResource):
     @cached_property
-    def drivers(self) -> Drivers:
-        return Drivers(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> DatabaseConnectionsWithRawResponse:
-        return DatabaseConnectionsWithRawResponse(self)
+    def drivers(self) -> DriversResource:
+        return DriversResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> DatabaseConnectionsWithStreamingResponse:
-        return DatabaseConnectionsWithStreamingResponse(self)
+    def with_raw_response(self) -> DatabaseConnectionsResourceWithRawResponse:
+        return DatabaseConnectionsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> DatabaseConnectionsResourceWithStreamingResponse:
+        return DatabaseConnectionsResourceWithStreamingResponse(self)
 
     def create(
         self,
         *,
         alias: str,
         connection_uri: str,
-        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        bigquery_credential_file_content: Union[str, object] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -138,7 +138,7 @@ class DatabaseConnections(SyncAPIResource):
         *,
         alias: str,
         connection_uri: str,
-        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        bigquery_credential_file_content: Union[str, object] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -204,25 +204,25 @@ class DatabaseConnections(SyncAPIResource):
         )
 
 
-class AsyncDatabaseConnections(AsyncAPIResource):
+class AsyncDatabaseConnectionsResource(AsyncAPIResource):
     @cached_property
-    def drivers(self) -> AsyncDrivers:
-        return AsyncDrivers(self._client)
+    def drivers(self) -> AsyncDriversResource:
+        return AsyncDriversResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncDatabaseConnectionsWithRawResponse:
-        return AsyncDatabaseConnectionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncDatabaseConnectionsResourceWithRawResponse:
+        return AsyncDatabaseConnectionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncDatabaseConnectionsWithStreamingResponse:
-        return AsyncDatabaseConnectionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncDatabaseConnectionsResourceWithStreamingResponse:
+        return AsyncDatabaseConnectionsResourceWithStreamingResponse(self)
 
     async def create(
         self,
         *,
         alias: str,
         connection_uri: str,
-        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        bigquery_credential_file_content: Union[str, object] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_create_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -248,7 +248,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         """
         return await self._post(
             "/api/database-connections",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
@@ -305,7 +305,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         *,
         alias: str,
         connection_uri: str,
-        bigquery_credential_file_content: Union[object, str] | NotGiven = NOT_GIVEN,
+        bigquery_credential_file_content: Union[str, object] | NotGiven = NOT_GIVEN,
         metadata: object | NotGiven = NOT_GIVEN,
         sqlite_file_path: str | NotGiven = NOT_GIVEN,
         ssh_settings: database_connection_update_params.SSHSettings | NotGiven = NOT_GIVEN,
@@ -333,7 +333,7 @@ class AsyncDatabaseConnections(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._put(
             f"/api/database-connections/{id}",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "alias": alias,
                     "connection_uri": connection_uri,
@@ -371,8 +371,8 @@ class AsyncDatabaseConnections(AsyncAPIResource):
         )
 
 
-class DatabaseConnectionsWithRawResponse:
-    def __init__(self, database_connections: DatabaseConnections) -> None:
+class DatabaseConnectionsResourceWithRawResponse:
+    def __init__(self, database_connections: DatabaseConnectionsResource) -> None:
         self._database_connections = database_connections
 
         self.create = to_raw_response_wrapper(
@@ -389,12 +389,12 @@ class DatabaseConnectionsWithRawResponse:
         )
 
     @cached_property
-    def drivers(self) -> DriversWithRawResponse:
-        return DriversWithRawResponse(self._database_connections.drivers)
+    def drivers(self) -> DriversResourceWithRawResponse:
+        return DriversResourceWithRawResponse(self._database_connections.drivers)
 
 
-class AsyncDatabaseConnectionsWithRawResponse:
-    def __init__(self, database_connections: AsyncDatabaseConnections) -> None:
+class AsyncDatabaseConnectionsResourceWithRawResponse:
+    def __init__(self, database_connections: AsyncDatabaseConnectionsResource) -> None:
         self._database_connections = database_connections
 
         self.create = async_to_raw_response_wrapper(
@@ -411,12 +411,12 @@ class AsyncDatabaseConnectionsWithRawResponse:
         )
 
     @cached_property
-    def drivers(self) -> AsyncDriversWithRawResponse:
-        return AsyncDriversWithRawResponse(self._database_connections.drivers)
+    def drivers(self) -> AsyncDriversResourceWithRawResponse:
+        return AsyncDriversResourceWithRawResponse(self._database_connections.drivers)
 
 
-class DatabaseConnectionsWithStreamingResponse:
-    def __init__(self, database_connections: DatabaseConnections) -> None:
+class DatabaseConnectionsResourceWithStreamingResponse:
+    def __init__(self, database_connections: DatabaseConnectionsResource) -> None:
         self._database_connections = database_connections
 
         self.create = to_streamed_response_wrapper(
@@ -433,12 +433,12 @@ class DatabaseConnectionsWithStreamingResponse:
         )
 
     @cached_property
-    def drivers(self) -> DriversWithStreamingResponse:
-        return DriversWithStreamingResponse(self._database_connections.drivers)
+    def drivers(self) -> DriversResourceWithStreamingResponse:
+        return DriversResourceWithStreamingResponse(self._database_connections.drivers)
 
 
-class AsyncDatabaseConnectionsWithStreamingResponse:
-    def __init__(self, database_connections: AsyncDatabaseConnections) -> None:
+class AsyncDatabaseConnectionsResourceWithStreamingResponse:
+    def __init__(self, database_connections: AsyncDatabaseConnectionsResource) -> None:
         self._database_connections = database_connections
 
         self.create = async_to_streamed_response_wrapper(
@@ -455,5 +455,5 @@ class AsyncDatabaseConnectionsWithStreamingResponse:
         )
 
     @cached_property
-    def drivers(self) -> AsyncDriversWithStreamingResponse:
-        return AsyncDriversWithStreamingResponse(self._database_connections.drivers)
+    def drivers(self) -> AsyncDriversResourceWithStreamingResponse:
+        return AsyncDriversResourceWithStreamingResponse(self._database_connections.drivers)

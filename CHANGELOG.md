@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.20.0 (2024-05-06)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/Dataherald/dataherald-python/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#52](https://github.com/Dataherald/dataherald-python/issues/52)) ([84b46e9](https://github.com/Dataherald/dataherald-python/commit/84b46e9a1aa8046a1b8c909669c746f95ef6c567))
+
 ## 0.19.0 (2024-02-28)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/Dataherald/dataherald-python/compare/v0.18.0...v0.19.0)

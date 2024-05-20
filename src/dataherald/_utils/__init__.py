@@ -6,6 +6,7 @@ from ._utils import (
     is_list as is_list,
     is_given as is_given,
     is_tuple as is_tuple,
+    lru_cache as lru_cache,
     is_mapping as is_mapping,
     is_tuple_t as is_tuple_t,
     parse_date as parse_date,
@@ -44,5 +45,7 @@ from ._streams import consume_sync_iterator as consume_sync_iterator, consume_as
 from ._transform import (
     PropertyInfo as PropertyInfo,
     transform as transform,
+    async_transform as async_transform,
     maybe_transform as maybe_transform,
+    async_maybe_transform as async_maybe_transform,
 )

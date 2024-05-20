@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -16,19 +16,19 @@ from ..._response import (
 from ..._base_client import (
     make_request_options,
 )
-from ...types.shared import InstructionResponse
+from ...types.shared.instruction_response import InstructionResponse
 
-__all__ = ["First", "AsyncFirst"]
+__all__ = ["FirstResource", "AsyncFirstResource"]
 
 
-class First(SyncAPIResource):
+class FirstResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> FirstWithRawResponse:
-        return FirstWithRawResponse(self)
+    def with_raw_response(self) -> FirstResourceWithRawResponse:
+        return FirstResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> FirstWithStreamingResponse:
-        return FirstWithStreamingResponse(self)
+    def with_streaming_response(self) -> FirstResourceWithStreamingResponse:
+        return FirstResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -50,14 +50,14 @@ class First(SyncAPIResource):
         )
 
 
-class AsyncFirst(AsyncAPIResource):
+class AsyncFirstResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncFirstWithRawResponse:
-        return AsyncFirstWithRawResponse(self)
+    def with_raw_response(self) -> AsyncFirstResourceWithRawResponse:
+        return AsyncFirstResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncFirstWithStreamingResponse:
-        return AsyncFirstWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncFirstResourceWithStreamingResponse:
+        return AsyncFirstResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -79,8 +79,8 @@ class AsyncFirst(AsyncAPIResource):
         )
 
 
-class FirstWithRawResponse:
-    def __init__(self, first: First) -> None:
+class FirstResourceWithRawResponse:
+    def __init__(self, first: FirstResource) -> None:
         self._first = first
 
         self.retrieve = to_raw_response_wrapper(
@@ -88,8 +88,8 @@ class FirstWithRawResponse:
         )
 
 
-class AsyncFirstWithRawResponse:
-    def __init__(self, first: AsyncFirst) -> None:
+class AsyncFirstResourceWithRawResponse:
+    def __init__(self, first: AsyncFirstResource) -> None:
         self._first = first
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -97,8 +97,8 @@ class AsyncFirstWithRawResponse:
         )
 
 
-class FirstWithStreamingResponse:
-    def __init__(self, first: First) -> None:
+class FirstResourceWithStreamingResponse:
+    def __init__(self, first: FirstResource) -> None:
         self._first = first
 
         self.retrieve = to_streamed_response_wrapper(
@@ -106,8 +106,8 @@ class FirstWithStreamingResponse:
         )
 
 
-class AsyncFirstWithStreamingResponse:
-    def __init__(self, first: AsyncFirst) -> None:
+class AsyncFirstResourceWithStreamingResponse:
+    def __init__(self, first: AsyncFirstResource) -> None:
         self._first = first
 
         self.retrieve = async_to_streamed_response_wrapper(

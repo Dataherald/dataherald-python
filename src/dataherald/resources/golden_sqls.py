@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -6,14 +6,12 @@ from typing import Iterable
 
 import httpx
 
-from ..types import (
-    GoldenSqlListResponse,
-    GoldenSqlUploadResponse,
-    golden_sql_list_params,
-    golden_sql_upload_params,
-)
+from ..types import golden_sql_list_params, golden_sql_upload_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import maybe_transform
+from .._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -25,19 +23,21 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
-from ..types.shared import GoldenSqlResponse
+from ..types.golden_sql_list_response import GoldenSqlListResponse
+from ..types.golden_sql_upload_response import GoldenSqlUploadResponse
+from ..types.shared.golden_sql_response import GoldenSqlResponse
 
-__all__ = ["GoldenSqls", "AsyncGoldenSqls"]
+__all__ = ["GoldenSqlsResource", "AsyncGoldenSqlsResource"]
 
 
-class GoldenSqls(SyncAPIResource):
+class GoldenSqlsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> GoldenSqlsWithRawResponse:
-        return GoldenSqlsWithRawResponse(self)
+    def with_raw_response(self) -> GoldenSqlsResourceWithRawResponse:
+        return GoldenSqlsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GoldenSqlsWithStreamingResponse:
-        return GoldenSqlsWithStreamingResponse(self)
+    def with_streaming_response(self) -> GoldenSqlsResourceWithStreamingResponse:
+        return GoldenSqlsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -186,14 +186,14 @@ class GoldenSqls(SyncAPIResource):
         )
 
 
-class AsyncGoldenSqls(AsyncAPIResource):
+class AsyncGoldenSqlsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncGoldenSqlsWithRawResponse:
-        return AsyncGoldenSqlsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncGoldenSqlsResourceWithRawResponse:
+        return AsyncGoldenSqlsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGoldenSqlsWithStreamingResponse:
-        return AsyncGoldenSqlsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncGoldenSqlsResourceWithStreamingResponse:
+        return AsyncGoldenSqlsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -262,7 +262,7 @@ class AsyncGoldenSqls(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "ascend": ascend,
                         "db_connection_id": db_connection_id,
@@ -334,7 +334,7 @@ class AsyncGoldenSqls(AsyncAPIResource):
         """
         return await self._post(
             "/api/golden-sqls",
-            body=maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
+            body=await async_maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -342,8 +342,8 @@ class AsyncGoldenSqls(AsyncAPIResource):
         )
 
 
-class GoldenSqlsWithRawResponse:
-    def __init__(self, golden_sqls: GoldenSqls) -> None:
+class GoldenSqlsResourceWithRawResponse:
+    def __init__(self, golden_sqls: GoldenSqlsResource) -> None:
         self._golden_sqls = golden_sqls
 
         self.retrieve = to_raw_response_wrapper(
@@ -360,8 +360,8 @@ class GoldenSqlsWithRawResponse:
         )
 
 
-class AsyncGoldenSqlsWithRawResponse:
-    def __init__(self, golden_sqls: AsyncGoldenSqls) -> None:
+class AsyncGoldenSqlsResourceWithRawResponse:
+    def __init__(self, golden_sqls: AsyncGoldenSqlsResource) -> None:
         self._golden_sqls = golden_sqls
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -378,8 +378,8 @@ class AsyncGoldenSqlsWithRawResponse:
         )
 
 
-class GoldenSqlsWithStreamingResponse:
-    def __init__(self, golden_sqls: GoldenSqls) -> None:
+class GoldenSqlsResourceWithStreamingResponse:
+    def __init__(self, golden_sqls: GoldenSqlsResource) -> None:
         self._golden_sqls = golden_sqls
 
         self.retrieve = to_streamed_response_wrapper(
@@ -396,8 +396,8 @@ class GoldenSqlsWithStreamingResponse:
         )
 
 
-class AsyncGoldenSqlsWithStreamingResponse:
-    def __init__(self, golden_sqls: AsyncGoldenSqls) -> None:
+class AsyncGoldenSqlsResourceWithStreamingResponse:
+    def __init__(self, golden_sqls: AsyncGoldenSqlsResource) -> None:
         self._golden_sqls = golden_sqls
 
         self.retrieve = async_to_streamed_response_wrapper(
