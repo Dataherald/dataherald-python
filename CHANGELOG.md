@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.20.1 (2024-05-20)
+
+Full Changelog: [v0.20.0...v0.20.1](https://github.com/Dataherald/dataherald-python/compare/v0.20.0...v0.20.1)
+
+### Chores
+
+* **internal:** version bump ([#54](https://github.com/Dataherald/dataherald-python/issues/54)) ([762488e](https://github.com/Dataherald/dataherald-python/commit/762488ecc8e55fb18e05b90a7cb353bea9ee6a00))
+
 ## 0.20.0 (2024-05-06)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/Dataherald/dataherald-python/compare/v0.19.0...v0.20.0)
