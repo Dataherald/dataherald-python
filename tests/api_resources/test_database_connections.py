@@ -23,23 +23,23 @@ class TestDatabaseConnections:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         database_connection = client.database_connections.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         database_connection = client.database_connections.create(
-            alias="string",
-            connection_uri="string",
-            bigquery_credential_file_content={},
+            alias="alias",
+            connection_uri="connection_uri",
+            bigquery_credential_file_content="string",
             metadata={},
-            sqlite_file_path="string",
+            sqlite_file_path="sqlite_file_path",
             ssh_settings={
-                "host": "string",
-                "username": "string",
-                "password": "string",
+                "host": "host",
+                "password": "password",
+                "username": "username",
             },
             use_ssh=True,
         )
@@ -48,8 +48,8 @@ class TestDatabaseConnections:
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.database_connections.with_raw_response.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         )
 
         assert response.is_closed is True
@@ -60,8 +60,8 @@ class TestDatabaseConnections:
     @parametrize
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.database_connections.with_streaming_response.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -74,14 +74,14 @@ class TestDatabaseConnections:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         database_connection = client.database_connections.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.database_connections.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -92,7 +92,7 @@ class TestDatabaseConnections:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.database_connections.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -112,25 +112,25 @@ class TestDatabaseConnections:
     @parametrize
     def test_method_update(self, client: Dataherald) -> None:
         database_connection = client.database_connections.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Dataherald) -> None:
         database_connection = client.database_connections.update(
-            "string",
-            alias="string",
-            connection_uri="string",
-            bigquery_credential_file_content={},
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
+            bigquery_credential_file_content="string",
             metadata={},
-            sqlite_file_path="string",
+            sqlite_file_path="sqlite_file_path",
             ssh_settings={
-                "host": "string",
-                "username": "string",
-                "password": "string",
+                "host": "host",
+                "password": "password",
+                "username": "username",
             },
             use_ssh=True,
         )
@@ -139,9 +139,9 @@ class TestDatabaseConnections:
     @parametrize
     def test_raw_response_update(self, client: Dataherald) -> None:
         response = client.database_connections.with_raw_response.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         )
 
         assert response.is_closed is True
@@ -152,9 +152,9 @@ class TestDatabaseConnections:
     @parametrize
     def test_streaming_response_update(self, client: Dataherald) -> None:
         with client.database_connections.with_streaming_response.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -168,9 +168,9 @@ class TestDatabaseConnections:
     def test_path_params_update(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.database_connections.with_raw_response.update(
-                "",
-                alias="string",
-                connection_uri="string",
+                id="",
+                alias="alias",
+                connection_uri="connection_uri",
             )
 
     @parametrize
@@ -205,23 +205,23 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         database_connection = await async_client.database_connections.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         database_connection = await async_client.database_connections.create(
-            alias="string",
-            connection_uri="string",
-            bigquery_credential_file_content={},
+            alias="alias",
+            connection_uri="connection_uri",
+            bigquery_credential_file_content="string",
             metadata={},
-            sqlite_file_path="string",
+            sqlite_file_path="sqlite_file_path",
             ssh_settings={
-                "host": "string",
-                "username": "string",
-                "password": "string",
+                "host": "host",
+                "password": "password",
+                "username": "username",
             },
             use_ssh=True,
         )
@@ -230,8 +230,8 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.database_connections.with_raw_response.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         )
 
         assert response.is_closed is True
@@ -242,8 +242,8 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.database_connections.with_streaming_response.create(
-            alias="string",
-            connection_uri="string",
+            alias="alias",
+            connection_uri="connection_uri",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -256,14 +256,14 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         database_connection = await async_client.database_connections.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.database_connections.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -274,7 +274,7 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.database_connections.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,25 +294,25 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_method_update(self, async_client: AsyncDataherald) -> None:
         database_connection = await async_client.database_connections.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         )
         assert_matches_type(DBConnectionResponse, database_connection, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncDataherald) -> None:
         database_connection = await async_client.database_connections.update(
-            "string",
-            alias="string",
-            connection_uri="string",
-            bigquery_credential_file_content={},
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
+            bigquery_credential_file_content="string",
             metadata={},
-            sqlite_file_path="string",
+            sqlite_file_path="sqlite_file_path",
             ssh_settings={
-                "host": "string",
-                "username": "string",
-                "password": "string",
+                "host": "host",
+                "password": "password",
+                "username": "username",
             },
             use_ssh=True,
         )
@@ -321,9 +321,9 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncDataherald) -> None:
         response = await async_client.database_connections.with_raw_response.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         )
 
         assert response.is_closed is True
@@ -334,9 +334,9 @@ class TestAsyncDatabaseConnections:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncDataherald) -> None:
         async with async_client.database_connections.with_streaming_response.update(
-            "string",
-            alias="string",
-            connection_uri="string",
+            id="id",
+            alias="alias",
+            connection_uri="connection_uri",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -350,9 +350,9 @@ class TestAsyncDatabaseConnections:
     async def test_path_params_update(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.database_connections.with_raw_response.update(
-                "",
-                alias="string",
-                connection_uri="string",
+                id="",
+                alias="alias",
+                connection_uri="connection_uri",
             )
 
     @parametrize

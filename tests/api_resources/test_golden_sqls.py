@@ -24,14 +24,14 @@ class TestGoldenSqls:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         golden_sql = client.golden_sqls.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.golden_sqls.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -42,7 +42,7 @@ class TestGoldenSqls:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.golden_sqls.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -68,8 +68,8 @@ class TestGoldenSqls:
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         golden_sql = client.golden_sqls.list(
             ascend=True,
-            db_connection_id="string",
-            order="string",
+            db_connection_id="db_connection_id",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -98,14 +98,14 @@ class TestGoldenSqls:
     @parametrize
     def test_method_delete(self, client: Dataherald) -> None:
         golden_sql = client.golden_sqls.delete(
-            "string",
+            "id",
         )
         assert_matches_type(object, golden_sql, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Dataherald) -> None:
         response = client.golden_sqls.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -116,7 +116,7 @@ class TestGoldenSqls:
     @parametrize
     def test_streaming_response_delete(self, client: Dataherald) -> None:
         with client.golden_sqls.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -138,19 +138,19 @@ class TestGoldenSqls:
         golden_sql = client.golden_sqls.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         )
@@ -161,19 +161,19 @@ class TestGoldenSqls:
         response = client.golden_sqls.with_raw_response.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         )
@@ -188,19 +188,19 @@ class TestGoldenSqls:
         with client.golden_sqls.with_streaming_response.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         ) as response:
@@ -219,14 +219,14 @@ class TestAsyncGoldenSqls:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         golden_sql = await async_client.golden_sqls.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(GoldenSqlResponse, golden_sql, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.golden_sqls.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -237,7 +237,7 @@ class TestAsyncGoldenSqls:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.golden_sqls.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -263,8 +263,8 @@ class TestAsyncGoldenSqls:
     async def test_method_list_with_all_params(self, async_client: AsyncDataherald) -> None:
         golden_sql = await async_client.golden_sqls.list(
             ascend=True,
-            db_connection_id="string",
-            order="string",
+            db_connection_id="db_connection_id",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -293,14 +293,14 @@ class TestAsyncGoldenSqls:
     @parametrize
     async def test_method_delete(self, async_client: AsyncDataherald) -> None:
         golden_sql = await async_client.golden_sqls.delete(
-            "string",
+            "id",
         )
         assert_matches_type(object, golden_sql, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncDataherald) -> None:
         response = await async_client.golden_sqls.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -311,7 +311,7 @@ class TestAsyncGoldenSqls:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncDataherald) -> None:
         async with async_client.golden_sqls.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -333,19 +333,19 @@ class TestAsyncGoldenSqls:
         golden_sql = await async_client.golden_sqls.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         )
@@ -356,19 +356,19 @@ class TestAsyncGoldenSqls:
         response = await async_client.golden_sqls.with_raw_response.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         )
@@ -383,19 +383,19 @@ class TestAsyncGoldenSqls:
         async with async_client.golden_sqls.with_streaming_response.upload(
             body=[
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
                 {
-                    "db_connection_id": "string",
-                    "prompt_text": "string",
-                    "sql": "string",
+                    "db_connection_id": "db_connection_id",
+                    "prompt_text": "prompt_text",
+                    "sql": "sql",
                 },
             ],
         ) as response:

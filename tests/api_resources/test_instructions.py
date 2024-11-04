@@ -23,15 +23,15 @@ class TestInstructions:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         instruction = client.instructions.create(
-            instruction="string",
+            instruction="instruction",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         instruction = client.instructions.create(
-            instruction="string",
-            db_connection_id="string",
+            instruction="instruction",
+            db_connection_id="db_connection_id",
             metadata={},
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
@@ -39,7 +39,7 @@ class TestInstructions:
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.instructions.with_raw_response.create(
-            instruction="string",
+            instruction="instruction",
         )
 
         assert response.is_closed is True
@@ -50,7 +50,7 @@ class TestInstructions:
     @parametrize
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.instructions.with_streaming_response.create(
-            instruction="string",
+            instruction="instruction",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,14 +63,14 @@ class TestInstructions:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         instruction = client.instructions.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.instructions.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -81,7 +81,7 @@ class TestInstructions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.instructions.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -101,17 +101,17 @@ class TestInstructions:
     @parametrize
     def test_method_update(self, client: Dataherald) -> None:
         instruction = client.instructions.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Dataherald) -> None:
         instruction = client.instructions.update(
-            "string",
-            instruction="string",
-            db_connection_id="string",
+            id="id",
+            instruction="instruction",
+            db_connection_id="db_connection_id",
             metadata={},
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
@@ -119,8 +119,8 @@ class TestInstructions:
     @parametrize
     def test_raw_response_update(self, client: Dataherald) -> None:
         response = client.instructions.with_raw_response.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         )
 
         assert response.is_closed is True
@@ -131,8 +131,8 @@ class TestInstructions:
     @parametrize
     def test_streaming_response_update(self, client: Dataherald) -> None:
         with client.instructions.with_streaming_response.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -146,21 +146,21 @@ class TestInstructions:
     def test_path_params_update(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.instructions.with_raw_response.update(
-                "",
-                instruction="string",
+                id="",
+                instruction="instruction",
             )
 
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
         instruction = client.instructions.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(InstructionListResponse, instruction, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.instructions.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -171,7 +171,7 @@ class TestInstructions:
     @parametrize
     def test_streaming_response_list(self, client: Dataherald) -> None:
         with client.instructions.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -184,14 +184,14 @@ class TestInstructions:
     @parametrize
     def test_method_delete(self, client: Dataherald) -> None:
         instruction = client.instructions.delete(
-            "string",
+            "id",
         )
         assert_matches_type(object, instruction, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Dataherald) -> None:
         response = client.instructions.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -202,7 +202,7 @@ class TestInstructions:
     @parametrize
     def test_streaming_response_delete(self, client: Dataherald) -> None:
         with client.instructions.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -226,15 +226,15 @@ class TestAsyncInstructions:
     @parametrize
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.create(
-            instruction="string",
+            instruction="instruction",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.create(
-            instruction="string",
-            db_connection_id="string",
+            instruction="instruction",
+            db_connection_id="db_connection_id",
             metadata={},
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
@@ -242,7 +242,7 @@ class TestAsyncInstructions:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.instructions.with_raw_response.create(
-            instruction="string",
+            instruction="instruction",
         )
 
         assert response.is_closed is True
@@ -253,7 +253,7 @@ class TestAsyncInstructions:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.instructions.with_streaming_response.create(
-            instruction="string",
+            instruction="instruction",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -266,14 +266,14 @@ class TestAsyncInstructions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.instructions.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -284,7 +284,7 @@ class TestAsyncInstructions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.instructions.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -304,17 +304,17 @@ class TestAsyncInstructions:
     @parametrize
     async def test_method_update(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.update(
-            "string",
-            instruction="string",
-            db_connection_id="string",
+            id="id",
+            instruction="instruction",
+            db_connection_id="db_connection_id",
             metadata={},
         )
         assert_matches_type(InstructionResponse, instruction, path=["response"])
@@ -322,8 +322,8 @@ class TestAsyncInstructions:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncDataherald) -> None:
         response = await async_client.instructions.with_raw_response.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         )
 
         assert response.is_closed is True
@@ -334,8 +334,8 @@ class TestAsyncInstructions:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncDataherald) -> None:
         async with async_client.instructions.with_streaming_response.update(
-            "string",
-            instruction="string",
+            id="id",
+            instruction="instruction",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -349,21 +349,21 @@ class TestAsyncInstructions:
     async def test_path_params_update(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.instructions.with_raw_response.update(
-                "",
-                instruction="string",
+                id="",
+                instruction="instruction",
             )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(InstructionListResponse, instruction, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDataherald) -> None:
         response = await async_client.instructions.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -374,7 +374,7 @@ class TestAsyncInstructions:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDataherald) -> None:
         async with async_client.instructions.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -387,14 +387,14 @@ class TestAsyncInstructions:
     @parametrize
     async def test_method_delete(self, async_client: AsyncDataherald) -> None:
         instruction = await async_client.instructions.delete(
-            "string",
+            "id",
         )
         assert_matches_type(object, instruction, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncDataherald) -> None:
         response = await async_client.instructions.with_raw_response.delete(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -405,7 +405,7 @@ class TestAsyncInstructions:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncDataherald) -> None:
         async with async_client.instructions.with_streaming_response.delete(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
