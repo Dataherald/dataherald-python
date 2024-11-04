@@ -25,8 +25,8 @@ class TestSqlGenerations:
     def test_method_create(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
@@ -35,14 +35,14 @@ class TestSqlGenerations:
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
                 "metadata": {},
             },
             evaluate=True,
-            finetuning_id="string",
+            finetuning_id="finetuning_id",
             metadata={},
-            sql="string",
+            sql="sql",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
@@ -50,8 +50,8 @@ class TestSqlGenerations:
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.sql_generations.with_raw_response.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         )
 
@@ -64,8 +64,8 @@ class TestSqlGenerations:
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.sql_generations.with_streaming_response.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         ) as response:
             assert not response.is_closed
@@ -79,14 +79,14 @@ class TestSqlGenerations:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.sql_generations.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -97,7 +97,7 @@ class TestSqlGenerations:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.sql_generations.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -123,7 +123,7 @@ class TestSqlGenerations:
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.list(
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -152,14 +152,14 @@ class TestSqlGenerations:
     @parametrize
     def test_method_execute(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.execute(
-            "string",
+            id="id",
         )
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
 
     @parametrize
     def test_method_execute_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.sql_generations.execute(
-            "string",
+            id="id",
             max_rows=0,
         )
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
@@ -167,7 +167,7 @@ class TestSqlGenerations:
     @parametrize
     def test_raw_response_execute(self, client: Dataherald) -> None:
         response = client.sql_generations.with_raw_response.execute(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -178,7 +178,7 @@ class TestSqlGenerations:
     @parametrize
     def test_streaming_response_execute(self, client: Dataherald) -> None:
         with client.sql_generations.with_streaming_response.execute(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,7 +192,7 @@ class TestSqlGenerations:
     def test_path_params_execute(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.sql_generations.with_raw_response.execute(
-                "",
+                id="",
             )
 
 
@@ -203,8 +203,8 @@ class TestAsyncSqlGenerations:
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
@@ -213,14 +213,14 @@ class TestAsyncSqlGenerations:
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
                 "metadata": {},
             },
             evaluate=True,
-            finetuning_id="string",
+            finetuning_id="finetuning_id",
             metadata={},
-            sql="string",
+            sql="sql",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
@@ -228,8 +228,8 @@ class TestAsyncSqlGenerations:
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.sql_generations.with_raw_response.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         )
 
@@ -242,8 +242,8 @@ class TestAsyncSqlGenerations:
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.sql_generations.with_streaming_response.create(
             prompt={
-                "text": "string",
-                "db_connection_id": "string",
+                "db_connection_id": "db_connection_id",
+                "text": "text",
             },
         ) as response:
             assert not response.is_closed
@@ -257,14 +257,14 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.sql_generations.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -275,7 +275,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.sql_generations.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -301,7 +301,7 @@ class TestAsyncSqlGenerations:
     async def test_method_list_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.list(
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -330,14 +330,14 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_method_execute(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.execute(
-            "string",
+            id="id",
         )
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
 
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.sql_generations.execute(
-            "string",
+            id="id",
             max_rows=0,
         )
         assert_matches_type(SqlGenerationExecuteResponse, sql_generation, path=["response"])
@@ -345,7 +345,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncDataherald) -> None:
         response = await async_client.sql_generations.with_raw_response.execute(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -356,7 +356,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncDataherald) -> None:
         async with async_client.sql_generations.with_streaming_response.execute(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -370,5 +370,5 @@ class TestAsyncSqlGenerations:
     async def test_path_params_execute(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.sql_generations.with_raw_response.execute(
-                "",
+                id="",
             )

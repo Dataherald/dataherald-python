@@ -26,9 +26,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.instruction_list_response import InstructionListResponse
 from ...types.shared.instruction_response import InstructionResponse
 
@@ -42,10 +40,21 @@ class InstructionsResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> InstructionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return InstructionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> InstructionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return InstructionsResourceWithStreamingResponse(self)
 
     def create(
@@ -244,10 +253,21 @@ class AsyncInstructionsResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncInstructionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncInstructionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncInstructionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncInstructionsResourceWithStreamingResponse(self)
 
     async def create(

@@ -20,26 +20,26 @@ class TestSqlGenerations:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.create(
-            "string",
+            id="id",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.create(
-            "string",
+            id="id",
             evaluate=True,
-            finetuning_id="string",
+            finetuning_id="finetuning_id",
             low_latency_mode=True,
             metadata={},
-            sql="string",
+            sql="sql",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.prompts.sql_generations.with_raw_response.create(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -50,7 +50,7 @@ class TestSqlGenerations:
     @parametrize
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.prompts.sql_generations.with_streaming_response.create(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -64,22 +64,22 @@ class TestSqlGenerations:
     def test_path_params_create(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.prompts.sql_generations.with_raw_response.create(
-                "",
+                id="",
             )
 
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.retrieve(
-            "string",
+            id="id",
         )
         assert_matches_type(object, sql_generation, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.retrieve(
-            "string",
+            id="id",
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -88,7 +88,7 @@ class TestSqlGenerations:
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.prompts.sql_generations.with_raw_response.retrieve(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -99,7 +99,7 @@ class TestSqlGenerations:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.prompts.sql_generations.with_streaming_response.retrieve(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -113,13 +113,13 @@ class TestSqlGenerations:
     def test_path_params_retrieve(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.prompts.sql_generations.with_raw_response.retrieve(
-                "",
+                id="",
             )
 
     @parametrize
     def test_method_nl_generations(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         )
         assert_matches_type(NlGenerationResponse, sql_generation, path=["response"])
@@ -127,13 +127,13 @@ class TestSqlGenerations:
     @parametrize
     def test_method_nl_generations_with_all_params(self, client: Dataherald) -> None:
         sql_generation = client.prompts.sql_generations.nl_generations(
-            "string",
+            id="id",
             sql_generation={
-                "finetuning_id": "string",
-                "low_latency_mode": True,
                 "evaluate": True,
-                "sql": "string",
+                "finetuning_id": "finetuning_id",
+                "low_latency_mode": True,
                 "metadata": {},
+                "sql": "sql",
             },
             max_rows=0,
             metadata={},
@@ -143,7 +143,7 @@ class TestSqlGenerations:
     @parametrize
     def test_raw_response_nl_generations(self, client: Dataherald) -> None:
         response = client.prompts.sql_generations.with_raw_response.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         )
 
@@ -155,7 +155,7 @@ class TestSqlGenerations:
     @parametrize
     def test_streaming_response_nl_generations(self, client: Dataherald) -> None:
         with client.prompts.sql_generations.with_streaming_response.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         ) as response:
             assert not response.is_closed
@@ -170,7 +170,7 @@ class TestSqlGenerations:
     def test_path_params_nl_generations(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.prompts.sql_generations.with_raw_response.nl_generations(
-                "",
+                id="",
                 sql_generation={},
             )
 
@@ -181,26 +181,26 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.create(
-            "string",
+            id="id",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.create(
-            "string",
+            id="id",
             evaluate=True,
-            finetuning_id="string",
+            finetuning_id="finetuning_id",
             low_latency_mode=True,
             metadata={},
-            sql="string",
+            sql="sql",
         )
         assert_matches_type(SqlGenerationResponse, sql_generation, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.prompts.sql_generations.with_raw_response.create(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -211,7 +211,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.prompts.sql_generations.with_streaming_response.create(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -225,22 +225,22 @@ class TestAsyncSqlGenerations:
     async def test_path_params_create(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.prompts.sql_generations.with_raw_response.create(
-                "",
+                id="",
             )
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.retrieve(
-            "string",
+            id="id",
         )
         assert_matches_type(object, sql_generation, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.retrieve(
-            "string",
+            id="id",
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -249,7 +249,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.prompts.sql_generations.with_raw_response.retrieve(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -260,7 +260,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.prompts.sql_generations.with_streaming_response.retrieve(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -274,13 +274,13 @@ class TestAsyncSqlGenerations:
     async def test_path_params_retrieve(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.prompts.sql_generations.with_raw_response.retrieve(
-                "",
+                id="",
             )
 
     @parametrize
     async def test_method_nl_generations(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         )
         assert_matches_type(NlGenerationResponse, sql_generation, path=["response"])
@@ -288,13 +288,13 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_method_nl_generations_with_all_params(self, async_client: AsyncDataherald) -> None:
         sql_generation = await async_client.prompts.sql_generations.nl_generations(
-            "string",
+            id="id",
             sql_generation={
-                "finetuning_id": "string",
-                "low_latency_mode": True,
                 "evaluate": True,
-                "sql": "string",
+                "finetuning_id": "finetuning_id",
+                "low_latency_mode": True,
                 "metadata": {},
+                "sql": "sql",
             },
             max_rows=0,
             metadata={},
@@ -304,7 +304,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_raw_response_nl_generations(self, async_client: AsyncDataherald) -> None:
         response = await async_client.prompts.sql_generations.with_raw_response.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         )
 
@@ -316,7 +316,7 @@ class TestAsyncSqlGenerations:
     @parametrize
     async def test_streaming_response_nl_generations(self, async_client: AsyncDataherald) -> None:
         async with async_client.prompts.sql_generations.with_streaming_response.nl_generations(
-            "string",
+            id="id",
             sql_generation={},
         ) as response:
             assert not response.is_closed
@@ -331,6 +331,6 @@ class TestAsyncSqlGenerations:
     async def test_path_params_nl_generations(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.prompts.sql_generations.with_raw_response.nl_generations(
-                "",
+                id="",
                 sql_generation={},
             )

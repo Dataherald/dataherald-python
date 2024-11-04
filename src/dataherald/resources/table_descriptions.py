@@ -24,9 +24,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.table_description_response import TableDescriptionResponse
 from ..types.table_description_list_response import TableDescriptionListResponse
 from ..types.table_description_sync_schemas_response import TableDescriptionSyncSchemasResponse
@@ -37,10 +35,21 @@ __all__ = ["TableDescriptionsResource", "AsyncTableDescriptionsResource"]
 class TableDescriptionsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TableDescriptionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return TableDescriptionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> TableDescriptionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return TableDescriptionsResourceWithStreamingResponse(self)
 
     def retrieve(
@@ -189,7 +198,7 @@ class TableDescriptionsResource(SyncAPIResource):
         """
         return self._post(
             "/api/table-descriptions/sync-schemas",
-            body=maybe_transform(body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams),
+            body=maybe_transform(body, Iterable[table_description_sync_schemas_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -200,10 +209,21 @@ class TableDescriptionsResource(SyncAPIResource):
 class AsyncTableDescriptionsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncTableDescriptionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncTableDescriptionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncTableDescriptionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncTableDescriptionsResourceWithStreamingResponse(self)
 
     async def retrieve(
@@ -352,9 +372,7 @@ class AsyncTableDescriptionsResource(AsyncAPIResource):
         """
         return await self._post(
             "/api/table-descriptions/sync-schemas",
-            body=await async_maybe_transform(
-                body, table_description_sync_schemas_params.TableDescriptionSyncSchemasParams
-            ),
+            body=await async_maybe_transform(body, Iterable[table_description_sync_schemas_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

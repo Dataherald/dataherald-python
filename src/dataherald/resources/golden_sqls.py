@@ -20,9 +20,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.golden_sql_list_response import GoldenSqlListResponse
 from ..types.golden_sql_upload_response import GoldenSqlUploadResponse
 from ..types.shared.golden_sql_response import GoldenSqlResponse
@@ -33,10 +31,21 @@ __all__ = ["GoldenSqlsResource", "AsyncGoldenSqlsResource"]
 class GoldenSqlsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> GoldenSqlsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return GoldenSqlsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> GoldenSqlsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return GoldenSqlsResourceWithStreamingResponse(self)
 
     def retrieve(
@@ -178,7 +187,7 @@ class GoldenSqlsResource(SyncAPIResource):
         """
         return self._post(
             "/api/golden-sqls",
-            body=maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
+            body=maybe_transform(body, Iterable[golden_sql_upload_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -189,10 +198,21 @@ class GoldenSqlsResource(SyncAPIResource):
 class AsyncGoldenSqlsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncGoldenSqlsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncGoldenSqlsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncGoldenSqlsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncGoldenSqlsResourceWithStreamingResponse(self)
 
     async def retrieve(
@@ -334,7 +354,7 @@ class AsyncGoldenSqlsResource(AsyncAPIResource):
         """
         return await self._post(
             "/api/golden-sqls",
-            body=await async_maybe_transform(body, golden_sql_upload_params.GoldenSqlUploadParams),
+            body=await async_maybe_transform(body, Iterable[golden_sql_upload_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

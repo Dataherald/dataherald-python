@@ -13,9 +13,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.shared.instruction_response import InstructionResponse
 
 __all__ = ["FirstResource", "AsyncFirstResource"]
@@ -24,10 +22,21 @@ __all__ = ["FirstResource", "AsyncFirstResource"]
 class FirstResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FirstResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return FirstResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> FirstResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return FirstResourceWithStreamingResponse(self)
 
     def retrieve(
@@ -53,10 +62,21 @@ class FirstResource(SyncAPIResource):
 class AsyncFirstResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncFirstResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncFirstResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncFirstResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncFirstResourceWithStreamingResponse(self)
 
     async def retrieve(

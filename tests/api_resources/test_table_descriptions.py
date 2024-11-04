@@ -24,14 +24,14 @@ class TestTableDescriptions:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.table_descriptions.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -42,7 +42,7 @@ class TestTableDescriptions:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.table_descriptions.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -62,44 +62,44 @@ class TestTableDescriptions:
     @parametrize
     def test_method_update(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.update(
-            "string",
+            id="id",
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.update(
-            "string",
+            id="id",
             columns=[
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
             ],
-            description="string",
+            description="description",
             examples=[{}, {}, {}],
             metadata={},
         )
@@ -108,7 +108,7 @@ class TestTableDescriptions:
     @parametrize
     def test_raw_response_update(self, client: Dataherald) -> None:
         response = client.table_descriptions.with_raw_response.update(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -119,7 +119,7 @@ class TestTableDescriptions:
     @parametrize
     def test_streaming_response_update(self, client: Dataherald) -> None:
         with client.table_descriptions.with_streaming_response.update(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -133,28 +133,28 @@ class TestTableDescriptions:
     def test_path_params_update(self, client: Dataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.table_descriptions.with_raw_response.update(
-                "",
+                id="",
             )
 
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.list(
-            db_connection_id="string",
-            table_name="string",
+            db_connection_id="db_connection_id",
+            table_name="table_name",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.table_descriptions.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -165,7 +165,7 @@ class TestTableDescriptions:
     @parametrize
     def test_streaming_response_list(self, client: Dataherald) -> None:
         with client.table_descriptions.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -178,14 +178,22 @@ class TestTableDescriptions:
     @parametrize
     def test_method_sync_schemas(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         )
         assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_sync_schemas(self, client: Dataherald) -> None:
         response = client.table_descriptions.with_raw_response.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         )
 
         assert response.is_closed is True
@@ -196,7 +204,11 @@ class TestTableDescriptions:
     @parametrize
     def test_streaming_response_sync_schemas(self, client: Dataherald) -> None:
         with client.table_descriptions.with_streaming_response.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -213,14 +225,14 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.table_descriptions.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -231,7 +243,7 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.table_descriptions.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -251,44 +263,44 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_method_update(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.update(
-            "string",
+            id="id",
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.update(
-            "string",
+            id="id",
             columns=[
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
                 {
-                    "name": "string",
-                    "description": "string",
-                    "is_primary_key": True,
-                    "data_type": "string",
-                    "low_cardinality": True,
                     "categories": ["string", "string", "string"],
+                    "data_type": "data_type",
+                    "description": "description",
                     "foreign_key": {},
+                    "is_primary_key": True,
+                    "low_cardinality": True,
+                    "name": "name",
                 },
             ],
-            description="string",
+            description="description",
             examples=[{}, {}, {}],
             metadata={},
         )
@@ -297,7 +309,7 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncDataherald) -> None:
         response = await async_client.table_descriptions.with_raw_response.update(
-            "string",
+            id="id",
         )
 
         assert response.is_closed is True
@@ -308,7 +320,7 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncDataherald) -> None:
         async with async_client.table_descriptions.with_streaming_response.update(
-            "string",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -322,28 +334,28 @@ class TestAsyncTableDescriptions:
     async def test_path_params_update(self, async_client: AsyncDataherald) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.table_descriptions.with_raw_response.update(
-                "",
+                id="",
             )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.list(
-            db_connection_id="string",
-            table_name="string",
+            db_connection_id="db_connection_id",
+            table_name="table_name",
         )
         assert_matches_type(TableDescriptionListResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDataherald) -> None:
         response = await async_client.table_descriptions.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -354,7 +366,7 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDataherald) -> None:
         async with async_client.table_descriptions.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -367,14 +379,22 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_method_sync_schemas(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         )
         assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_sync_schemas(self, async_client: AsyncDataherald) -> None:
         response = await async_client.table_descriptions.with_raw_response.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         )
 
         assert response.is_closed is True
@@ -385,7 +405,11 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_streaming_response_sync_schemas(self, async_client: AsyncDataherald) -> None:
         async with async_client.table_descriptions.with_streaming_response.sync_schemas(
-            body=[{"db_connection_id": "string"}, {"db_connection_id": "string"}, {"db_connection_id": "string"}],
+            body=[
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+                {"db_connection_id": "db_connection_id"},
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

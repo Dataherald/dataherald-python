@@ -18,9 +18,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from .sql_generations import (
     SqlGenerationsResource,
     AsyncSqlGenerationsResource,
@@ -42,10 +40,21 @@ class PromptsResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> PromptsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return PromptsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> PromptsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return PromptsResourceWithStreamingResponse(self)
 
     def create(
@@ -176,10 +185,21 @@ class AsyncPromptsResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncPromptsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncPromptsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncPromptsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncPromptsResourceWithStreamingResponse(self)
 
     async def create(
