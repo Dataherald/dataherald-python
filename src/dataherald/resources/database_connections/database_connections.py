@@ -28,9 +28,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.db_connection_response import DBConnectionResponse
 from ...types.database_connection_list_response import DatabaseConnectionListResponse
 
@@ -44,10 +42,21 @@ class DatabaseConnectionsResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> DatabaseConnectionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return DatabaseConnectionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DatabaseConnectionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return DatabaseConnectionsResourceWithStreamingResponse(self)
 
     def create(
@@ -211,10 +220,21 @@ class AsyncDatabaseConnectionsResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncDatabaseConnectionsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncDatabaseConnectionsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDatabaseConnectionsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncDatabaseConnectionsResourceWithStreamingResponse(self)
 
     async def create(

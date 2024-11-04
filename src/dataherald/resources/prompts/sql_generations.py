@@ -17,9 +17,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.prompts import (
     sql_generation_create_params,
     sql_generation_retrieve_params,
@@ -34,10 +32,21 @@ __all__ = ["SqlGenerationsResource", "AsyncSqlGenerationsResource"]
 class SqlGenerationsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> SqlGenerationsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return SqlGenerationsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> SqlGenerationsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return SqlGenerationsResourceWithStreamingResponse(self)
 
     def create(
@@ -185,10 +194,21 @@ class SqlGenerationsResource(SyncAPIResource):
 class AsyncSqlGenerationsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncSqlGenerationsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#accessing-raw-response-data-eg-headers
+        """
         return AsyncSqlGenerationsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncSqlGenerationsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/Dataherald/dataherald-python#with_streaming_response
+        """
         return AsyncSqlGenerationsResourceWithStreamingResponse(self)
 
     async def create(

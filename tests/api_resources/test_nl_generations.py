@@ -23,8 +23,8 @@ class TestNlGenerations:
         nl_generation = client.nl_generations.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         )
@@ -34,15 +34,15 @@ class TestNlGenerations:
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         nl_generation = client.nl_generations.create(
             sql_generation={
-                "finetuning_id": "string",
-                "evaluate": True,
-                "sql": "string",
-                "metadata": {},
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                     "metadata": {},
                 },
+                "evaluate": True,
+                "finetuning_id": "finetuning_id",
+                "metadata": {},
+                "sql": "sql",
             },
             max_rows=0,
             metadata={},
@@ -54,8 +54,8 @@ class TestNlGenerations:
         response = client.nl_generations.with_raw_response.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         )
@@ -70,8 +70,8 @@ class TestNlGenerations:
         with client.nl_generations.with_streaming_response.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         ) as response:
@@ -86,14 +86,14 @@ class TestNlGenerations:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         nl_generation = client.nl_generations.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.nl_generations.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -104,7 +104,7 @@ class TestNlGenerations:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.nl_generations.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -130,7 +130,7 @@ class TestNlGenerations:
     def test_method_list_with_all_params(self, client: Dataherald) -> None:
         nl_generation = client.nl_generations.list(
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
@@ -165,8 +165,8 @@ class TestAsyncNlGenerations:
         nl_generation = await async_client.nl_generations.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         )
@@ -176,15 +176,15 @@ class TestAsyncNlGenerations:
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         nl_generation = await async_client.nl_generations.create(
             sql_generation={
-                "finetuning_id": "string",
-                "evaluate": True,
-                "sql": "string",
-                "metadata": {},
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                     "metadata": {},
                 },
+                "evaluate": True,
+                "finetuning_id": "finetuning_id",
+                "metadata": {},
+                "sql": "sql",
             },
             max_rows=0,
             metadata={},
@@ -196,8 +196,8 @@ class TestAsyncNlGenerations:
         response = await async_client.nl_generations.with_raw_response.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         )
@@ -212,8 +212,8 @@ class TestAsyncNlGenerations:
         async with async_client.nl_generations.with_streaming_response.create(
             sql_generation={
                 "prompt": {
-                    "text": "string",
-                    "db_connection_id": "string",
+                    "db_connection_id": "db_connection_id",
+                    "text": "text",
                 }
             },
         ) as response:
@@ -228,14 +228,14 @@ class TestAsyncNlGenerations:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         nl_generation = await async_client.nl_generations.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(NlGenerationResponse, nl_generation, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.nl_generations.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -246,7 +246,7 @@ class TestAsyncNlGenerations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.nl_generations.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -272,7 +272,7 @@ class TestAsyncNlGenerations:
     async def test_method_list_with_all_params(self, async_client: AsyncDataherald) -> None:
         nl_generation = await async_client.nl_generations.list(
             ascend=True,
-            order="string",
+            order="order",
             page=0,
             page_size=0,
         )
