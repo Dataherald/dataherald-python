@@ -141,17 +141,7 @@ class TestGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         )
         assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
@@ -164,17 +154,7 @@ class TestGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         )
 
@@ -191,17 +171,7 @@ class TestGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed
@@ -336,17 +306,7 @@ class TestAsyncGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         )
         assert_matches_type(GoldenSqlUploadResponse, golden_sql, path=["response"])
@@ -359,17 +319,7 @@ class TestAsyncGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         )
 
@@ -386,17 +336,7 @@ class TestAsyncGoldenSqls:
                     "db_connection_id": "db_connection_id",
                     "prompt_text": "prompt_text",
                     "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
-                {
-                    "db_connection_id": "db_connection_id",
-                    "prompt_text": "prompt_text",
-                    "sql": "sql",
-                },
+                }
             ],
         ) as response:
             assert not response.is_closed

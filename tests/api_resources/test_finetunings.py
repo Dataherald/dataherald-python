@@ -39,7 +39,7 @@ class TestFinetunings:
                 "model_provider": "model_provider",
             },
             db_connection_id="db_connection_id",
-            golden_sqls=["string", "string", "string"],
+            golden_sqls=["string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -202,7 +202,7 @@ class TestAsyncFinetunings:
                 "model_provider": "model_provider",
             },
             db_connection_id="db_connection_id",
-            golden_sqls=["string", "string", "string"],
+            golden_sqls=["string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
