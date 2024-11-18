@@ -72,35 +72,17 @@ class TestTableDescriptions:
             id="id",
             columns=[
                 {
-                    "categories": ["string", "string", "string"],
+                    "categories": ["string"],
                     "data_type": "data_type",
                     "description": "description",
                     "foreign_key": {},
                     "is_primary_key": True,
                     "low_cardinality": True,
                     "name": "name",
-                },
-                {
-                    "categories": ["string", "string", "string"],
-                    "data_type": "data_type",
-                    "description": "description",
-                    "foreign_key": {},
-                    "is_primary_key": True,
-                    "low_cardinality": True,
-                    "name": "name",
-                },
-                {
-                    "categories": ["string", "string", "string"],
-                    "data_type": "data_type",
-                    "description": "description",
-                    "foreign_key": {},
-                    "is_primary_key": True,
-                    "low_cardinality": True,
-                    "name": "name",
-                },
+                }
             ],
             description="description",
-            examples=[{}, {}, {}],
+            examples=[{}],
             metadata={},
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
@@ -178,22 +160,14 @@ class TestTableDescriptions:
     @parametrize
     def test_method_sync_schemas(self, client: Dataherald) -> None:
         table_description = client.table_descriptions.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         )
         assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     def test_raw_response_sync_schemas(self, client: Dataherald) -> None:
         response = client.table_descriptions.with_raw_response.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         )
 
         assert response.is_closed is True
@@ -204,11 +178,7 @@ class TestTableDescriptions:
     @parametrize
     def test_streaming_response_sync_schemas(self, client: Dataherald) -> None:
         with client.table_descriptions.with_streaming_response.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -273,35 +243,17 @@ class TestAsyncTableDescriptions:
             id="id",
             columns=[
                 {
-                    "categories": ["string", "string", "string"],
+                    "categories": ["string"],
                     "data_type": "data_type",
                     "description": "description",
                     "foreign_key": {},
                     "is_primary_key": True,
                     "low_cardinality": True,
                     "name": "name",
-                },
-                {
-                    "categories": ["string", "string", "string"],
-                    "data_type": "data_type",
-                    "description": "description",
-                    "foreign_key": {},
-                    "is_primary_key": True,
-                    "low_cardinality": True,
-                    "name": "name",
-                },
-                {
-                    "categories": ["string", "string", "string"],
-                    "data_type": "data_type",
-                    "description": "description",
-                    "foreign_key": {},
-                    "is_primary_key": True,
-                    "low_cardinality": True,
-                    "name": "name",
-                },
+                }
             ],
             description="description",
-            examples=[{}, {}, {}],
+            examples=[{}],
             metadata={},
         )
         assert_matches_type(TableDescriptionResponse, table_description, path=["response"])
@@ -379,22 +331,14 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_method_sync_schemas(self, async_client: AsyncDataherald) -> None:
         table_description = await async_client.table_descriptions.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         )
         assert_matches_type(TableDescriptionSyncSchemasResponse, table_description, path=["response"])
 
     @parametrize
     async def test_raw_response_sync_schemas(self, async_client: AsyncDataherald) -> None:
         response = await async_client.table_descriptions.with_raw_response.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         )
 
         assert response.is_closed is True
@@ -405,11 +349,7 @@ class TestAsyncTableDescriptions:
     @parametrize
     async def test_streaming_response_sync_schemas(self, async_client: AsyncDataherald) -> None:
         async with async_client.table_descriptions.with_streaming_response.sync_schemas(
-            body=[
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-                {"db_connection_id": "db_connection_id"},
-            ],
+            body=[{"db_connection_id": "db_connection_id"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
