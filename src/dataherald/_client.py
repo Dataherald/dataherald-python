@@ -8,7 +8,7 @@ from typing_extensions import Self, Literal, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,6 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
+from .resources import engine, heartbeat, finetunings, generations, golden_sqls, nl_generations, table_descriptions
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, DataheraldError
 from ._base_client import (
@@ -31,6 +32,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.prompts import prompts
+from .resources.instructions import instructions
+from .resources.sql_generations import sql_generations
+from .resources.database_connections import database_connections
 
 __all__ = [
     "ENVIRONMENTS",
@@ -38,7 +43,6 @@ __all__ = [
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "resources",
     "Dataherald",
     "AsyncDataherald",
     "Client",
@@ -52,17 +56,17 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Dataherald(SyncAPIClient):
-    database_connections: resources.DatabaseConnectionsResource
-    finetunings: resources.FinetuningsResource
-    golden_sqls: resources.GoldenSqlsResource
-    instructions: resources.InstructionsResource
-    generations: resources.GenerationsResource
-    prompts: resources.PromptsResource
-    sql_generations: resources.SqlGenerationsResource
-    nl_generations: resources.NlGenerationsResource
-    table_descriptions: resources.TableDescriptionsResource
-    heartbeat: resources.HeartbeatResource
-    engine: resources.EngineResource
+    database_connections: database_connections.DatabaseConnectionsResource
+    finetunings: finetunings.FinetuningsResource
+    golden_sqls: golden_sqls.GoldenSqlsResource
+    instructions: instructions.InstructionsResource
+    generations: generations.GenerationsResource
+    prompts: prompts.PromptsResource
+    sql_generations: sql_generations.SqlGenerationsResource
+    nl_generations: nl_generations.NlGenerationsResource
+    table_descriptions: table_descriptions.TableDescriptionsResource
+    heartbeat: heartbeat.HeartbeatResource
+    engine: engine.EngineResource
     with_raw_response: DataheraldWithRawResponse
     with_streaming_response: DataheraldWithStreamedResponse
 
@@ -144,17 +148,17 @@ class Dataherald(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.database_connections = resources.DatabaseConnectionsResource(self)
-        self.finetunings = resources.FinetuningsResource(self)
-        self.golden_sqls = resources.GoldenSqlsResource(self)
-        self.instructions = resources.InstructionsResource(self)
-        self.generations = resources.GenerationsResource(self)
-        self.prompts = resources.PromptsResource(self)
-        self.sql_generations = resources.SqlGenerationsResource(self)
-        self.nl_generations = resources.NlGenerationsResource(self)
-        self.table_descriptions = resources.TableDescriptionsResource(self)
-        self.heartbeat = resources.HeartbeatResource(self)
-        self.engine = resources.EngineResource(self)
+        self.database_connections = database_connections.DatabaseConnectionsResource(self)
+        self.finetunings = finetunings.FinetuningsResource(self)
+        self.golden_sqls = golden_sqls.GoldenSqlsResource(self)
+        self.instructions = instructions.InstructionsResource(self)
+        self.generations = generations.GenerationsResource(self)
+        self.prompts = prompts.PromptsResource(self)
+        self.sql_generations = sql_generations.SqlGenerationsResource(self)
+        self.nl_generations = nl_generations.NlGenerationsResource(self)
+        self.table_descriptions = table_descriptions.TableDescriptionsResource(self)
+        self.heartbeat = heartbeat.HeartbeatResource(self)
+        self.engine = engine.EngineResource(self)
         self.with_raw_response = DataheraldWithRawResponse(self)
         self.with_streaming_response = DataheraldWithStreamedResponse(self)
 
@@ -266,17 +270,17 @@ class Dataherald(SyncAPIClient):
 
 
 class AsyncDataherald(AsyncAPIClient):
-    database_connections: resources.AsyncDatabaseConnectionsResource
-    finetunings: resources.AsyncFinetuningsResource
-    golden_sqls: resources.AsyncGoldenSqlsResource
-    instructions: resources.AsyncInstructionsResource
-    generations: resources.AsyncGenerationsResource
-    prompts: resources.AsyncPromptsResource
-    sql_generations: resources.AsyncSqlGenerationsResource
-    nl_generations: resources.AsyncNlGenerationsResource
-    table_descriptions: resources.AsyncTableDescriptionsResource
-    heartbeat: resources.AsyncHeartbeatResource
-    engine: resources.AsyncEngineResource
+    database_connections: database_connections.AsyncDatabaseConnectionsResource
+    finetunings: finetunings.AsyncFinetuningsResource
+    golden_sqls: golden_sqls.AsyncGoldenSqlsResource
+    instructions: instructions.AsyncInstructionsResource
+    generations: generations.AsyncGenerationsResource
+    prompts: prompts.AsyncPromptsResource
+    sql_generations: sql_generations.AsyncSqlGenerationsResource
+    nl_generations: nl_generations.AsyncNlGenerationsResource
+    table_descriptions: table_descriptions.AsyncTableDescriptionsResource
+    heartbeat: heartbeat.AsyncHeartbeatResource
+    engine: engine.AsyncEngineResource
     with_raw_response: AsyncDataheraldWithRawResponse
     with_streaming_response: AsyncDataheraldWithStreamedResponse
 
@@ -358,17 +362,17 @@ class AsyncDataherald(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.database_connections = resources.AsyncDatabaseConnectionsResource(self)
-        self.finetunings = resources.AsyncFinetuningsResource(self)
-        self.golden_sqls = resources.AsyncGoldenSqlsResource(self)
-        self.instructions = resources.AsyncInstructionsResource(self)
-        self.generations = resources.AsyncGenerationsResource(self)
-        self.prompts = resources.AsyncPromptsResource(self)
-        self.sql_generations = resources.AsyncSqlGenerationsResource(self)
-        self.nl_generations = resources.AsyncNlGenerationsResource(self)
-        self.table_descriptions = resources.AsyncTableDescriptionsResource(self)
-        self.heartbeat = resources.AsyncHeartbeatResource(self)
-        self.engine = resources.AsyncEngineResource(self)
+        self.database_connections = database_connections.AsyncDatabaseConnectionsResource(self)
+        self.finetunings = finetunings.AsyncFinetuningsResource(self)
+        self.golden_sqls = golden_sqls.AsyncGoldenSqlsResource(self)
+        self.instructions = instructions.AsyncInstructionsResource(self)
+        self.generations = generations.AsyncGenerationsResource(self)
+        self.prompts = prompts.AsyncPromptsResource(self)
+        self.sql_generations = sql_generations.AsyncSqlGenerationsResource(self)
+        self.nl_generations = nl_generations.AsyncNlGenerationsResource(self)
+        self.table_descriptions = table_descriptions.AsyncTableDescriptionsResource(self)
+        self.heartbeat = heartbeat.AsyncHeartbeatResource(self)
+        self.engine = engine.AsyncEngineResource(self)
         self.with_raw_response = AsyncDataheraldWithRawResponse(self)
         self.with_streaming_response = AsyncDataheraldWithStreamedResponse(self)
 
@@ -481,70 +485,76 @@ class AsyncDataherald(AsyncAPIClient):
 
 class DataheraldWithRawResponse:
     def __init__(self, client: Dataherald) -> None:
-        self.database_connections = resources.DatabaseConnectionsResourceWithRawResponse(client.database_connections)
-        self.finetunings = resources.FinetuningsResourceWithRawResponse(client.finetunings)
-        self.golden_sqls = resources.GoldenSqlsResourceWithRawResponse(client.golden_sqls)
-        self.instructions = resources.InstructionsResourceWithRawResponse(client.instructions)
-        self.generations = resources.GenerationsResourceWithRawResponse(client.generations)
-        self.prompts = resources.PromptsResourceWithRawResponse(client.prompts)
-        self.sql_generations = resources.SqlGenerationsResourceWithRawResponse(client.sql_generations)
-        self.nl_generations = resources.NlGenerationsResourceWithRawResponse(client.nl_generations)
-        self.table_descriptions = resources.TableDescriptionsResourceWithRawResponse(client.table_descriptions)
-        self.heartbeat = resources.HeartbeatResourceWithRawResponse(client.heartbeat)
-        self.engine = resources.EngineResourceWithRawResponse(client.engine)
+        self.database_connections = database_connections.DatabaseConnectionsResourceWithRawResponse(
+            client.database_connections
+        )
+        self.finetunings = finetunings.FinetuningsResourceWithRawResponse(client.finetunings)
+        self.golden_sqls = golden_sqls.GoldenSqlsResourceWithRawResponse(client.golden_sqls)
+        self.instructions = instructions.InstructionsResourceWithRawResponse(client.instructions)
+        self.generations = generations.GenerationsResourceWithRawResponse(client.generations)
+        self.prompts = prompts.PromptsResourceWithRawResponse(client.prompts)
+        self.sql_generations = sql_generations.SqlGenerationsResourceWithRawResponse(client.sql_generations)
+        self.nl_generations = nl_generations.NlGenerationsResourceWithRawResponse(client.nl_generations)
+        self.table_descriptions = table_descriptions.TableDescriptionsResourceWithRawResponse(client.table_descriptions)
+        self.heartbeat = heartbeat.HeartbeatResourceWithRawResponse(client.heartbeat)
+        self.engine = engine.EngineResourceWithRawResponse(client.engine)
 
 
 class AsyncDataheraldWithRawResponse:
     def __init__(self, client: AsyncDataherald) -> None:
-        self.database_connections = resources.AsyncDatabaseConnectionsResourceWithRawResponse(
+        self.database_connections = database_connections.AsyncDatabaseConnectionsResourceWithRawResponse(
             client.database_connections
         )
-        self.finetunings = resources.AsyncFinetuningsResourceWithRawResponse(client.finetunings)
-        self.golden_sqls = resources.AsyncGoldenSqlsResourceWithRawResponse(client.golden_sqls)
-        self.instructions = resources.AsyncInstructionsResourceWithRawResponse(client.instructions)
-        self.generations = resources.AsyncGenerationsResourceWithRawResponse(client.generations)
-        self.prompts = resources.AsyncPromptsResourceWithRawResponse(client.prompts)
-        self.sql_generations = resources.AsyncSqlGenerationsResourceWithRawResponse(client.sql_generations)
-        self.nl_generations = resources.AsyncNlGenerationsResourceWithRawResponse(client.nl_generations)
-        self.table_descriptions = resources.AsyncTableDescriptionsResourceWithRawResponse(client.table_descriptions)
-        self.heartbeat = resources.AsyncHeartbeatResourceWithRawResponse(client.heartbeat)
-        self.engine = resources.AsyncEngineResourceWithRawResponse(client.engine)
+        self.finetunings = finetunings.AsyncFinetuningsResourceWithRawResponse(client.finetunings)
+        self.golden_sqls = golden_sqls.AsyncGoldenSqlsResourceWithRawResponse(client.golden_sqls)
+        self.instructions = instructions.AsyncInstructionsResourceWithRawResponse(client.instructions)
+        self.generations = generations.AsyncGenerationsResourceWithRawResponse(client.generations)
+        self.prompts = prompts.AsyncPromptsResourceWithRawResponse(client.prompts)
+        self.sql_generations = sql_generations.AsyncSqlGenerationsResourceWithRawResponse(client.sql_generations)
+        self.nl_generations = nl_generations.AsyncNlGenerationsResourceWithRawResponse(client.nl_generations)
+        self.table_descriptions = table_descriptions.AsyncTableDescriptionsResourceWithRawResponse(
+            client.table_descriptions
+        )
+        self.heartbeat = heartbeat.AsyncHeartbeatResourceWithRawResponse(client.heartbeat)
+        self.engine = engine.AsyncEngineResourceWithRawResponse(client.engine)
 
 
 class DataheraldWithStreamedResponse:
     def __init__(self, client: Dataherald) -> None:
-        self.database_connections = resources.DatabaseConnectionsResourceWithStreamingResponse(
+        self.database_connections = database_connections.DatabaseConnectionsResourceWithStreamingResponse(
             client.database_connections
         )
-        self.finetunings = resources.FinetuningsResourceWithStreamingResponse(client.finetunings)
-        self.golden_sqls = resources.GoldenSqlsResourceWithStreamingResponse(client.golden_sqls)
-        self.instructions = resources.InstructionsResourceWithStreamingResponse(client.instructions)
-        self.generations = resources.GenerationsResourceWithStreamingResponse(client.generations)
-        self.prompts = resources.PromptsResourceWithStreamingResponse(client.prompts)
-        self.sql_generations = resources.SqlGenerationsResourceWithStreamingResponse(client.sql_generations)
-        self.nl_generations = resources.NlGenerationsResourceWithStreamingResponse(client.nl_generations)
-        self.table_descriptions = resources.TableDescriptionsResourceWithStreamingResponse(client.table_descriptions)
-        self.heartbeat = resources.HeartbeatResourceWithStreamingResponse(client.heartbeat)
-        self.engine = resources.EngineResourceWithStreamingResponse(client.engine)
+        self.finetunings = finetunings.FinetuningsResourceWithStreamingResponse(client.finetunings)
+        self.golden_sqls = golden_sqls.GoldenSqlsResourceWithStreamingResponse(client.golden_sqls)
+        self.instructions = instructions.InstructionsResourceWithStreamingResponse(client.instructions)
+        self.generations = generations.GenerationsResourceWithStreamingResponse(client.generations)
+        self.prompts = prompts.PromptsResourceWithStreamingResponse(client.prompts)
+        self.sql_generations = sql_generations.SqlGenerationsResourceWithStreamingResponse(client.sql_generations)
+        self.nl_generations = nl_generations.NlGenerationsResourceWithStreamingResponse(client.nl_generations)
+        self.table_descriptions = table_descriptions.TableDescriptionsResourceWithStreamingResponse(
+            client.table_descriptions
+        )
+        self.heartbeat = heartbeat.HeartbeatResourceWithStreamingResponse(client.heartbeat)
+        self.engine = engine.EngineResourceWithStreamingResponse(client.engine)
 
 
 class AsyncDataheraldWithStreamedResponse:
     def __init__(self, client: AsyncDataherald) -> None:
-        self.database_connections = resources.AsyncDatabaseConnectionsResourceWithStreamingResponse(
+        self.database_connections = database_connections.AsyncDatabaseConnectionsResourceWithStreamingResponse(
             client.database_connections
         )
-        self.finetunings = resources.AsyncFinetuningsResourceWithStreamingResponse(client.finetunings)
-        self.golden_sqls = resources.AsyncGoldenSqlsResourceWithStreamingResponse(client.golden_sqls)
-        self.instructions = resources.AsyncInstructionsResourceWithStreamingResponse(client.instructions)
-        self.generations = resources.AsyncGenerationsResourceWithStreamingResponse(client.generations)
-        self.prompts = resources.AsyncPromptsResourceWithStreamingResponse(client.prompts)
-        self.sql_generations = resources.AsyncSqlGenerationsResourceWithStreamingResponse(client.sql_generations)
-        self.nl_generations = resources.AsyncNlGenerationsResourceWithStreamingResponse(client.nl_generations)
-        self.table_descriptions = resources.AsyncTableDescriptionsResourceWithStreamingResponse(
+        self.finetunings = finetunings.AsyncFinetuningsResourceWithStreamingResponse(client.finetunings)
+        self.golden_sqls = golden_sqls.AsyncGoldenSqlsResourceWithStreamingResponse(client.golden_sqls)
+        self.instructions = instructions.AsyncInstructionsResourceWithStreamingResponse(client.instructions)
+        self.generations = generations.AsyncGenerationsResourceWithStreamingResponse(client.generations)
+        self.prompts = prompts.AsyncPromptsResourceWithStreamingResponse(client.prompts)
+        self.sql_generations = sql_generations.AsyncSqlGenerationsResourceWithStreamingResponse(client.sql_generations)
+        self.nl_generations = nl_generations.AsyncNlGenerationsResourceWithStreamingResponse(client.nl_generations)
+        self.table_descriptions = table_descriptions.AsyncTableDescriptionsResourceWithStreamingResponse(
             client.table_descriptions
         )
-        self.heartbeat = resources.AsyncHeartbeatResourceWithStreamingResponse(client.heartbeat)
-        self.engine = resources.AsyncEngineResourceWithStreamingResponse(client.engine)
+        self.heartbeat = heartbeat.AsyncHeartbeatResourceWithStreamingResponse(client.heartbeat)
+        self.engine = engine.AsyncEngineResourceWithStreamingResponse(client.engine)
 
 
 Client = Dataherald
