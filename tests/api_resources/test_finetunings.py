@@ -23,23 +23,23 @@ class TestFinetunings:
     @parametrize
     def test_method_create(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Dataherald) -> None:
         finetuning = client.finetunings.create(
-            alias="string",
+            alias="alias",
             base_llm={
-                "model_provider": "string",
-                "model_name": "string",
+                "model_name": "model_name",
                 "model_parameters": {"foo": "string"},
+                "model_provider": "model_provider",
             },
-            db_connection_id="string",
-            golden_sqls=["string", "string", "string"],
+            db_connection_id="db_connection_id",
+            golden_sqls=["string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -47,9 +47,9 @@ class TestFinetunings:
     @parametrize
     def test_raw_response_create(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -60,9 +60,9 @@ class TestFinetunings:
     @parametrize
     def test_streaming_response_create(self, client: Dataherald) -> None:
         with client.finetunings.with_streaming_response.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -75,14 +75,14 @@ class TestFinetunings:
     @parametrize
     def test_method_retrieve(self, client: Dataherald) -> None:
         finetuning = client.finetunings.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -93,7 +93,7 @@ class TestFinetunings:
     @parametrize
     def test_streaming_response_retrieve(self, client: Dataherald) -> None:
         with client.finetunings.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -113,14 +113,14 @@ class TestFinetunings:
     @parametrize
     def test_method_list(self, client: Dataherald) -> None:
         finetuning = client.finetunings.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(FinetuningListResponse, finetuning, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -131,7 +131,7 @@ class TestFinetunings:
     @parametrize
     def test_streaming_response_list(self, client: Dataherald) -> None:
         with client.finetunings.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -144,14 +144,14 @@ class TestFinetunings:
     @parametrize
     def test_method_cancel(self, client: Dataherald) -> None:
         finetuning = client.finetunings.cancel(
-            "string",
+            "id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     def test_raw_response_cancel(self, client: Dataherald) -> None:
         response = client.finetunings.with_raw_response.cancel(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -162,7 +162,7 @@ class TestFinetunings:
     @parametrize
     def test_streaming_response_cancel(self, client: Dataherald) -> None:
         with client.finetunings.with_streaming_response.cancel(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -186,23 +186,23 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_create(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.create(
-            alias="string",
+            alias="alias",
             base_llm={
-                "model_provider": "string",
-                "model_name": "string",
+                "model_name": "model_name",
                 "model_parameters": {"foo": "string"},
+                "model_provider": "model_provider",
             },
-            db_connection_id="string",
-            golden_sqls=["string", "string", "string"],
+            db_connection_id="db_connection_id",
+            golden_sqls=["string"],
             metadata={},
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
@@ -210,9 +210,9 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncDataherald) -> None:
         response = await async_client.finetunings.with_raw_response.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -223,9 +223,9 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncDataherald) -> None:
         async with async_client.finetunings.with_streaming_response.create(
-            alias="string",
+            alias="alias",
             base_llm={},
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -238,14 +238,14 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.retrieve(
-            "string",
+            "id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncDataherald) -> None:
         response = await async_client.finetunings.with_raw_response.retrieve(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -256,7 +256,7 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncDataherald) -> None:
         async with async_client.finetunings.with_streaming_response.retrieve(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -276,14 +276,14 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_list(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
         assert_matches_type(FinetuningListResponse, finetuning, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncDataherald) -> None:
         response = await async_client.finetunings.with_raw_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         )
 
         assert response.is_closed is True
@@ -294,7 +294,7 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncDataherald) -> None:
         async with async_client.finetunings.with_streaming_response.list(
-            db_connection_id="string",
+            db_connection_id="db_connection_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -307,14 +307,14 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_method_cancel(self, async_client: AsyncDataherald) -> None:
         finetuning = await async_client.finetunings.cancel(
-            "string",
+            "id",
         )
         assert_matches_type(FinetuningResponse, finetuning, path=["response"])
 
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncDataherald) -> None:
         response = await async_client.finetunings.with_raw_response.cancel(
-            "string",
+            "id",
         )
 
         assert response.is_closed is True
@@ -325,7 +325,7 @@ class TestAsyncFinetunings:
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncDataherald) -> None:
         async with async_client.finetunings.with_streaming_response.cancel(
-            "string",
+            "id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

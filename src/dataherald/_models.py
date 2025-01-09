@@ -10,6 +10,7 @@ from typing_extensions import (
     ClassVar,
     Protocol,
     Required,
+    ParamSpec,
     TypedDict,
     TypeGuard,
     final,
@@ -36,6 +37,7 @@ from ._utils import (
     PropertyInfo,
     is_list,
     is_given,
+    json_safe,
     lru_cache,
     is_mapping,
     parse_date,
@@ -44,6 +46,7 @@ from ._utils import (
     strip_not_given,
     extract_type_arg,
     is_annotated_type,
+    is_type_alias_type,
     strip_annotated_type,
 )
 from ._compat import (
@@ -62,11 +65,14 @@ from ._compat import (
 from ._constants import RAW_RESPONSE_HEADER
 
 if TYPE_CHECKING:
-    from pydantic_core.core_schema import ModelField, ModelFieldsSchema
+    from pydantic_core.core_schema import ModelField, LiteralSchema, ModelFieldsSchema
 
 __all__ = ["BaseModel", "GenericModel"]
 
 _T = TypeVar("_T")
+_BaseModelT = TypeVar("_BaseModelT", bound="BaseModel")
+
+P = ParamSpec("P")
 
 
 @runtime_checkable
@@ -172,7 +178,7 @@ class BaseModel(pydantic.BaseModel):
     # Based on https://github.com/samuelcolvin/pydantic/issues/1168#issuecomment-817742836.
     @classmethod
     @override
-    def construct(
+    def construct(  # pyright: ignore[reportIncompatibleMethodOverride]
         cls: Type[ModelT],
         _fields_set: set[str] | None = None,
         **values: object,
@@ -244,14 +250,16 @@ class BaseModel(pydantic.BaseModel):
             self,
             *,
             mode: Literal["json", "python"] | str = "python",
-            include: IncEx = None,
-            exclude: IncEx = None,
+            include: IncEx | None = None,
+            exclude: IncEx | None = None,
             by_alias: bool = False,
             exclude_unset: bool = False,
             exclude_defaults: bool = False,
             exclude_none: bool = False,
             round_trip: bool = False,
-            warnings: bool = True,
+            warnings: bool | Literal["none", "warn", "error"] = True,
+            context: dict[str, Any] | None = None,
+            serialize_as_any: bool = False,
         ) -> dict[str, Any]:
             """Usage docs: https://docs.pydantic.dev/2.4/concepts/serialization/#modelmodel_dump
 
@@ -273,13 +281,17 @@ class BaseModel(pydantic.BaseModel):
             Returns:
                 A dictionary representation of the model.
             """
-            if mode != "python":
-                raise ValueError("mode is only supported in Pydantic v2")
+            if mode not in {"json", "python"}:
+                raise ValueError("mode must be either 'json' or 'python'")
             if round_trip != False:
                 raise ValueError("round_trip is only supported in Pydantic v2")
             if warnings != True:
                 raise ValueError("warnings is only supported in Pydantic v2")
-            return super().dict(  # pyright: ignore[reportDeprecated]
+            if context is not None:
+                raise ValueError("context is only supported in Pydantic v2")
+            if serialize_as_any != False:
+                raise ValueError("serialize_as_any is only supported in Pydantic v2")
+            dumped = super().dict(  # pyright: ignore[reportDeprecated]
                 include=include,
                 exclude=exclude,
                 by_alias=by_alias,
@@ -288,19 +300,23 @@ class BaseModel(pydantic.BaseModel):
                 exclude_none=exclude_none,
             )
 
+            return cast(dict[str, Any], json_safe(dumped)) if mode == "json" else dumped
+
         @override
         def model_dump_json(
             self,
             *,
             indent: int | None = None,
-            include: IncEx = None,
-            exclude: IncEx = None,
+            include: IncEx | None = None,
+            exclude: IncEx | None = None,
             by_alias: bool = False,
             exclude_unset: bool = False,
             exclude_defaults: bool = False,
             exclude_none: bool = False,
             round_trip: bool = False,
-            warnings: bool = True,
+            warnings: bool | Literal["none", "warn", "error"] = True,
+            context: dict[str, Any] | None = None,
+            serialize_as_any: bool = False,
         ) -> str:
             """Usage docs: https://docs.pydantic.dev/2.4/concepts/serialization/#modelmodel_dump_json
 
@@ -324,6 +340,10 @@ class BaseModel(pydantic.BaseModel):
                 raise ValueError("round_trip is only supported in Pydantic v2")
             if warnings != True:
                 raise ValueError("warnings is only supported in Pydantic v2")
+            if context is not None:
+                raise ValueError("context is only supported in Pydantic v2")
+            if serialize_as_any != False:
+                raise ValueError("serialize_as_any is only supported in Pydantic v2")
             return super().json(  # type: ignore[reportDeprecated]
                 indent=indent,
                 include=include,
@@ -364,7 +384,41 @@ def is_basemodel(type_: type) -> bool:
 
 def is_basemodel_type(type_: type) -> TypeGuard[type[BaseModel] | type[GenericModel]]:
     origin = get_origin(type_) or type_
+    if not inspect.isclass(origin):
+        return False
     return issubclass(origin, BaseModel) or issubclass(origin, GenericModel)
+
+
+def build(
+    base_model_cls: Callable[P, _BaseModelT],
+    *args: P.args,
+    **kwargs: P.kwargs,
+) -> _BaseModelT:
+    """Construct a BaseModel class without validation.
+
+    This is useful for cases where you need to instantiate a `BaseModel`
+    from an API response as this provides type-safe params which isn't supported
+    by helpers like `construct_type()`.
+
+    ```py
+    build(MyModel, my_field_a="foo", my_field_b=123)
+    ```
+    """
+    if args:
+        raise TypeError(
+            "Received positional arguments which are not supported; Keyword arguments must be used instead",
+        )
+
+    return cast(_BaseModelT, construct_type(type_=base_model_cls, value=kwargs))
+
+
+def construct_type_unchecked(*, value: object, type_: type[_T]) -> _T:
+    """Loose coercion to the expected type with construction of nested values.
+
+    Note: the returned value from this function is not guaranteed to match the
+    given type.
+    """
+    return cast(_T, construct_type(value=value, type_=type_))
 
 
 def construct_type(*, value: object, type_: object) -> object:
@@ -375,6 +429,8 @@ def construct_type(*, value: object, type_: object) -> object:
     # we allow `object` as the input type because otherwise, passing things like
     # `Literal['value']` will be reported as a type error by type checkers
     type_ = cast("type[object]", type_)
+    if is_type_alias_type(type_):
+        type_ = type_.__value__  # type: ignore[unreachable]
 
     # unwrap `Annotated[T, ...]` -> `T`
     if is_annotated_type(type_):
@@ -432,7 +488,11 @@ def construct_type(*, value: object, type_: object) -> object:
         _, items_type = get_args(type_)  # Dict[_, items_type]
         return {key: construct_type(value=item, type_=items_type) for key, item in value.items()}
 
-    if not is_literal_type(type_) and (issubclass(origin, BaseModel) or issubclass(origin, GenericModel)):
+    if (
+        not is_literal_type(type_)
+        and inspect.isclass(origin)
+        and (issubclass(origin, BaseModel) or issubclass(origin, GenericModel))
+    ):
         if is_list(value):
             return [cast(Any, type_).construct(**entry) if is_mapping(entry) else entry for entry in value]
 
@@ -550,7 +610,7 @@ def _build_discriminated_union_meta(*, union: type, meta_annotations: tuple[Any,
                 field_schema = field["schema"]
 
                 if field_schema["type"] == "literal":
-                    for entry in field_schema["expected"]:
+                    for entry in cast("LiteralSchema", field_schema)["expected"]:
                         if isinstance(entry, str):
                             mapping[entry] = variant
             else:
@@ -602,6 +662,14 @@ def validate_type(*, type_: type[_T], value: object) -> _T:
         return cast(_T, parse_obj(type_, value))
 
     return cast(_T, _validate_non_model_type(type_=type_, value=value))
+
+
+def set_pydantic_config(typ: Any, config: pydantic.ConfigDict) -> None:
+    """Add a pydantic config for the given type.
+
+    Note: this is a no-op on Pydantic v1.
+    """
+    setattr(typ, "__pydantic_config__", config)  # noqa: B010
 
 
 # our use of subclasssing here causes weirdness for type checkers,
